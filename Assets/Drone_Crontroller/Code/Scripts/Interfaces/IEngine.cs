@@ -8,7 +8,7 @@ namespace TdsWork
     public interface IEngine
     {
         void InitEngine();
-        void UpdateEngine();
+        void UpdateEngine(Rigidbody rb, Drone_Inputs input);
     }
     
 }
