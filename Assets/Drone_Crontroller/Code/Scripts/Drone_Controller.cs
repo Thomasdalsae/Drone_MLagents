@@ -21,7 +21,7 @@ namespace TdsWork
         [SerializeField]private float minMaxPitch = 30f;
         [SerializeField]private float minMaxRoll = 30f;
         [SerializeField]private float yawPower = 4f;
-        [SerializeField] private float maxThrottle = 10f;
+        [SerializeField] private float maxThrottle = 30f;
         [SerializeField] private float lerpSpeed = 2f;
 
         [Header("Ml Targets")] [SerializeField]
@@ -57,7 +57,7 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
-            transform.localPosition = Vector3.zero;
+            transform.localPosition = new Vector3(0,2,0);
             _targetTransform = goal.transform.localPosition;
         }
 
@@ -78,11 +78,16 @@ namespace TdsWork
              _roll = actions.ContinuousActions[1];
             _yaw = actions.ContinuousActions[2];
             _throttle = actions.ContinuousActions[3];
-            */
+            
             _pitch = _input.Cyclic.y * minMaxPitch + actions.ContinuousActions[0];
             _roll = -_input.Cyclic.x * minMaxRoll + actions.ContinuousActions[1];
             _yaw += _input.Pedals * yawPower + actions.ContinuousActions[2];
             _throttle = _input.Throttle * maxThrottle + actions.ContinuousActions[3];
+            */
+            _pitch =  actions.ContinuousActions[0] * minMaxPitch;
+            _roll =   -actions.ContinuousActions[1] * minMaxRoll;
+            _yaw =  actions.ContinuousActions[2] * yawPower;
+            _throttle =  actions.ContinuousActions[3] * maxThrottle;
                                                      
             _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
             _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
@@ -97,10 +102,10 @@ namespace TdsWork
         {
             Debug.Log("Entering Heuristics:");
             ActionSegment<float> continousActions = actionsOut.ContinuousActions;
-            continousActions[0] =  _input.Cyclic.y * minMaxPitch;
-            continousActions[1] = -_input.Cyclic.x * minMaxRoll;
-            continousActions[2] = _input.Pedals * yawPower;
-            continousActions[3] = _input.Throttle * maxThrottle;
+            continousActions[0] =  _input.Cyclic.y;
+            continousActions[1] = -_input.Cyclic.x;
+            continousActions[2] = _input.Pedals;
+            continousActions[3] = _input.Throttle;
 
         }
 
