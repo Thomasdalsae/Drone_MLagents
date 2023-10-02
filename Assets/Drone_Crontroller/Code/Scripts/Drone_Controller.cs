@@ -6,6 +6,7 @@ using System.Linq;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 
@@ -20,12 +21,12 @@ namespace TdsWork
         [SerializeField]private float minMaxPitch = 30f;
         [SerializeField]private float minMaxRoll = 30f;
         [SerializeField]private float yawPower = 4f;
+        [SerializeField] private float maxThrottle = 10f;
         [SerializeField] private float lerpSpeed = 2f;
 
         [Header("Ml Targets")] [SerializeField]
         private GameObject goal;
-        //private Transform _targetTransform;
-        
+        private Vector3 _targetTransform;
         
         private Drone_Inputs _input;
         private List<IEngine> _engines = new List<IEngine>();
@@ -36,6 +37,8 @@ namespace TdsWork
         private float _finalRoll;
         private float _yaw;
         private float _finalYaw;
+        private float _throttle;
+        private float _finalThrottle;
         #endregion
 
         #region Main Methods
@@ -45,6 +48,8 @@ namespace TdsWork
             _input = GetComponent<Drone_Inputs>(); // grab the instance of the drone inputs;
             _engines = GetComponentsInChildren<IEngine>().ToList<IEngine>();
         }
+        
+        
 
         #endregion
 
@@ -52,13 +57,14 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
-            
+            transform.localPosition = Vector3.zero;
+            _targetTransform = goal.transform.localPosition;
         }
 
         public override void CollectObservations(VectorSensor sensor)
         {
-            //sensor.AddObservation(_targetTransform.gameObject.transform.localPosition);
-            Vector3 DirToGoal = (goal.transform.localPosition - transform.localPosition).normalized;
+            sensor.AddObservation(_targetTransform);
+            Vector3 DirToGoal = (_targetTransform - transform.localPosition).normalized;
             sensor.AddObservation(DirToGoal.x);
             sensor.AddObservation(DirToGoal.y);
             sensor.AddObservation(DirToGoal.z);
@@ -66,23 +72,48 @@ namespace TdsWork
 
         public override void OnActionReceived(ActionBuffers actions)
         {
-
-            float pitch = actions.ContinuousActions[0];
-            float roll = actions.ContinuousActions[1];
-            _yaw =+ actions.ContinuousActions[2];
-            
-            HandleControls(_pitch,_roll,_yaw);
+            Debug.Log("Entering OnACtionReceived");
+            /*
+             _pitch = actions.ContinuousActions[0];
+             _roll = actions.ContinuousActions[1];
+            _yaw = actions.ContinuousActions[2];
+            _throttle = actions.ContinuousActions[3];
+            */
+            _pitch = _input.Cyclic.y * minMaxPitch + actions.ContinuousActions[0];
+            _roll = -_input.Cyclic.x * minMaxRoll + actions.ContinuousActions[1];
+            _yaw += _input.Pedals * yawPower + actions.ContinuousActions[2];
+            _throttle = _input.Throttle * maxThrottle + actions.ContinuousActions[3];
+                                                     
+            _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
+            _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
+            _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
+                                                                 
+            Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);
+            //Add torque later
+            rb.MoveRotation(rot);
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
         {
+            Debug.Log("Entering Heuristics:");
             ActionSegment<float> continousActions = actionsOut.ContinuousActions;
             continousActions[0] =  _input.Cyclic.y * minMaxPitch;
             continousActions[1] = -_input.Cyclic.x * minMaxRoll;
             continousActions[2] = _input.Pedals * yawPower;
-            
+            continousActions[3] = _input.Throttle * maxThrottle;
+
         }
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent<Goal>(out Goal goal))
+            {
+                Debug.Log("Collided with" + other);
+                SetReward(+1f); //reward value is only relative to other rewards
+                EndEpisode();
+            }
+
+        }
 
         #endregion
         #region Custom Methods
@@ -90,7 +121,7 @@ namespace TdsWork
         protected override void HandlePhysics() //This will not run if there is no rigidbody in rb script,
         {
             HandleEngines();
-            HandleControls(_pitch,_roll,_yaw);
+            //HandleControls();
         }
 
         protected virtual void HandleEngines()
@@ -102,14 +133,14 @@ namespace TdsWork
             }
         }
 
-        protected virtual void HandleControls(float pitch,float roll,float _yaw)
+        protected virtual void HandleControls()
         {
-             pitch = _input.Cyclic.y * minMaxPitch;
-             roll = -_input.Cyclic.x * minMaxRoll;
+             _pitch = _input.Cyclic.y * minMaxPitch;
+             _roll = -_input.Cyclic.x * minMaxRoll;
             _yaw += _input.Pedals * yawPower;
 
-            _finalPitch = Mathf.Lerp(_finalPitch, pitch, Time.deltaTime * lerpSpeed);
-            _finalRoll = Mathf.Lerp(_finalRoll, roll, Time.deltaTime * lerpSpeed);
+            _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
+            _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
             _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
             
             Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);

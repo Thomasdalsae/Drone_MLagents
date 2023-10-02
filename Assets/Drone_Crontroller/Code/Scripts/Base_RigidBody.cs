@@ -26,6 +26,7 @@ namespace TdsWork
             rb = GetComponent<Rigidbody>();
             if (rb)
             {
+                
                 rb.mass = weightInKg;
                 startDrag = rb.drag;
                 startAngularDrag = rb.angularDrag;
