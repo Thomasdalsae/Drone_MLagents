@@ -21,7 +21,7 @@ namespace TdsWork
         [SerializeField]private float minMaxPitch = 30f;
         [SerializeField]private float minMaxRoll = 35f;
         [SerializeField]private float yawPower = 4f;
-        [SerializeField] private float maxThrottle = 50f;
+        [SerializeField] private float maxThrottle = 5f;
         [SerializeField] private float lerpSpeed = 2f;
 
         [Header("Ml Targets")] [SerializeField]
@@ -67,7 +67,7 @@ namespace TdsWork
         public override void CollectObservations(VectorSensor sensor)
         {
             sensor.AddObservation(_targetTransform);
-            Vector3 DirToGoal = (_targetTransform - transform.localPosition).normalized;
+            Vector3 DirToGoal = (_targetTransform - transform.localPosition).normalized; //can change to dot later
             Debug.Log("Direction: " + DirToGoal);
             Debug.Log("_targetTransform" + _targetTransform);
             sensor.AddObservation(DirToGoal.x);
@@ -77,6 +77,11 @@ namespace TdsWork
             sensor.AddObservation(_pitch);
             sensor.AddObservation(_yaw);
             sensor.AddObservation(_throttle);
+            sensor.AddObservation(_roll);
+            sensor.AddObservation(rb.velocity);
+            sensor.AddObservation(rb.position);
+
+            
         }
 
         public override void OnActionReceived(ActionBuffers actions)
@@ -95,17 +100,19 @@ namespace TdsWork
             */
             //_pitch =  actions.ContinuousActions[0] * minMaxPitch;
             //_roll =   actions.ContinuousActions[1] * minMaxRoll;
-            _yaw =  actions.ContinuousActions[2] * yawPower;
+            //_yaw +=  actions.ContinuousActions[2] * yawPower;
             _throttle =  actions.ContinuousActions[3] * maxThrottle;
 
-           // _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
-           // _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
-            _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
+            //_finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
+            //_finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
+            //_finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
             _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
 
-             Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);
+            //Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);
             //Add torque later
-            rb.MoveRotation(rot);
+            //rb.MoveRotation(rot);
+            rb.AddRelativeForce(new Vector3(0,_finalThrottle,0));
+            
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
@@ -114,8 +121,8 @@ namespace TdsWork
             ActionSegment<float> continousActions = actionsOut.ContinuousActions;
             //continousActions[0] =  _input.Cyclic.y;
             //continousActions[1] = -_input.Cyclic.x;
-            continousActions[2] = _input.Pedals;
-            continousActions[3] =+ _input.Throttle;
+            //continousActions[2] = _input.Pedals;
+            continousActions[3] = _input.Throttle;
 
         }
 
@@ -125,6 +132,14 @@ namespace TdsWork
             {
                 Debug.Log("Collided with" + other);
                 SetReward(+1f); //reward value is only relative to other rewards
+                EndEpisode();
+            }
+
+            if (other.TryGetComponent<Ground>(out Ground ground))
+            {
+             
+                Debug.Log("Collided with " + other);
+                SetReward(-1f);
                 EndEpisode();
             }
 
