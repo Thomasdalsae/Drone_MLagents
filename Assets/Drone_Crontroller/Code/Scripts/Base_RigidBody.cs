@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.MLAgents;
 using UnityEngine;
 
 namespace TdsWork
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Base_RigidBody : MonoBehaviour
+    public class Base_RigidBody : Agent
     {
         #region Variables
 
