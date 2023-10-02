@@ -47,6 +47,8 @@ namespace TdsWork
         {
             _input = GetComponent<Drone_Inputs>(); // grab the instance of the drone inputs;
             _engines = GetComponentsInChildren<IEngine>().ToList<IEngine>();
+                
+            //Physics.IgnoreCollision(this.GetComponent<Collider>(), GameObject.FindGameObjectWithTag("dr").GetComponent<Collider>());
         }
         
         

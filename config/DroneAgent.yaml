@@ -20,10 +20,10 @@ behaviors:
         gamma: 0.99
       gail:
         strength: 0.5
-        demo_path: F:\Unity projects\Oblig2\Drone_MLagents\Demos\DroneAgentup.demo
+        demo_path: F:\Unity projects\Oblig2\Drone_MLagents\Demos\DroneAgentGoal.demo
     behavioral_cloning:
         strength: 0.5
-        demo_path: F:\Unity projects\Oblig2\Drone_MLagents\Demos\DroneAgentup.demo
+        demo_path: F:\Unity projects\Oblig2\Drone_MLagents\Demos\DroneAgentGoal.demo
     max_steps: 5000000
     time_horizon: 64
     summary_freq: 20000
