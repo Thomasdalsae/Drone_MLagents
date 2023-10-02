@@ -59,7 +59,7 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
-            transform.localPosition = new Vector3(0,1.5f,0);
+            transform.localPosition = new Vector3(0,1f,0);
             rb.velocity = Vector3.zero;
             _targetTransform = goal.transform.localPosition;
         }
@@ -73,6 +73,10 @@ namespace TdsWork
             sensor.AddObservation(DirToGoal.x);
             sensor.AddObservation(DirToGoal.y);
             sensor.AddObservation(DirToGoal.z);
+            
+            sensor.AddObservation(_pitch);
+            sensor.AddObservation(_yaw);
+            sensor.AddObservation(_throttle);
         }
 
         public override void OnActionReceived(ActionBuffers actions)
@@ -89,16 +93,17 @@ namespace TdsWork
             _yaw += _input.Pedals * yawPower + actions.ContinuousActions[2];
             _throttle = _input.Throttle * maxThrottle + actions.ContinuousActions[3];
             */
-            _pitch =  actions.ContinuousActions[0] * minMaxPitch;
-            _roll =   actions.ContinuousActions[1] * minMaxRoll;
-            _yaw +=  actions.ContinuousActions[2] * yawPower;
+            //_pitch =  actions.ContinuousActions[0] * minMaxPitch;
+            //_roll =   actions.ContinuousActions[1] * minMaxRoll;
+            _yaw =  actions.ContinuousActions[2] * yawPower;
             _throttle =  actions.ContinuousActions[3] * maxThrottle;
-                                                     
-            _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
-            _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
+
+           // _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
+           // _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
             _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
-                                                                 
-            Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);
+            _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
+
+             Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);
             //Add torque later
             rb.MoveRotation(rot);
         }
@@ -107,10 +112,10 @@ namespace TdsWork
         {
             Debug.Log("Entering Heuristics:");
             ActionSegment<float> continousActions = actionsOut.ContinuousActions;
-            continousActions[0] =  _input.Cyclic.y;
-            continousActions[1] = -_input.Cyclic.x;
+            //continousActions[0] =  _input.Cyclic.y;
+            //continousActions[1] = -_input.Cyclic.x;
             continousActions[2] = _input.Pedals;
-            continousActions[3] = _input.Throttle;
+            continousActions[3] =+ _input.Throttle;
 
         }
 
@@ -143,6 +148,7 @@ namespace TdsWork
             }
         }
 
+        /*
         protected virtual void HandleControls()
         {
              _pitch = _input.Cyclic.y * minMaxPitch;
@@ -157,6 +163,9 @@ namespace TdsWork
             //Add torque later
             rb.MoveRotation(rot);
         }
+        */
         #endregion
+        
     }
+    
 }
