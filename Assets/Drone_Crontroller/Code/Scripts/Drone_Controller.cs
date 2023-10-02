@@ -8,6 +8,7 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 
 namespace TdsWork
@@ -27,6 +28,7 @@ namespace TdsWork
         [Header("Ml Targets")] [SerializeField]
         private GameObject goal;
         private Vector3 _targetTransform;
+        private int maxsteps;
         
         private Drone_Inputs _input;
         private List<IEngine> _engines = new List<IEngine>();
@@ -47,7 +49,10 @@ namespace TdsWork
         {
             _input = GetComponent<Drone_Inputs>(); // grab the instance of the drone inputs;
             _engines = GetComponentsInChildren<IEngine>().ToList<IEngine>();
-                
+            
+               // transform.localPosition = new Vector3(Random.Range(-3.5f, +3.5f), Random.Range(-1f,5f), Random.Range(+2.5f, +5f));
+               transform.localPosition = new Vector3(-0.9f,4.15f,12.32f);
+                goal = Instantiate(goal, this.transform.position, Quaternion.identity);
             //Physics.IgnoreCollision(this.GetComponent<Collider>(), GameObject.FindGameObjectWithTag("dr").GetComponent<Collider>());
         }
         
@@ -61,12 +66,12 @@ namespace TdsWork
         {
             transform.localPosition = new Vector3(0,1f,0);
             rb.velocity = Vector3.zero;
-            _targetTransform = goal.transform.localPosition;
+            _targetTransform = goal.gameObject.transform.position;
         }
 
         public override void CollectObservations(VectorSensor sensor)
         {
-            sensor.AddObservation(_targetTransform);
+            sensor.AddObservation(goal);
             Vector3 DirToGoal = (_targetTransform - transform.localPosition).normalized; //can change to dot later
             Debug.Log("Direction: " + DirToGoal);
             Debug.Log("_targetTransform" + _targetTransform);
@@ -86,7 +91,7 @@ namespace TdsWork
 
         public override void OnActionReceived(ActionBuffers actions)
         {
-            Debug.Log("Entering OnACtionReceived");
+           // Debug.Log("Entering OnACtionReceived");
             /*
              _pitch = actions.ContinuousActions[0];
              _roll = actions.ContinuousActions[1];
@@ -98,30 +103,35 @@ namespace TdsWork
             _yaw += _input.Pedals * yawPower + actions.ContinuousActions[2];
             _throttle = _input.Throttle * maxThrottle + actions.ContinuousActions[3];
             */
-            //_pitch =  actions.ContinuousActions[0] * minMaxPitch;
-            //_roll =   actions.ContinuousActions[1] * minMaxRoll;
-            //_yaw +=  actions.ContinuousActions[2] * yawPower;
+            _pitch =  actions.ContinuousActions[0] * minMaxPitch;
+            _roll =   actions.ContinuousActions[1] * minMaxRoll;
+            _yaw +=  actions.ContinuousActions[2] * yawPower;
             _throttle =  actions.ContinuousActions[3] * maxThrottle;
 
-            //_finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
-            //_finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
-            //_finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
+            _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
+            _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
+            _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
             _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
 
-            //Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);
+            Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);
             //Add torque later
-            //rb.MoveRotation(rot);
+            rb.MoveRotation(rot);
             rb.AddRelativeForce(new Vector3(0,_finalThrottle,0));
+            
+            if (rb.position.y > 0.1f)
+            {
+                AddReward(1f / MaxStep); //Only add after they have learned first 
+            }
             
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
         {
-            Debug.Log("Entering Heuristics:");
+            //Debug.Log("Entering Heuristics:");
             ActionSegment<float> continousActions = actionsOut.ContinuousActions;
-            //continousActions[0] =  _input.Cyclic.y;
-            //continousActions[1] = -_input.Cyclic.x;
-            //continousActions[2] = _input.Pedals;
+            continousActions[0] =  _input.Cyclic.y;
+            continousActions[1] = -_input.Cyclic.x;
+            continousActions[2] = _input.Pedals;
             continousActions[3] = _input.Throttle;
 
         }
