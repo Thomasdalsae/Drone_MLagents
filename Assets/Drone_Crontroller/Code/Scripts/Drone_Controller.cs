@@ -57,7 +57,8 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
-            transform.localPosition = new Vector3(0,2,0);
+            transform.localPosition = new Vector3(0,1.5f,0);
+            rb.velocity = Vector3.zero;
             _targetTransform = goal.transform.localPosition;
         }
 
@@ -65,6 +66,8 @@ namespace TdsWork
         {
             sensor.AddObservation(_targetTransform);
             Vector3 DirToGoal = (_targetTransform - transform.localPosition).normalized;
+            Debug.Log("Direction: " + DirToGoal);
+            Debug.Log("_targetTransform" + _targetTransform);
             sensor.AddObservation(DirToGoal.x);
             sensor.AddObservation(DirToGoal.y);
             sensor.AddObservation(DirToGoal.z);
@@ -85,8 +88,8 @@ namespace TdsWork
             _throttle = _input.Throttle * maxThrottle + actions.ContinuousActions[3];
             */
             _pitch =  actions.ContinuousActions[0] * minMaxPitch;
-            _roll =   -actions.ContinuousActions[1] * minMaxRoll;
-            _yaw =  actions.ContinuousActions[2] * yawPower;
+            _roll =   actions.ContinuousActions[1] * minMaxRoll;
+            _yaw +=  actions.ContinuousActions[2] * yawPower;
             _throttle =  actions.ContinuousActions[3] * maxThrottle;
                                                      
             _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);

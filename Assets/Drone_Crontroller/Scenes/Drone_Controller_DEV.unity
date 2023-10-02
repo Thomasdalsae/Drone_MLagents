@@ -793,7 +793,7 @@ Transform:
   m_GameObject: {fileID: 1086616611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.282, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -821,7 +821,7 @@ MonoBehaviour:
   minMaxPitch: 30
   minMaxRoll: 30
   yawPower: 4
-  maxThrottle: 5
+  maxThrottle: 50
   lerpSpeed: 2
   goal: {fileID: 1543732517}
 --- !u!54 &1086616614
@@ -951,7 +951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: DroneAgentup
+  DemonstrationName: DroneAgentGoal
   DemonstrationDirectory: Demos
 --- !u!1 &1487498574
 GameObject:
@@ -1048,13 +1048,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543732517}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 2.971, z: 0.148}
-  m_LocalScale: {x: 2.6263, y: 0.9067301, z: 2.6263}
+  m_LocalRotation: {x: 0.4517958, y: 0.48951986, z: 0.5124733, w: 0.54186904}
+  m_LocalPosition: {x: 1.78, y: 2.07, z: 13.77}
+  m_LocalScale: {x: 2.6263, y: 0.9067301, z: 3.6419456}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 33096984}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.693, y: 83.54, z: 86.187}
 --- !u!65 &1543732519
 BoxCollider:
   m_ObjectHideFlags: 0
