@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -73,7 +74,7 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
-            transform.localPosition = new Vector3(0,1.5f,0);
+            transform.localPosition = new Vector3(0,4f,0);
             rb.velocity = Vector3.zero;
             _targetTransform = goal.gameObject.transform.position;
             _yaw = 0;
@@ -83,7 +84,22 @@ namespace TdsWork
         public override void CollectObservations(VectorSensor sensor)
         {
 
+            var rcComponents = this.GetComponents<RayPerceptionSensorComponent3D>();
             
+                        for (int i = 0; i < rcComponents.Length; i++)
+                        {
+                            var r1 = rcComponents[i];
+                            var r2 = r1.GetRayPerceptionInput();
+                            var r3 = RayPerceptionSensor.Perceive(r2);
+                            foreach (RayPerceptionOutput.RayOutput rayOutput in r3.RayOutputs)
+                            {
+                                //Debug.Log(rayOutput.HasHit+" "+rayOutput.HitTaggedObject+" "+rayOutput.HitTagIndex+" "+rayOutput.HitFraction);
+                               sensor.AddObservation(rayOutput.HitFraction);
+                               sensor.AddObservation(rayOutput.HasHit);
+                            }
+                            
+                        }
+                        
             sensor.AddObservation(goal);
             Vector3 DirToGoal = (_targetTransform - transform.localPosition).normalized; //can change to dot later
             Debug.Log("Direction: " + DirToGoal);
@@ -114,6 +130,42 @@ namespace TdsWork
 
         public override void OnActionReceived(ActionBuffers actions)
         {
+
+
+            // var r1 = this.GetComponent<RayPerceptionSensorComponent3D>();
+            // var r2 = r1.GetRayPerceptionInput();  
+            //var r3 =  RayPerceptionSensor.Perceive(r2);
+
+            _pitch = actions.ContinuousActions[0] * minMaxPitch;
+            _roll = actions.ContinuousActions[1] * minMaxRoll;
+            _yaw += actions.ContinuousActions[2] * yawPower;
+            _throttle = actions.ContinuousActions[3] * maxThrottle;
+
+            _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
+            _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
+            _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
+            _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
+
+            Quaternion rot = Quaternion.Euler(_finalPitch, _finalYaw, _finalRoll);
+            //Add torque later
+            rb.MoveRotation(rot);
+            rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
+
+            /*
+            if (rb.position.y > 0.5f)
+            {
+                AddReward(1f / MaxStep); //Only add after they have learned first
+            }
+            */
+            
+            if (_finalPitch > 0.5f || _finalPitch < 0.5f)
+            {
+                AddReward(0.1f / MaxStep);
+            }
+            if (_finalRoll > 0.5f || _finalRoll < 0.5f)
+            {
+                AddReward(0.1f / MaxStep);
+            }
             
             var rcComponents = this.GetComponents<RayPerceptionSensorComponent3D>();
 
@@ -124,40 +176,29 @@ namespace TdsWork
                 var r3 = RayPerceptionSensor.Perceive(r2);
                 foreach (RayPerceptionOutput.RayOutput rayOutput in r3.RayOutputs)
                 {
-                    Debug.Log(rayOutput.HasHit+" "+rayOutput.HitTaggedObject+" "+rayOutput.HitTagIndex+" "+rayOutput.HitFraction);
+                    if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Goal"))
+                    {
+                        if (rayOutput.HitFraction < 0.04f)
+                        {
+                            Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
+                            AddReward((0.1f / MaxStep));
+                        }
+
+                    }
+
+                    if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Killer"))
+                    {
+                        
+                        if (rayOutput.HitFraction < 0.04f)
+                        {
+                            Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
+                            AddReward((0.1f / MaxStep));
+                        }
+                    }
                 }
             }
-           // var r1 = this.GetComponent<RayPerceptionSensorComponent3D>();
-           // var r2 = r1.GetRayPerceptionInput();  
-            //var r3 =  RayPerceptionSensor.Perceive(r2);
             
-            _pitch =  actions.ContinuousActions[0] * minMaxPitch;
-            _roll =   actions.ContinuousActions[1] * minMaxRoll;
-            //_yaw +=  actions.ContinuousActions[2] * yawPower;
-            _throttle =  actions.ContinuousActions[3] * maxThrottle;
-
-            _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
-            _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
-            //_finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
-            _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
-
-            Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);
-            //Add torque later
-            rb.MoveRotation(rot);
-            rb.AddRelativeForce(new Vector3(0,_finalThrottle,0));
-            
-            
-            if (rb.position.y > 1f)
-            {
-                AddReward(1f / MaxStep); //Only add after they have learned first 
-            }
-            /*
-            if (_pitch > 0.1f)
-            {
-                AddReward( 0.1f / maxsteps);
-            }
-            */
-            
+                            Debug.Log("Current rewards" + GetCumulativeReward());
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
@@ -166,7 +207,7 @@ namespace TdsWork
             ActionSegment<float> continousActions = actionsOut.ContinuousActions;
             continousActions[0] =  _input.Cyclic.y;
             continousActions[1] = -_input.Cyclic.x;
-            //continousActions[2] = _input.Pedals;
+            continousActions[2] = _input.Pedals;
             continousActions[3] = _input.Throttle;
 
         }
@@ -190,9 +231,10 @@ namespace TdsWork
             if (other.TryGetComponent<Killer>(out Killer killer))
             {
                 Debug.Log("Collided with " + other);
-                //SetReward(-1f);
+                SetReward(-1f);
                 EndEpisode();
             }
+            
         }
 
         #endregion

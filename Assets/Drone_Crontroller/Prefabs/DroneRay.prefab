@@ -430,7 +430,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1500
+  MaxStep: 2000
   weightInKg: 1
   minMaxPitch: 30
   minMaxRoll: 30
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 16
+    VectorObservationSize: 44
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -462,7 +462,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: f09549c5d2bba144b9bb0000c0fb4f95, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: DroneAgent
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: DroneAgentNewT
+  DemonstrationName: DroneAgentMove
   DemonstrationDirectory: Demos
 --- !u!114 &8713279568146889808
 MonoBehaviour:
@@ -519,8 +519,8 @@ MonoBehaviour:
   - Killer
   m_RaysPerDirection: 4
   m_MaxRayDegrees: 180
-  m_SphereCastRadius: 0.23
-  m_RayLength: 45
+  m_SphereCastRadius: 0.02
+  m_RayLength: 60
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
@@ -546,7 +546,7 @@ MonoBehaviour:
   - Goal
   - Ground
   - Killer
-  m_RaysPerDirection: 2
+  m_RaysPerDirection: 0
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.02
   m_RayLength: 1
@@ -557,7 +557,7 @@ MonoBehaviour:
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
-  m_EndVerticalOffset: -6
+  m_EndVerticalOffset: -10
 --- !u!114 &6339756460871402170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,7 +575,7 @@ MonoBehaviour:
   - Goal
   - Ground
   - Killer
-  m_RaysPerDirection: 2
+  m_RaysPerDirection: 0
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.02
   m_RayLength: 1
@@ -586,7 +586,7 @@ MonoBehaviour:
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
-  m_EndVerticalOffset: 6
+  m_EndVerticalOffset: 10
 --- !u!1001 &2601217374628886160
 PrefabInstance:
   m_ObjectHideFlags: 0
