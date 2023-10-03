@@ -59,7 +59,7 @@ namespace TdsWork
             raySensor = GetComponent<RayPerceptionSensorComponent3D>();
             
                // transform.localPosition = new Vector3(Random.Range(-3.5f, +3.5f), Random.Range(-1f,5f), Random.Range(+2.5f, +5f));
-               transform.localPosition = new Vector3(-0.9f,4.15f,9.32f);
+               transform.localPosition = new Vector3(-0.9f,4.15f,14.32f);
                 goal = Instantiate(goal, this.transform.position, Quaternion.identity);
             //Physics.IgnoreCollision(this.GetComponent<Collider>(), GameObject.FindGameObjectWithTag("dr").GetComponent<Collider>());
         }
@@ -100,7 +100,7 @@ namespace TdsWork
                             
                         }
                         
-            sensor.AddObservation(goal);
+            sensor.AddObservation(_targetTransform);
             Vector3 DirToGoal = (_targetTransform - transform.localPosition).normalized; //can change to dot later
             Debug.Log("Direction: " + DirToGoal);
             Debug.Log("_targetTransform" + _targetTransform);
@@ -151,12 +151,12 @@ namespace TdsWork
             rb.MoveRotation(rot);
             rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
 
-            /*
-            if (rb.position.y > 0.5f)
+            
+            if (rb.position.y > 0.35f)
             {
-                AddReward(1f / MaxStep); //Only add after they have learned first
+                AddReward(0.1f / MaxStep); //Only add after they have learned first
             }
-            */
+            
             
             if (_finalPitch > 0.5f || _finalPitch < 0.5f)
             {
