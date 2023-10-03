@@ -26,27 +26,37 @@ namespace TdsWork
         [SerializeField]private float yawPower = 4f;
         [SerializeField] private float maxThrottle = 5f;
         [SerializeField] private float lerpSpeed = 2f;
+          private float _pitch;
+          private float _finalPitch;
+                private float _roll;
+                private float _finalRoll;
+                private float _yaw;
+                private float _finalYaw;
+                private float _throttle;
+                private float _finalThrottle;
 
         [Header("Ml Targets")] [SerializeField]
         private GameObject goal;
-        private Vector3 _targetTransform;
-        private int maxsteps;
+        [SerializeField] private GoalSpawner _goalSpawner;
+        [SerializeField]private Vector3 _targetTransform;
+        
 
         [Header("RayTracing")] [SerializeField]
         private RayPerceptionSensorComponent3D raySensor;
         public float thresholdDistance = 1.5f;
         
+        [Header("Materials")]
+        [SerializeField] private Material winMaterial;
+        [SerializeField] private Material loseMaterial;
+        [SerializeField] private Material startMaterial;
+        [SerializeField] private MeshRenderer groundMeshRenderer;
+        
+        
         private Drone_Inputs _input;
         private List<IEngine> _engines = new List<IEngine>();
-
-        private float _pitch;
-        private float _finalPitch;
-        private float _roll;
-        private float _finalRoll;
-        private float _yaw;
-        private float _finalYaw;
-        private float _throttle;
-        private float _finalThrottle;
+        
+        
+      
         #endregion
 
         #region Main Methods
@@ -58,10 +68,7 @@ namespace TdsWork
 
             raySensor = GetComponent<RayPerceptionSensorComponent3D>();
             
-               // transform.localPosition = new Vector3(Random.Range(-3.5f, +3.5f), Random.Range(-1f,5f), Random.Range(+2.5f, +5f));
-               transform.localPosition = new Vector3(-0.9f,4.15f,14.32f);
-                goal = Instantiate(goal, this.transform.position, Quaternion.identity);
-            //Physics.IgnoreCollision(this.GetComponent<Collider>(), GameObject.FindGameObjectWithTag("dr").GetComponent<Collider>());
+               //transform.localPosition = new Vector3(-0.9f,4.15f,4.32f);
         }
 
         private void Update()
@@ -74,9 +81,12 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
+            _goalSpawner.KillGoal();
+            _goalSpawner.SpawnFood();
+            groundMeshRenderer.material = startMaterial;
             transform.localPosition = new Vector3(0,4f,0);
             rb.velocity = Vector3.zero;
-            _targetTransform = goal.gameObject.transform.position;
+            _targetTransform = _goalSpawner.GetLastGoalTransform();
             _yaw = 0;
             _finalYaw = 0;
         }
@@ -101,12 +111,21 @@ namespace TdsWork
                         }
                         
             sensor.AddObservation(_targetTransform);
-            Vector3 DirToGoal = (_targetTransform - transform.localPosition).normalized; //can change to dot later
-            Debug.Log("Direction: " + DirToGoal);
-            Debug.Log("_targetTransform" + _targetTransform);
+            if (_goalSpawner.HasGoalSpawned())
+            {
+            Vector3 DirToGoal = (_goalSpawner.GetLastGoalTransform() - transform.position).normalized; //can change to dot later
+           // Debug.Log("Direction: " + DirToGoal);
+           // Debug.Log("_targetTransform" + _goalSpawner.GetLastGoalTransform());
             sensor.AddObservation(DirToGoal.x);
             sensor.AddObservation(DirToGoal.y);
             sensor.AddObservation(DirToGoal.z);
+            }
+            else
+            {
+                sensor.AddObservation(0f); //x
+                sensor.AddObservation(0f); //y
+                sensor.AddObservation(0f); //z
+            }
             
             sensor.AddObservation(_pitch);
             sensor.AddObservation(_finalPitch);
@@ -180,7 +199,7 @@ namespace TdsWork
                     {
                         if (rayOutput.HitFraction < 0.04f)
                         {
-                            Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
+                            //Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
                             AddReward((0.1f / MaxStep));
                         }
 
@@ -191,14 +210,14 @@ namespace TdsWork
                         
                         if (rayOutput.HitFraction < 0.04f)
                         {
-                            Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
+                            //Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
                             AddReward((0.1f / MaxStep));
                         }
                     }
                 }
             }
             
-                            Debug.Log("Current rewards" + GetCumulativeReward());
+                           // Debug.Log("Current rewards" + GetCumulativeReward());
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
@@ -218,6 +237,7 @@ namespace TdsWork
             {
                 Debug.Log("Collided with" + other);
                 SetReward(+1f); //reward value is only relative to other rewards
+                groundMeshRenderer.material = winMaterial;
                 EndEpisode();
             }
         
@@ -232,7 +252,8 @@ namespace TdsWork
             {
                 Debug.Log("Collided with " + other);
                 SetReward(-1f);
-                EndEpisode();
+                //EndEpisode();
+                groundMeshRenderer.material = loseMaterial;
             }
             
         }
