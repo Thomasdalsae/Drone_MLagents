@@ -1,0 +1,47 @@
+{
+    "DroneAgent": {
+        "checkpoints": [
+            {
+                "steps": 499976,
+                "file_path": "results\\DroneAgentGoalRayGG1\\DroneAgent\\DroneAgent-499976.onnx",
+                "reward": 1.000000074505806,
+                "creation_time": 1696284708.1605537,
+                "auxillary_file_paths": [
+                    "results\\DroneAgentGoalRayGG1\\DroneAgent\\DroneAgent-499976.pt"
+                ]
+            },
+            {
+                "steps": 999940,
+                "file_path": "results\\DroneAgentGoalRayGG1\\DroneAgent\\DroneAgent-999940.onnx",
+                "reward": null,
+                "creation_time": 1696285805.3709965,
+                "auxillary_file_paths": [
+                    "results\\DroneAgentGoalRayGG1\\DroneAgent\\DroneAgent-999940.pt"
+                ]
+            },
+            {
+                "steps": 1178055,
+                "file_path": "results\\DroneAgentGoalRayGG1\\DroneAgent\\DroneAgent-1178055.onnx",
+                "reward": 0.08400000631809235,
+                "creation_time": 1696286261.4297528,
+                "auxillary_file_paths": [
+                    "results\\DroneAgentGoalRayGG1\\DroneAgent\\DroneAgent-1178055.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1178055,
+            "file_path": "results\\DroneAgentGoalRayGG1\\DroneAgent.onnx",
+            "reward": 0.08400000631809235,
+            "creation_time": 1696286261.4297528,
+            "auxillary_file_paths": [
+                "results\\DroneAgentGoalRayGG1\\DroneAgent\\DroneAgent-1178055.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.0.1+cu117"
+    }
+}

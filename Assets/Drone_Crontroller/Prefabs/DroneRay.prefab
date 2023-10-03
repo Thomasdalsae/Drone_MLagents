@@ -430,7 +430,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1000
+  MaxStep: 1500
   weightInKg: 1
   minMaxPitch: 30
   minMaxRoll: 30
@@ -438,6 +438,8 @@ MonoBehaviour:
   maxThrottle: 5
   lerpSpeed: 2
   goal: {fileID: 4687400044590151136, guid: 4485634a9a6c2aa4f8478e7d27e2d0dc, type: 3}
+  raySensor: {fileID: 0}
+  thresholdDistance: 1.5
 --- !u!114 &1413618516064086516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,7 +462,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: d434a94ad7dec70478d6a7b6fc39046c, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: DroneAgent
@@ -494,9 +496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Record: 1
+  Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: DroneAgentNow
+  DemonstrationName: DroneAgentNewT
   DemonstrationDirectory: Demos
 --- !u!114 &8713279568146889808
 MonoBehaviour:
@@ -514,10 +516,11 @@ MonoBehaviour:
   m_DetectableTags:
   - Goal
   - Ground
+  - Killer
   m_RaysPerDirection: 4
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.23
-  m_RayLength: 12
+  m_RayLength: 45
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
@@ -542,10 +545,11 @@ MonoBehaviour:
   m_DetectableTags:
   - Goal
   - Ground
+  - Killer
   m_RaysPerDirection: 2
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.02
-  m_RayLength: 2
+  m_RayLength: 1
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
@@ -553,7 +557,7 @@ MonoBehaviour:
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
-  m_EndVerticalOffset: -10
+  m_EndVerticalOffset: -6
 --- !u!114 &6339756460871402170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,10 +574,11 @@ MonoBehaviour:
   m_DetectableTags:
   - Goal
   - Ground
+  - Killer
   m_RaysPerDirection: 2
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.02
-  m_RayLength: 2
+  m_RayLength: 1
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
@@ -581,7 +586,7 @@ MonoBehaviour:
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
-  m_EndVerticalOffset: 10
+  m_EndVerticalOffset: 6
 --- !u!1001 &2601217374628886160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -652,7 +657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: cae7bd101fff4ff4d8ecdaef191105c6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.051
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: cae7bd101fff4ff4d8ecdaef191105c6, type: 3}
       propertyPath: m_LocalPosition.z
