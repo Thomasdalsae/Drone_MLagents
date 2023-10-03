@@ -51,7 +51,7 @@ public class GoalSpawner : MonoBehaviour
 
     public void KillGoal()
     {
-        Destroy(ThisGoal.gameObject);
+        Destroy(ThisGoal);
         GoalHasSpawned = false;
     }
 }

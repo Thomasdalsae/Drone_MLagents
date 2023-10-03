@@ -38,8 +38,8 @@ namespace TdsWork
         [Header("Ml Targets")] [SerializeField]
         private GameObject goal;
         [SerializeField] private GoalSpawner _goalSpawner;
-        [SerializeField]private Vector3 _targetTransform;
-        
+        [SerializeField] private Vector3 _targetPosition;
+        [SerializeField] private Transform _targetTransform;
 
         [Header("RayTracing")] [SerializeField]
         private RayPerceptionSensorComponent3D raySensor;
@@ -84,9 +84,9 @@ namespace TdsWork
             _goalSpawner.KillGoal();
             _goalSpawner.SpawnFood();
             groundMeshRenderer.material = startMaterial;
-            transform.localPosition = new Vector3(0,4f,0);
+            transform.localPosition = new Vector3(Random.Range(-3f,3f),Random.Range(0.2f,7f), Random.Range(-4f,4f));
             rb.velocity = Vector3.zero;
-            _targetTransform = _goalSpawner.GetLastGoalTransform();
+            _targetPosition = _goalSpawner.GetLastGoalTransform();
             _yaw = 0;
             _finalYaw = 0;
         }
@@ -110,12 +110,12 @@ namespace TdsWork
                             
                         }
                         
-            sensor.AddObservation(_targetTransform);
+            sensor.AddObservation(_targetPosition);
             if (_goalSpawner.HasGoalSpawned())
             {
             Vector3 DirToGoal = (_goalSpawner.GetLastGoalTransform() - transform.position).normalized; //can change to dot later
            // Debug.Log("Direction: " + DirToGoal);
-           // Debug.Log("_targetTransform" + _goalSpawner.GetLastGoalTransform());
+           // Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
             sensor.AddObservation(DirToGoal.x);
             sensor.AddObservation(DirToGoal.y);
             sensor.AddObservation(DirToGoal.z);
@@ -184,6 +184,19 @@ namespace TdsWork
             if (_finalRoll > 0.5f || _finalRoll < 0.5f)
             {
                 AddReward(0.1f / MaxStep);
+            }
+
+            //Quaternion lookRotation = Quaternion.LookRotation(_targetPosition - transform.position);
+
+            float angle = 20;
+            if  ( Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.transform.position) < angle) {
+                Debug.Log("Is currently facing goal");
+                AddReward(0.1f / MaxStep);
+            }
+            else
+            {
+                Debug.Log("Is Not Facing the goal !!");
+                AddReward(-0.1f / MaxStep);
             }
             
             var rcComponents = this.GetComponents<RayPerceptionSensorComponent3D>();
