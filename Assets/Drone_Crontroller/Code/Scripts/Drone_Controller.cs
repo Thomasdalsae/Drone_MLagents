@@ -155,7 +155,7 @@ namespace TdsWork
             _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
             _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
 
-            var rot = Quaternion.Euler(_finalPitch, _finalYaw, _finalRoll);
+            var rot = Quaternion.Euler(_finalPitch, _finalYaw, -_finalRoll);
             //Add torque later
             rb.MoveRotation(rot);
             rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
@@ -192,16 +192,16 @@ namespace TdsWork
                 foreach (var rayOutput in r3.RayOutputs)
                 {
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Goal"))
-                        if (rayOutput.HitFraction < 0.07f)
+                        if (rayOutput.HitFraction < 0.15f)
                             Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
                     AddReward(0.1f / MaxStep);
 
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Killer"))
-                        if (rayOutput.HitFraction < 0.05f)
+                        if (rayOutput.HitFraction < 0.1f)
                             Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
                     AddReward(-0.1f / MaxStep);
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Ground"))
-                        if (rayOutput.HitFraction < 0.05f)
+                        if (rayOutput.HitFraction < 0.1f)
                             Debug.Log("Ground is close , CAREFULL" + rayOutput.HitFraction);
                     AddReward(-0.1f / MaxStep);         
                 }
