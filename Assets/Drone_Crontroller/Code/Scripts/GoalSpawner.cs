@@ -18,7 +18,7 @@ public class GoalSpawner : MonoBehaviour
     {
         transform.localPosition = new Vector3(0, 0, 0);
         //ResetGoal();
-        ThisGoal = Goal;
+        
     }
 
     public void ResetGoal()
@@ -28,7 +28,7 @@ public class GoalSpawner : MonoBehaviour
 
     public void SpawnFood()
     {
-        transform.localPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0.0f, 10f), Random.Range(-10f, 10f));
+        transform.localPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0.0f, 5f), Random.Range(-7f, 7f));
         Debug.Log("SpawnFood Gets called");
         ThisGoal = Instantiate(Goal.gameObject, transform.position, quaternion.identity);
         GoalHasSpawned = true;
@@ -53,7 +53,7 @@ public class GoalSpawner : MonoBehaviour
 
     public void KillGoal()
     {
-        DestroyImmediate(ThisGoal);
+        Destroy(ThisGoal);
         GoalHasSpawned = false;
     }
 }
