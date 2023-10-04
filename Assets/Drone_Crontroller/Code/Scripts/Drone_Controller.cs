@@ -39,8 +39,8 @@ namespace TdsWork
 
         public float thresholdDistance = 1.5f;
 
-        [Header("Materials")] [SerializeField] private Material winMaterial;
-
+        [Header("Materials")] 
+        [SerializeField] private Material winMaterial;
         [SerializeField] private Material loseMaterial;
         [SerializeField] private Material startMaterial;
         [SerializeField] private MeshRenderer groundMeshRenderer;
@@ -76,7 +76,7 @@ namespace TdsWork
             _goalSpawner.KillGoal();
             _goalSpawner.SpawnFood();
            // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
-           transform.localPosition = new Vector3(0, 4, -2);
+           transform.localPosition = new Vector3(0, 4, -5);
             rb.velocity = Vector3.zero;
             _targetPosition = _goalSpawner.GetLastGoalTransform();
             _yaw = 0;
@@ -214,6 +214,7 @@ namespace TdsWork
 
         private void OnTriggerEnter(Collider other)
         {
+            groundMeshRenderer.material = loseMaterial;
             if (other.TryGetComponent(out Goal goal))
             {
                 Debug.Log("Collided with" + other);
@@ -225,14 +226,14 @@ namespace TdsWork
             if (other.TryGetComponent(out Ground ground)) Debug.Log("Collided with " + other);
                 //SetReward(-1f);
                 //EndEpisode();
-                groundMeshRenderer.material = loseMaterial;
+                //groundMeshRenderer.material = loseMaterial;
                 
             if (other.TryGetComponent(out Killer killer))
             {
                 Debug.Log("Collided with " + other);
                 //SetReward(-1f);
                 //EndEpisode();
-                groundMeshRenderer.material = loseMaterial;
+                //groundMeshRenderer.material = loseMaterial;
             }
         }
 
