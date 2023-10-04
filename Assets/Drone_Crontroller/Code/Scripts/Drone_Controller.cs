@@ -215,7 +215,7 @@ namespace TdsWork
             //Debug.Log("Entering Heuristics:");
             var continousActions = actionsOut.ContinuousActions;
             continousActions[0] = _input.Cyclic.y;
-            continousActions[1] = -_input.Cyclic.x;
+            continousActions[1] = _input.Cyclic.x;
             continousActions[2] = _input.Pedals;
             continousActions[3] = _input.Throttle;
             
