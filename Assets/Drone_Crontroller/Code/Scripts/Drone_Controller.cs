@@ -33,6 +33,9 @@ namespace TdsWork
         [SerializeField] private GoalSpawner _goalSpawner;
         [SerializeField] private Vector3 _targetPosition;
         [SerializeField] private Transform _targetTransform;
+        [SerializeField] private Vector3 _myLocation;
+        [SerializeField] private Vector3 _myRBlocation;
+        [SerializeField] private Vector3 _myVelo;
 
         [Header("RayTracing")] [SerializeField]
         private RayPerceptionSensorComponent3D raySensor;
@@ -95,14 +98,15 @@ namespace TdsWork
                 foreach (var rayOutput in r3.RayOutputs)
                 {
                     //Debug.Log(rayOutput.HasHit+" "+rayOutput.HitTaggedObject+" "+rayOutput.HitTagIndex+" "+rayOutput.HitFraction);
-                    sensor.AddObservation(rayOutput.HitFraction);
                     sensor.AddObservation(rayOutput.HasHit);
+                    sensor.AddObservation(rayOutput.HitFraction);
                 }
             }
 
-            sensor.AddObservation(_targetPosition);
             if (_goalSpawner.HasGoalSpawned())
             {
+                
+                sensor.AddObservation(_targetPosition);
                 var DirToGoal =
                     (_goalSpawner.GetLastGoalTransform() - transform.position).normalized; //can change to dot later
                  Debug.Log("Direction: " + DirToGoal);
@@ -126,18 +130,21 @@ namespace TdsWork
             sensor.AddObservation(_finalRoll);
             sensor.AddObservation(_throttle);
             sensor.AddObservation(_finalThrottle);
+            
+            sensor.AddObservation(transform.localPosition);
+            
             sensor.AddObservation(rb.velocity);
             sensor.AddObservation(rb.position);
             sensor.AddObservation(rb.transform.forward);
-            sensor.AddObservation(rb.position.y);
         }
 
         public override void OnActionReceived(ActionBuffers actions)
         {
-            // var r1 = this.GetComponent<RayPerceptionSensorComponent3D>();
-            // var r2 = r1.GetRayPerceptionInput();  
-            //var r3 =  RayPerceptionSensor.Perceive(r2);
-
+            
+            _myLocation = transform.localPosition;
+            _myVelo = rb.velocity;
+           
+            
             _pitch = actions.ContinuousActions[0] * minMaxPitch;
             _roll = actions.ContinuousActions[1] * minMaxRoll;
             _yaw += actions.ContinuousActions[2] * yawPower;
@@ -152,8 +159,9 @@ namespace TdsWork
             //Add torque later
             rb.MoveRotation(rot);
             rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
+            
 
-            if (rb.position.y > 0.35f) AddReward(0.1f / MaxStep); //Only add after they have learned first
+           // if (rb. > 0.35f) AddReward(0.1f / MaxStep); //Only add after they have learned first
 
 
            // if (_finalPitch > 0.5f || _finalPitch < -0.5f) AddReward(0.1f / MaxStep);
@@ -162,7 +170,7 @@ namespace TdsWork
             //Quaternion lookRotation = Quaternion.LookRotation(_targetPosition - transform.position);
 
             float angle = 20;
-            if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.transform.position) <
+            if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.position) <
                 angle)
             {
                 //Debug.Log("Is currently facing goal");
@@ -184,16 +192,16 @@ namespace TdsWork
                 foreach (var rayOutput in r3.RayOutputs)
                 {
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Goal"))
-                        if (rayOutput.HitFraction < 0.06f)
+                        if (rayOutput.HitFraction < 0.07f)
                             Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
                     AddReward(0.1f / MaxStep);
 
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Killer"))
-                        if (rayOutput.HitFraction < 0.04f)
+                        if (rayOutput.HitFraction < 0.05f)
                             Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
                     AddReward(-0.1f / MaxStep);
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Ground"))
-                        if (rayOutput.HitFraction < 0.04f)
+                        if (rayOutput.HitFraction < 0.05f)
                             Debug.Log("Ground is close , CAREFULL" + rayOutput.HitFraction);
                     AddReward(-0.1f / MaxStep);         
                 }
@@ -210,6 +218,7 @@ namespace TdsWork
             continousActions[1] = -_input.Cyclic.x;
             continousActions[2] = _input.Pedals;
             continousActions[3] = _input.Throttle;
+            
         }
 
         private void OnTriggerEnter(Collider other)
@@ -256,17 +265,7 @@ namespace TdsWork
         /*
         protected virtual void HandleControls()
         {
-             _pitch = _input.Cyclic.y * minMaxPitch;
-             _roll = -_input.Cyclic.x * minMaxRoll;
-            _yaw += _input.Pedals * yawPower;
-
-            _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
-            _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
-            _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
-
-            Quaternion rot = Quaternion.Euler(_finalPitch,_finalYaw,_finalRoll);
-            //Add torque later
-            rb.MoveRotation(rot);
+             
         }
         */
 
