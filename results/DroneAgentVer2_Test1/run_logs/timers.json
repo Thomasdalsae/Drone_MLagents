@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1696381935",
+        "python_version": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "F:\\Unity projects\\Oblig2\\Drone_MLagents\\venv\\Scripts\\mlagents-learn config/DroneAgent.yaml --run-id=DroneAgentVer2_Test1",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.0.1+cu117",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1696381997"
+    },
+    "total": 61.7157275,
+    "count": 1,
+    "self": 0.005684500000008086,
+    "children": {
+        "run_training.setup": {
+            "total": 0.07255400000000001,
+            "count": 1,
+            "self": 0.07255400000000001
+        },
+        "TrainerController.start_learning": {
+            "total": 61.637488999999995,
+            "count": 1,
+            "self": 0.0001221999999998502,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 61.6373489,
+                    "count": 1,
+                    "self": 61.6373489
+                },
+                "TrainerController._save_models": {
+                    "total": 1.7899999996018323e-05,
+                    "count": 1,
+                    "self": 1.7899999996018323e-05
+                }
+            }
+        }
+    }
+}

@@ -75,8 +75,8 @@ namespace TdsWork
         {
             _goalSpawner.KillGoal();
             _goalSpawner.SpawnFood();
-            groundMeshRenderer.material = startMaterial;
-            transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
+           // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
+           transform.localPosition = new Vector3(0, 4, -2);
             rb.velocity = Vector3.zero;
             _targetPosition = _goalSpawner.GetLastGoalTransform();
             _yaw = 0;
@@ -105,8 +105,8 @@ namespace TdsWork
             {
                 var DirToGoal =
                     (_goalSpawner.GetLastGoalTransform() - transform.position).normalized; //can change to dot later
-                // Debug.Log("Direction: " + DirToGoal);
-                // Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
+                 Debug.Log("Direction: " + DirToGoal);
+                 Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
                 sensor.AddObservation(DirToGoal.x);
                 sensor.AddObservation(DirToGoal.y);
                 sensor.AddObservation(DirToGoal.z);
@@ -153,12 +153,11 @@ namespace TdsWork
             rb.MoveRotation(rot);
             rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
 
-
             if (rb.position.y > 0.35f) AddReward(0.1f / MaxStep); //Only add after they have learned first
 
 
-            if (_finalPitch > 0.5f || _finalPitch < 0.5f) AddReward(0.1f / MaxStep);
-            if (_finalRoll > 0.5f || _finalRoll < 0.5f) AddReward(0.1f / MaxStep);
+           // if (_finalPitch > 0.5f || _finalPitch < -0.5f) AddReward(0.1f / MaxStep);
+           // if (_finalRoll > 0.5f || _finalRoll < -0.5f) AddReward(0.1f / MaxStep);
 
             //Quaternion lookRotation = Quaternion.LookRotation(_targetPosition - transform.position);
 
@@ -166,7 +165,7 @@ namespace TdsWork
             if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.transform.position) <
                 angle)
             {
-                Debug.Log("Is currently facing goal");
+                //Debug.Log("Is currently facing goal");
                 AddReward(0.1f / MaxStep);
             }
             else
@@ -185,14 +184,18 @@ namespace TdsWork
                 foreach (var rayOutput in r3.RayOutputs)
                 {
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Goal"))
-                        if (rayOutput.HitFraction < 0.04f)
-                            //Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
-                            AddReward(0.1f / MaxStep);
+                        if (rayOutput.HitFraction < 0.06f)
+                            Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
+                    AddReward(0.1f / MaxStep);
 
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Killer"))
                         if (rayOutput.HitFraction < 0.04f)
-                            //Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
-                            AddReward(0.1f / MaxStep);
+                            Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
+                    AddReward(-0.1f / MaxStep);
+                    if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Ground"))
+                        if (rayOutput.HitFraction < 0.04f)
+                            Debug.Log("Ground is close , CAREFULL" + rayOutput.HitFraction);
+                    AddReward(-0.1f / MaxStep);         
                 }
             }
 
@@ -220,11 +223,14 @@ namespace TdsWork
             }
 
             if (other.TryGetComponent(out Ground ground)) Debug.Log("Collided with " + other);
-            //SetReward(-1f);
+                //SetReward(-1f);
+                //EndEpisode();
+                groundMeshRenderer.material = loseMaterial;
+                
             if (other.TryGetComponent(out Killer killer))
             {
                 Debug.Log("Collided with " + other);
-                SetReward(-1f);
+                //SetReward(-1f);
                 //EndEpisode();
                 groundMeshRenderer.material = loseMaterial;
             }
