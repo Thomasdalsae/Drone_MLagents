@@ -439,7 +439,8 @@ MonoBehaviour:
   lerpSpeed: 2
   goal: {fileID: 4687400044590151136, guid: 4485634a9a6c2aa4f8478e7d27e2d0dc, type: 3}
   _goalSpawner: {fileID: 5903269606092305730, guid: 088f2197acf63fa41a7a99eafddd2d8c, type: 3}
-  _targetTransform: {x: 0, y: 0, z: 0}
+  _targetPosition: {x: 0, y: 0, z: 0}
+  _targetTransform: {fileID: 0}
   raySensor: {fileID: 0}
   thresholdDistance: 1.5
   winMaterial: {fileID: 0}
@@ -470,7 +471,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: f09549c5d2bba144b9bb0000c0fb4f95, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
