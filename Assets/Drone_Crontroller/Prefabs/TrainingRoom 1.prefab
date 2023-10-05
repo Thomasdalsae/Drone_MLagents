@@ -929,7 +929,7 @@ PrefabInstance:
       objectReference: {fileID: 5022602860645237092, guid: 4035c75b0ca92214fa47f7e471ec450e, type: 3}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_BehaviorType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_InferenceDevice
@@ -1013,7 +1013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5041016667782020400, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: DemonstrationName
-      value: DroneAgentWOW
+      value: DroneAgentMove
       objectReference: {fileID: 0}
     - target: {fileID: 6003215379407834267, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_Name
@@ -1033,7 +1033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: yawPower
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: lerpSpeed
@@ -1041,15 +1041,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: minMaxRoll
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: maxThrottle
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: minMaxPitch
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: winMaterial
