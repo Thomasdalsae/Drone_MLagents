@@ -1,0 +1,65 @@
+{
+    "DroneAgent": {
+        "checkpoints": [
+            {
+                "steps": 4349995,
+                "file_path": "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4349995.onnx",
+                "reward": -0.6143028475826473,
+                "creation_time": 1696539496.7270453,
+                "auxillary_file_paths": [
+                    "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4349995.pt"
+                ]
+            },
+            {
+                "steps": 4399958,
+                "file_path": "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4399958.onnx",
+                "reward": -0.7771500032677068,
+                "creation_time": 1696539586.494917,
+                "auxillary_file_paths": [
+                    "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4399958.pt"
+                ]
+            },
+            {
+                "steps": 4449952,
+                "file_path": "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4449952.onnx",
+                "reward": -0.7776040532965757,
+                "creation_time": 1696539702.1191447,
+                "auxillary_file_paths": [
+                    "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4449952.pt"
+                ]
+            },
+            {
+                "steps": 4499993,
+                "file_path": "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4499993.onnx",
+                "reward": -0.5574871784382804,
+                "creation_time": 1696539786.499923,
+                "auxillary_file_paths": [
+                    "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4499993.pt"
+                ]
+            },
+            {
+                "steps": 4522886,
+                "file_path": "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4522886.onnx",
+                "reward": -0.65834999026265,
+                "creation_time": 1696539884.8113108,
+                "auxillary_file_paths": [
+                    "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4522886.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 4522886,
+            "file_path": "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent.onnx",
+            "reward": -0.65834999026265,
+            "creation_time": 1696539884.8113108,
+            "auxillary_file_paths": [
+                "results\\DroneAgent_reworked_MoveingGoal_Killer\\DroneAgent\\DroneAgent-4522886.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.0.1+cu117"
+    }
+}
