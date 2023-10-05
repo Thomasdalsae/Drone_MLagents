@@ -139,7 +139,7 @@ namespace TdsWork
             sensor.AddObservation(rb.velocity);
             sensor.AddObservation(rb.position);
             sensor.AddObservation(rb.transform.forward);
-            
+             
         }
 
         public override void OnActionReceived(ActionBuffers actions)
@@ -244,9 +244,9 @@ namespace TdsWork
             if (other.TryGetComponent(out Killer killer))
             {
                 Debug.Log("Collided with " + other);
-                //SetReward(-1f);
-                //EndEpisode();
-                //groundMeshRenderer.material = loseMaterial;
+                SetReward(-1f);
+                EndEpisode();
+                groundMeshRenderer.material = loseMaterial;
             }
         }
 
