@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
@@ -76,14 +77,15 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
+            ResetValues();
             _goalSpawner.KillGoal();
             _goalSpawner.SpawnFood();
            // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
            transform.localPosition = new Vector3(0, 4, -5);
-            rb.velocity = Vector3.zero;
-            _targetPosition = _goalSpawner.GetLastGoalTransform();
-            _yaw = 0;
-            _finalYaw = 0;
+           _targetPosition = _goalSpawner.GetLastGoalTransform();
+
+            
+            
         }
 
         public override void CollectObservations(VectorSensor sensor)
@@ -132,6 +134,7 @@ namespace TdsWork
             sensor.AddObservation(_finalThrottle);
             
             sensor.AddObservation(transform.localPosition);
+            sensor.AddObservation(transform.localRotation);
             
             sensor.AddObservation(rb.velocity);
             sensor.AddObservation(rb.position);
@@ -269,6 +272,29 @@ namespace TdsWork
         }
         */
 
+
+        void ResetValues()
+        {
+            
+
+           quaternion startRot = quaternion.identity;
+           rb.rotation = startRot;
+           transform.localRotation = startRot;
+           rb.velocity = Vector3.zero;
+           rb.angularVelocity = Vector3.zero;
+
+           _pitch = 0;
+           _roll = 0;
+           _yaw = 0;
+           _throttle = 0;
+
+           _finalPitch = 0;
+           _finalRoll = 0;
+           _finalYaw = 0;
+           _finalThrottle = 0;
+
+        }
+        
         #endregion
     }
 }

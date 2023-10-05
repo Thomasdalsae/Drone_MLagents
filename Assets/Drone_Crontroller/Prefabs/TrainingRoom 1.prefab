@@ -929,7 +929,7 @@ PrefabInstance:
       objectReference: {fileID: 5022602860645237092, guid: f09549c5d2bba144b9bb0000c0fb4f95, type: 3}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_BehaviorType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_InferenceDevice
@@ -941,10 +941,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 48
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
+      propertyPath: m_BrainParameters.NumStackedVectorObservations
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
@@ -1009,7 +1013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5041016667782020400, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: DemonstrationName
-      value: DroneAgentFix
+      value: DroneAgentReal
       objectReference: {fileID: 0}
     - target: {fileID: 6003215379407834267, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_Name
@@ -1025,11 +1029,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: MaxStep
-      value: 750
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: yawPower
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: lerpSpeed
