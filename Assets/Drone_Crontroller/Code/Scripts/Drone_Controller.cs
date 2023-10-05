@@ -139,6 +139,7 @@ namespace TdsWork
             sensor.AddObservation(rb.velocity);
             sensor.AddObservation(rb.position);
             sensor.AddObservation(rb.transform.forward);
+            
         }
 
         public override void OnActionReceived(ActionBuffers actions)
@@ -162,15 +163,6 @@ namespace TdsWork
             //Add torque later
             rb.MoveRotation(rot);
             rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
-            
-
-           // if (rb. > 0.35f) AddReward(0.1f / MaxStep); //Only add after they have learned first
-
-
-           // if (_finalPitch > 0.5f || _finalPitch < -0.5f) AddReward(0.1f / MaxStep);
-           // if (_finalRoll > 0.5f || _finalRoll < -0.5f) AddReward(0.1f / MaxStep);
-
-            //Quaternion lookRotation = Quaternion.LookRotation(_targetPosition - transform.position);
 
             float angle = 20;
             if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.position) <
@@ -196,21 +188,30 @@ namespace TdsWork
                 {
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Goal"))
                         if (rayOutput.HitFraction < 0.15f)
+                        {
                             Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
-                    AddReward(0.1f / MaxStep);
+                            AddReward(0.1f / MaxStep);
+                        }
 
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Killer"))
                         if (rayOutput.HitFraction < 0.1f)
+                        {
                             Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
-                    AddReward(-0.1f / MaxStep);
+                           AddReward(-0.1f / MaxStep);
+                        }
+
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Ground"))
+                    {
                         if (rayOutput.HitFraction < 0.1f)
-                            Debug.Log("Ground is close , CAREFULL" + rayOutput.HitFraction);
-                    AddReward(-0.1f / MaxStep);         
+                        {
+                            Debug.Log("Ground is close , CAREFULL: " + rayOutput.HitFraction);
+                             AddReward(-0.1f / MaxStep);         
+                        }
+                    }
                 }
             }
 
-            // Debug.Log("Current rewards" + GetCumulativeReward());
+            Debug.Log("Current rewards" + GetCumulativeReward());
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
