@@ -110,19 +110,13 @@ namespace TdsWork
                 
                 sensor.AddObservation(_targetPosition);
                 var DirToGoal =
-                    (_goalSpawner.GetLastGoalTransform() - transform.position).normalized; //can change to dot later
+                    (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized; //can change to dot later
                  Debug.Log("Direction: " + DirToGoal);
                  Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
-                sensor.AddObservation(DirToGoal.x);
-                sensor.AddObservation(DirToGoal.y);
-                sensor.AddObservation(DirToGoal.z);
+              
+                sensor.AddObservation(DirToGoal);
             }
-            else
-            {
-                sensor.AddObservation(0f); //x
-                sensor.AddObservation(0f); //y
-                sensor.AddObservation(0f); //z
-            }
+          
 
             sensor.AddObservation(_pitch);
             sensor.AddObservation(_finalPitch);
@@ -135,7 +129,7 @@ namespace TdsWork
             
             sensor.AddObservation(transform.localPosition);
             sensor.AddObservation(transform.localRotation);
-            
+          
             sensor.AddObservation(rb.velocity);
             sensor.AddObservation(rb.position);
             sensor.AddObservation(rb.transform.forward);
@@ -176,7 +170,10 @@ namespace TdsWork
                 //Debug.Log("Is Not Facing the goal !!");
                 AddReward(-0.1f / MaxStep);
             }
-
+            //Testing <-<-<-<
+            Vector3 targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
+            AddReward(Vector3.Dot(rb.velocity, targetDirection) * (0.1f / MaxStep));
+            
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
 
             for (var i = 0; i < rcComponents.Length; i++)

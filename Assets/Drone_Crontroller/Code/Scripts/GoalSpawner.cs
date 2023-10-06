@@ -16,9 +16,8 @@ public class GoalSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.localPosition = new Vector3(0, 0, 0);
         //ResetGoal();
-        
+        transform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void ResetGoal()
@@ -30,15 +29,16 @@ public class GoalSpawner : MonoBehaviour
     {
         //transform.localPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(1.0f, 10f), Random.Range(-7f, 7f));
         //transform.localPosition = new Vector3(Random.Range(-6f, 6f), Random.Range(3f, 10f), 7f);
-        transform.localPosition = new Vector3(Random.Range(-7.5f, 7.5f), 4, 4);
+        //transform.localPosition = new Vector3(Random.Range(-7.5f, 7.5f), 4, 4);
+        transform.localPosition = Vector3.zero; 
         Debug.Log("SpawnFood Gets called");
-        ThisGoal = Instantiate(Goal.gameObject, transform.position, quaternion.identity);
+        ThisGoal = Instantiate(Goal,transform.gameObject.transform,false);
         GoalHasSpawned = true;
     }
 
     public Vector3 GetLastGoalTransform()
     {
-        _lastpostion = ThisGoal.gameObject.transform.localPosition;
+        _lastpostion = ThisGoal.transform.localPosition;
 
         return _lastpostion;
     }
