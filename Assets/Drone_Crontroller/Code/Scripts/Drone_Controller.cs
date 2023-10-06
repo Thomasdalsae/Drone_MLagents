@@ -157,7 +157,7 @@ namespace TdsWork
             //Add torque later
             rb.MoveRotation(rot);
             rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
-
+            /*
             float angle = 20;
             if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.position) <
                 angle)
@@ -170,10 +170,12 @@ namespace TdsWork
                 //Debug.Log("Is Not Facing the goal !!");
                 AddReward(-0.1f / MaxStep);
             }
+            */
             //Testing <-<-<-<
+            /*
             Vector3 targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
             AddReward(Vector3.Dot(rb.velocity, targetDirection) * (0.1f / MaxStep));
-            
+            */
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
 
             for (var i = 0; i < rcComponents.Length; i++)
@@ -208,7 +210,7 @@ namespace TdsWork
                 }
             }
 
-            Debug.Log("Current rewards" + GetCumulativeReward());
+           // Debug.Log("Current rewards" + GetCumulativeReward());
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
