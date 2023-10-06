@@ -30,7 +30,7 @@ public class GoalSpawner : MonoBehaviour
     {
         //transform.localPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(1.0f, 10f), Random.Range(-7f, 7f));
         //transform.localPosition = new Vector3(Random.Range(-6f, 6f), Random.Range(3f, 10f), 7f);
-        transform.localPosition = new Vector3(Random.Range(-8.5f, 8f), 3, 5);
+        transform.localPosition = new Vector3(Random.Range(-7.5f, 7.5f), 4, 4);
         Debug.Log("SpawnFood Gets called");
         ThisGoal = Instantiate(Goal.gameObject, transform.position, quaternion.identity);
         GoalHasSpawned = true;

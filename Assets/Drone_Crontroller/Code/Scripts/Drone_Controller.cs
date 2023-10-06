@@ -81,7 +81,7 @@ namespace TdsWork
             _goalSpawner.KillGoal();
             _goalSpawner.SpawnFood();
            // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
-           transform.localPosition = new Vector3(0, 4, -5);
+           transform.localPosition = new Vector3(0, 4, -4);
            _targetPosition = _goalSpawner.GetLastGoalTransform();
 
             
@@ -236,17 +236,18 @@ namespace TdsWork
                 EndEpisode();
             }
 
-            if (other.TryGetComponent(out Ground ground)) Debug.Log("Collided with " + other);
-                //SetReward(-1f);
-                //EndEpisode();
-                //groundMeshRenderer.material = loseMaterial;
-                
-            if (other.TryGetComponent(out Killer killer))
+            if (other.TryGetComponent(out Ground ground)) 
             {
-                Debug.Log("Collided with " + other);
                 SetReward(-1f);
                 EndEpisode();
                 groundMeshRenderer.material = loseMaterial;
+            }
+            if (other.TryGetComponent(out Killer killer))
+            {
+               // Debug.Log("Collided with " + other);
+                //SetReward(-1f);
+                //EndEpisode();
+                //groundMeshRenderer.material = loseMaterial;
             }
         }
 

@@ -100,7 +100,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
@@ -218,7 +218,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
@@ -368,7 +368,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
@@ -486,7 +486,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
@@ -675,7 +675,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
@@ -828,8 +828,8 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 1
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
@@ -926,7 +926,7 @@ PrefabInstance:
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: f0ca2b0b50a073b42b534ecf2b94083a, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: ae5fc652b53beb14b932c3fe68af9501, type: 3}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_BehaviorType
       value: 0
@@ -961,7 +961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1507699417663603381, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.58
+      value: -0.163
       objectReference: {fileID: 0}
     - target: {fileID: 1507699417663603381, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -969,7 +969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1507699417663603381, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.46
+      value: -4.014
       objectReference: {fileID: 0}
     - target: {fileID: 1507699417663603381, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1029,11 +1029,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: MaxStep
-      value: 750
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: yawPower
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: lerpSpeed
