@@ -12,12 +12,22 @@ namespace TdsWork
     {
         #region Variables
 
-        [Header("Control Properties")] [SerializeField]
-        private float minMaxPitch = 30f;
-
-        [SerializeField] private float minMaxRoll = 35f;
-        [SerializeField] private float yawPower = 4f;
+        [Header("Control Properties")]
+        /*
+        [SerializeField] private float minThrottle = -5f;
         [SerializeField] private float maxThrottle = 5f;
+        [SerializeField] private float minPitch = -30f;
+        [SerializeField] private float maxPitch = 30f;
+        [SerializeField] private float minRoll = -30f;
+        [SerializeField] private float maxRoll = 30f;
+        [SerializeField] private float minYaw = -4f;
+        [SerializeField] private float maxYaw = 4f;
+        */
+        [SerializeField] private float minMaxPitch = 30f;
+        [SerializeField] private float minMaxRoll = 30f;
+        [SerializeField] private float maxThrottle = 5f;
+        [SerializeField] private float yawPower = 4f;
+        
         [SerializeField] private float lerpSpeed = 2f;
         private float _pitch;
         private float _finalPitch;
@@ -138,9 +148,23 @@ namespace TdsWork
 
         public override void OnActionReceived(ActionBuffers actions)
         {
+            /*
+            //Normalization
+            var normPitch = (_pitch - minPitch / maxPitch - minPitch);
+            var normRoll = (_roll - minRoll / maxRoll - minRoll);
+            var normYaw = (_yaw - minYaw / maxYaw - minYaw);
+            var normThrottle = (_throttle - maxThrottle / maxThrottle - minThrottle);
             
             _myLocation = transform.localPosition;
+            var normMyLocationX = (_myLocation.x - minRoll / maxRoll - minRoll);
+            var normMyLocationY = (_myLocation.y - maxThrottle / maxThrottle - minThrottle)
+            var normMyLocationZ = (_myLocation.z - maxRoll / maxRoll - minRoll);
             _myVelo = rb.velocity;
+            var normMyVeloX = (rb.velocity.x - minRoll / maxRoll - minRoll);
+            var normMyVeloY = (rb.velocity.y - maxThrottle / maxThrottle - minThrottle);
+            var normalVeloZ = (rb.velocity.z - maxRoll / maxRoll - minRoll);
+            */
+            
            
             
             _pitch = actions.ContinuousActions[0] * minMaxPitch;
@@ -157,7 +181,7 @@ namespace TdsWork
             //Add torque later
             rb.MoveRotation(rot);
             rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
-            
+            /*
             float angle = 20;
             if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.position) <
                 angle)
@@ -170,6 +194,7 @@ namespace TdsWork
                 //Debug.Log("Is Not Facing the goal !!");
                 AddReward(-0.1f / MaxStep);
             }
+            */
             
             //Testing <-<-<-<
             /*
@@ -186,7 +211,7 @@ namespace TdsWork
                 foreach (var rayOutput in r3.RayOutputs)
                 {
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Goal"))
-                        if (rayOutput.HitFraction < 0.15f)
+                        if (rayOutput.HitFraction < 0.1f)
                         {
                             Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
                             AddReward(0.1f / MaxStep);
@@ -217,7 +242,7 @@ namespace TdsWork
         {
             //Debug.Log("Entering Heuristics:");
             var continousActions = actionsOut.ContinuousActions;
-            continousActions[0] = _input.Cyclic.y.;
+            continousActions[0] = _input.Cyclic.y;
             continousActions[1] = _input.Cyclic.x;
             continousActions[2] = _input.Pedals;
             continousActions[3] = _input.Throttle;
@@ -244,9 +269,9 @@ namespace TdsWork
             if (other.TryGetComponent(out Killer killer))
             {
                // Debug.Log("Collided with " + other);
-                SetReward(-1f);
-                EndEpisode();
-                groundMeshRenderer.material = loseMaterial;
+                //SetReward(-1f);
+                //EndEpisode();
+                //groundMeshRenderer.material = loseMaterial;
             }
         }
 
