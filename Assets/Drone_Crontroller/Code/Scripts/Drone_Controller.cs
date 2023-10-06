@@ -157,7 +157,7 @@ namespace TdsWork
             //Add torque later
             rb.MoveRotation(rot);
             rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
-            /*
+            
             float angle = 20;
             if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.position) <
                 angle)
@@ -170,7 +170,7 @@ namespace TdsWork
                 //Debug.Log("Is Not Facing the goal !!");
                 AddReward(-0.1f / MaxStep);
             }
-            */
+            
             //Testing <-<-<-<
             /*
             Vector3 targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
@@ -217,7 +217,7 @@ namespace TdsWork
         {
             //Debug.Log("Entering Heuristics:");
             var continousActions = actionsOut.ContinuousActions;
-            continousActions[0] = _input.Cyclic.y;
+            continousActions[0] = _input.Cyclic.y.;
             continousActions[1] = _input.Cyclic.x;
             continousActions[2] = _input.Pedals;
             continousActions[3] = _input.Throttle;
@@ -244,9 +244,9 @@ namespace TdsWork
             if (other.TryGetComponent(out Killer killer))
             {
                // Debug.Log("Collided with " + other);
-                //SetReward(-1f);
-                //EndEpisode();
-                //groundMeshRenderer.material = loseMaterial;
+                SetReward(-1f);
+                EndEpisode();
+                groundMeshRenderer.material = loseMaterial;
             }
         }
 
