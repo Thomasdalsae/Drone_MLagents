@@ -122,8 +122,8 @@ namespace TdsWork
                 var DirToGoal =
                     (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized; //can change to dot later
                  Debug.Log("Direction: " + DirToGoal);
-                 Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
-              
+                 Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform()); //<- might get position of spawner, but it works
+                // Debug.Log("TargetPosition not funv" + _goalSpawner.gameObject.transform.localPosition);
                 sensor.AddObservation(DirToGoal);
             }
           

@@ -38,7 +38,7 @@ public class GoalSpawner : MonoBehaviour
 
     public Vector3 GetLastGoalTransform()
     {
-        _lastpostion = ThisGoal.transform.localPosition;
+        _lastpostion = gameObject.transform.localPosition;
 
         return _lastpostion;
     }
