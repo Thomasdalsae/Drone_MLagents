@@ -155,18 +155,18 @@ namespace TdsWork
             var normYaw = (_yaw - minYaw / maxYaw - minYaw);
             var normThrottle = (_throttle - maxThrottle / maxThrottle - minThrottle);
             
-            _myLocation = transform.localPosition;
             var normMyLocationX = (_myLocation.x - minRoll / maxRoll - minRoll);
             var normMyLocationY = (_myLocation.y - maxThrottle / maxThrottle - minThrottle)
             var normMyLocationZ = (_myLocation.z - maxRoll / maxRoll - minRoll);
-            _myVelo = rb.velocity;
             var normMyVeloX = (rb.velocity.x - minRoll / maxRoll - minRoll);
             var normMyVeloY = (rb.velocity.y - maxThrottle / maxThrottle - minThrottle);
             var normalVeloZ = (rb.velocity.z - maxRoll / maxRoll - minRoll);
             */
             
            
-            
+            _myLocation = transform.localPosition;
+            _myVelo = rb.velocity;
+                
             _pitch = actions.ContinuousActions[0] * minMaxPitch;
             _roll = actions.ContinuousActions[1] * minMaxRoll;
             _yaw += actions.ContinuousActions[2] * yawPower;
