@@ -132,7 +132,7 @@ namespace TdsWork
                 Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
             }
 
-            /*
+            
             sensor.AddObservation(_normPitch);
             sensor.AddObservation(_normFPitch);
             sensor.AddObservation(_normYaw);
@@ -141,7 +141,7 @@ namespace TdsWork
             sensor.AddObservation(_normFRoll);
             sensor.AddObservation(_normThrottle);
             sensor.AddObservation(_normFThrottle);
-            */
+            
             
             sensor.AddObservation(transform.localPosition);
             sensor.AddObservation(transform.localRotation);

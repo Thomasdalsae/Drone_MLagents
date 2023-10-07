@@ -1,0 +1,89 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1696703635",
+        "python_version": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "F:\\Unity projects\\Oblig2\\Drone_MLagents\\venv\\Scripts\\mlagents-learn config/DroneAgentNew.yaml --run-id=DroneAgentB",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1696703640"
+    },
+    "total": 4.8922761999999995,
+    "count": 1,
+    "self": 0.006834399999998908,
+    "children": {
+        "run_training.setup": {
+            "total": 0.06963980000000003,
+            "count": 1,
+            "self": 0.06963980000000003
+        },
+        "TrainerController.start_learning": {
+            "total": 4.815802000000001,
+            "count": 1,
+            "self": 8.76000000005206e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 4.8143952,
+                    "count": 1,
+                    "self": 3.945847099999999,
+                    "children": {
+                        "demo_to_buffer": {
+                            "total": 0.8685481000000008,
+                            "count": 1,
+                            "self": 5.050000000039745e-05,
+                            "children": {
+                                "load_demonstration": {
+                                    "total": 0.01786840000000023,
+                                    "count": 1,
+                                    "self": 0.017509500000000067,
+                                    "children": {
+                                        "read_file": {
+                                            "total": 0.00035890000000016187,
+                                            "count": 1,
+                                            "self": 0.00035890000000016187
+                                        }
+                                    }
+                                },
+                                "make_demo_buffer": {
+                                    "total": 0.8506292000000002,
+                                    "count": 1,
+                                    "self": 0.09956070000002448,
+                                    "children": {
+                                        "steps_from_proto": {
+                                            "total": 0.7510684999999757,
+                                            "count": 4744,
+                                            "self": 0.27670489999992576,
+                                            "children": {
+                                                "_process_rank_one_or_two_observation": {
+                                                    "total": 0.47436360000004996,
+                                                    "count": 37952,
+                                                    "self": 0.47436360000004996
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "TrainerController._save_models": {
+                    "total": 0.0013192000000001869,
+                    "count": 1,
+                    "self": 0.0001398000000003563,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.0011793999999998306,
+                            "count": 1,
+                            "self": 0.0011793999999998306
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
