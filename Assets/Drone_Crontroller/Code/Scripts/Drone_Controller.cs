@@ -12,31 +12,38 @@ namespace TdsWork
     {
         #region Variables
 
-        [Header("Control Properties")]
-        /*
-        [SerializeField] private float minThrottle = -5f;
-        [SerializeField] private float maxThrottle = 5f;
+        [Header("Control Properties")] [SerializeField]
+        private float minThrottle = -5f;
+        [SerializeField] private float maxThrottle = 3f;
         [SerializeField] private float minPitch = -30f;
         [SerializeField] private float maxPitch = 30f;
         [SerializeField] private float minRoll = -30f;
         [SerializeField] private float maxRoll = 30f;
-        [SerializeField] private float minYaw = -4f;
-        [SerializeField] private float maxYaw = 4f;
-        */
-        [SerializeField] private float minMaxPitch = 30f;
-        [SerializeField] private float minMaxRoll = 30f;
-        [SerializeField] private float maxThrottle = 5f;
-        [SerializeField] private float yawPower = 4f;
-        
+        [SerializeField] private float minYaw = -3f;
+        [SerializeField] private float maxYaw = 3f;
+
+        //[SerializeField] private float minMaxPitch = 30f;
+        //[SerializeField] private float minMaxRoll = 30f;
+        //[SerializeField] private float maxThrottle = 5f;
+        //[SerializeField] private float yawPower = 4f;
+
         [SerializeField] private float lerpSpeed = 2f;
         private float _pitch;
         private float _finalPitch;
+        private float _normPitch;
+        private float _normFPitch;
         private float _roll;
         private float _finalRoll;
+        private float _normRoll;
+        private float _normFRoll;
         private float _yaw;
         private float _finalYaw;
+        private float _normYaw;
+        private float _normFYaw;
         private float _throttle;
         private float _finalThrottle;
+        private float _normThrottle;
+        private float _normFThrottle;
 
         [Header("Ml Targets")] [SerializeField]
         private GameObject goal;
@@ -53,8 +60,8 @@ namespace TdsWork
 
         public float thresholdDistance = 1.5f;
 
-        [Header("Materials")] 
-        [SerializeField] private Material winMaterial;
+        [Header("Materials")] [SerializeField] private Material winMaterial;
+
         [SerializeField] private Material loseMaterial;
         [SerializeField] private Material startMaterial;
         [SerializeField] private MeshRenderer groundMeshRenderer;
@@ -90,12 +97,9 @@ namespace TdsWork
             ResetValues();
             _goalSpawner.KillGoal();
             _goalSpawner.SpawnFood();
-           // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
-           transform.localPosition = new Vector3(0, 4, -4);
-           _targetPosition = _goalSpawner.GetLastGoalTransform();
-
-            
-            
+            // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
+            transform.localPosition = new Vector3(0, 4, -4);
+            _targetPosition = _goalSpawner.GetLastGoalTransform();
         }
 
         public override void CollectObservations(VectorSensor sensor)
@@ -117,70 +121,76 @@ namespace TdsWork
 
             if (_goalSpawner.HasGoalSpawned())
             {
-                
                 sensor.AddObservation(_targetPosition);
+                var DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
+                sensor.AddObservation(DistToGoal);
                 var DirToGoal =
                     (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized; //can change to dot later
-                 Debug.Log("Direction: " + DirToGoal);
-                 Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform()); //<- might get position of spawner, but it works
-                // Debug.Log("TargetPosition not funv" + _goalSpawner.gameObject.transform.localPosition);
                 sensor.AddObservation(DirToGoal);
+                Debug.Log("DistanceToGoal: " + DistToGoal);
+                Debug.Log("DirectionToGoal: " + DirToGoal);
+                Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
             }
-          
 
-            sensor.AddObservation(_pitch);
-            sensor.AddObservation(_finalPitch);
-            sensor.AddObservation(_yaw);
-            sensor.AddObservation(_finalYaw);
-            sensor.AddObservation(_roll);
-            sensor.AddObservation(_finalRoll);
-            sensor.AddObservation(_throttle);
-            sensor.AddObservation(_finalThrottle);
+            /*
+            sensor.AddObservation(_normPitch);
+            sensor.AddObservation(_normFPitch);
+            sensor.AddObservation(_normYaw);
+            sensor.AddObservation(_normFYaw);
+            sensor.AddObservation(_normRoll);
+            sensor.AddObservation(_normFRoll);
+            sensor.AddObservation(_normThrottle);
+            sensor.AddObservation(_normFThrottle);
+            */
             
             sensor.AddObservation(transform.localPosition);
             sensor.AddObservation(transform.localRotation);
-          
+            sensor.AddObservation(transform.forward);
+
             sensor.AddObservation(rb.velocity);
-            sensor.AddObservation(rb.position);
             sensor.AddObservation(rb.transform.forward);
-             
         }
 
         public override void OnActionReceived(ActionBuffers actions)
         {
-            /*
-            //Normalization
-            var normPitch = (_pitch - minPitch / maxPitch - minPitch);
-            var normRoll = (_roll - minRoll / maxRoll - minRoll);
-            var normYaw = (_yaw - minYaw / maxYaw - minYaw);
-            var normThrottle = (_throttle - maxThrottle / maxThrottle - minThrottle);
-            
-            var normMyLocationX = (_myLocation.x - minRoll / maxRoll - minRoll);
-            var normMyLocationY = (_myLocation.y - maxThrottle / maxThrottle - minThrottle)
-            var normMyLocationZ = (_myLocation.z - maxRoll / maxRoll - minRoll);
-            var normMyVeloX = (rb.velocity.x - minRoll / maxRoll - minRoll);
-            var normMyVeloY = (rb.velocity.y - maxThrottle / maxThrottle - minThrottle);
-            var normalVeloZ = (rb.velocity.z - maxRoll / maxRoll - minRoll);
-            */
-            
-           
             _myLocation = transform.localPosition;
             _myVelo = rb.velocity;
-                
-            _pitch = actions.ContinuousActions[0] * minMaxPitch;
-            _roll = actions.ContinuousActions[1] * minMaxRoll;
-            _yaw += actions.ContinuousActions[2] * yawPower;
+
+            _pitch = actions.ContinuousActions[0] * maxPitch;
+            _roll = actions.ContinuousActions[1] * maxRoll;
+            _yaw += actions.ContinuousActions[2] * maxYaw;
             _throttle = actions.ContinuousActions[3] * maxThrottle;
 
-            _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
+            //_pitch = (actions.ContinuousActions[0] - minPitch) / (maxPitch - minPitch) * 2 - 1;
+            //Normalization
+            _normThrottle = (_throttle - minThrottle) / (maxThrottle - minThrottle) * 2 - 1;
+            _normPitch = (_pitch - minPitch) / (maxPitch - minPitch) * 2 - 1;
+            _normRoll = (_roll - minRoll) / (maxRoll - minRoll) * 2 - 1;
+            _normYaw = (_yaw - minYaw) / (maxYaw - minYaw) * 2 - 1;
+
+            _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
+            _finalPitch = Mathf.Lerp(_finalPitch,_pitch , Time.deltaTime * lerpSpeed);
             _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
             _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
-            _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
 
+            
+            _normFPitch = (_finalPitch - minPitch) / (maxPitch - minPitch) * 2 - 1;
+            _normFRoll = (_finalRoll - minRoll) / (maxRoll - minRoll) * 2 - 1;
+            _normFYaw = (_finalYaw - minYaw) / (maxYaw - minYaw) * 2 - 1;
+            _normFThrottle = (_finalThrottle - minThrottle) / (maxThrottle - minThrottle) * 2 - 1;
+            
+
+            //var rot = Quaternion.Euler(_normFPitch, _normFYaw, -_normFRoll);
             var rot = Quaternion.Euler(_finalPitch, _finalYaw, -_finalRoll);
-            //Add torque later
+            //var normRot = rot.eulerAngles / 180.0f - Vector3.one; // [-1,1]
+            //Quaternion normQRot = Quaternion.Euler(normRot.x, normRot.z, normRot.y);
+            //rb.MoveRotation(normQRot);
             rb.MoveRotation(rot);
-            rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
+           
+            
+            //rb.AddRelativeForce(0,normFThrottle,0);
+
+            //rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
             /*
             float angle = 20;
             if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.position) <
@@ -195,7 +205,7 @@ namespace TdsWork
                 AddReward(-0.1f / MaxStep);
             }
             */
-            
+
             //Testing <-<-<-<
             /*
             Vector3 targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
@@ -221,21 +231,19 @@ namespace TdsWork
                         if (rayOutput.HitFraction < 0.1f)
                         {
                             Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
-                           AddReward(-0.1f / MaxStep);
+                            AddReward(-0.1f / MaxStep);
                         }
 
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Ground"))
-                    {
                         if (rayOutput.HitFraction < 0.1f)
                         {
                             Debug.Log("Ground is close , CAREFULL: " + rayOutput.HitFraction);
-                             AddReward(-0.1f / MaxStep);         
+                            AddReward(-0.1f / MaxStep);
                         }
-                    }
                 }
             }
 
-           // Debug.Log("Current rewards" + GetCumulativeReward());
+            // Debug.Log("Current rewards" + GetCumulativeReward());
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
@@ -246,7 +254,6 @@ namespace TdsWork
             continousActions[1] = _input.Cyclic.x;
             continousActions[2] = _input.Pedals;
             continousActions[3] = _input.Throttle;
-            
         }
 
         private void OnTriggerEnter(Collider other)
@@ -260,15 +267,16 @@ namespace TdsWork
                 EndEpisode();
             }
 
-            if (other.TryGetComponent(out Ground ground)) 
+            if (other.TryGetComponent(out Ground ground))
             {
                 SetReward(-1f);
                 EndEpisode();
                 groundMeshRenderer.material = loseMaterial;
             }
+
             if (other.TryGetComponent(out Killer killer))
             {
-               // Debug.Log("Collided with " + other);
+                // Debug.Log("Collided with " + other);
                 //SetReward(-1f);
                 //EndEpisode();
                 //groundMeshRenderer.material = loseMaterial;
@@ -294,33 +302,30 @@ namespace TdsWork
         /*
         protected virtual void HandleControls()
         {
-             
+
         }
         */
 
 
-        void ResetValues()
+        private void ResetValues()
         {
-            
+            var startRot = quaternion.identity;
+            rb.rotation = startRot;
+            transform.localRotation = startRot;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
 
-           quaternion startRot = quaternion.identity;
-           rb.rotation = startRot;
-           transform.localRotation = startRot;
-           rb.velocity = Vector3.zero;
-           rb.angularVelocity = Vector3.zero;
+            _pitch = 0;
+            _roll = 0;
+            _yaw = 0;
+            _throttle = 0;
 
-           _pitch = 0;
-           _roll = 0;
-           _yaw = 0;
-           _throttle = 0;
-
-           _finalPitch = 0;
-           _finalRoll = 0;
-           _finalYaw = 0;
-           _finalThrottle = 0;
-
+            _finalPitch = 0;
+            _finalRoll = 0;
+            _finalYaw = 0;
+            _finalThrottle = 0;
         }
-        
+
         #endregion
     }
 }
