@@ -15,6 +15,7 @@ namespace TdsWork
         
         
         protected Rigidbody rb;
+        protected Rigidbody forward;
         protected float startDrag;
         protected float startAngularDrag;
         #endregion
@@ -23,6 +24,7 @@ namespace TdsWork
 
         private void Awake()
         {
+
             rb = GetComponent<Rigidbody>();
             if (rb)
             {

@@ -14,6 +14,7 @@ namespace TdsWork
 
         [Header("Control Properties")] [SerializeField]
         private float minThrottle = -5f;
+
         [SerializeField] private float maxThrottle = 3f;
         [SerializeField] private float minPitch = -30f;
         [SerializeField] private float maxPitch = 30f;
@@ -44,6 +45,9 @@ namespace TdsWork
         private float _finalThrottle;
         private float _normThrottle;
         private float _normFThrottle;
+
+        [SerializeField] private Vector3 DirToGoal;
+        [SerializeField] private float DistToGoal;
 
         [Header("Ml Targets")] [SerializeField]
         private GameObject goal;
@@ -86,6 +90,12 @@ namespace TdsWork
 
         private void Update()
         {
+            /* // Checking forward vector
+                LineRenderer lineRenderer = GetComponent<LineRenderer>();
+                 lineRenderer.SetVertexCount(2);
+                 lineRenderer.SetPosition(0, transform.position);
+                 lineRenderer.SetPosition(1, rb.transform.forward * 20 + transform.position);
+                 */
         }
 
         #endregion
@@ -105,7 +115,7 @@ namespace TdsWork
         public override void CollectObservations(VectorSensor sensor)
         {
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
-            
+
             /*
             for (var i = 0; i < rcComponents.Length; i++)
             {
@@ -122,18 +132,34 @@ namespace TdsWork
             */
             if (_goalSpawner.HasGoalSpawned())
             {
-                sensor.AddObservation(_targetPosition);
-                var DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
+                //sensor.AddObservation(_targetPosition);
+
+                /*
+                var maxDistance = 25;
+
+                var normDistToGoal = DistToGoal / maxDistance;
+                */
+                //var normDistToGoal = ((DistToGoal/DistToGoal) * 2) - 1;
+                //Debug.Log("normalized dist" + normDistToGoal);
+
+                DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
                 sensor.AddObservation(DistToGoal);
-                var DirToGoal =
-                    (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized; //can change to dot later
+                DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized; //can change to dot later
                 sensor.AddObservation(DirToGoal);
+
+                /*
+                var DToGoal = new Vector3((_goalSpawner.GetLastGoalTransform().x - _myLocation.x),
+                    (_goalSpawner.GetLastGoalTransform().y - _myLocation.y),
+                    (_goalSpawner.GetLastGoalTransform().z - _myLocation.z));
+                sensor.AddObservation(DToGoal.normalized);
+
+                 */
                 Debug.Log("DistanceToGoal: " + DistToGoal);
                 Debug.Log("DirectionToGoal: " + DirToGoal);
                 Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
             }
-            
-            
+
+
             sensor.AddObservation(_normPitch);
             sensor.AddObservation(_normFPitch);
             sensor.AddObservation(_normYaw);
@@ -142,18 +168,20 @@ namespace TdsWork
             sensor.AddObservation(_normFRoll);
             sensor.AddObservation(_normThrottle);
             sensor.AddObservation(_normFThrottle);
-            
-            
-            sensor.AddObservation(transform.localPosition);
+
+
+            sensor.AddObservation(transform.localPosition.normalized);
             sensor.AddObservation(transform.localRotation);
-            sensor.AddObservation(transform.forward);
+            //sensor.AddObservation(transform.forward);
 
             sensor.AddObservation(rb.velocity);
-            sensor.AddObservation(rb.transform.forward); // check if forward
+            sensor.AddObservation(rb.transform.forward.normalized); // check if forward
         }
 
         public override void OnActionReceived(ActionBuffers actions)
         {
+            Debug.Log("forward" + rb.transform.forward);
+
             _myLocation = transform.localPosition;
             _myVelo = rb.velocity;
 
@@ -170,16 +198,16 @@ namespace TdsWork
             _normYaw = (_yaw - minYaw) / (maxYaw - minYaw) * 2 - 1;
 
             _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
-            _finalPitch = Mathf.Lerp(_finalPitch,_pitch , Time.deltaTime * lerpSpeed);
+            _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
             _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
             _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
 
-            
+
             _normFPitch = (_finalPitch - minPitch) / (maxPitch - minPitch) * 2 - 1;
             _normFRoll = (_finalRoll - minRoll) / (maxRoll - minRoll) * 2 - 1;
             _normFYaw = (_finalYaw - minYaw) / (maxYaw - minYaw) * 2 - 1;
             _normFThrottle = (_finalThrottle - minThrottle) / (maxThrottle - minThrottle) * 2 - 1;
-            
+
 
             //var rot = Quaternion.Euler(_normFPitch, _normFYaw, -_normFRoll);
             var rot = Quaternion.Euler(_finalPitch, _finalYaw, -_finalRoll);
@@ -187,12 +215,13 @@ namespace TdsWork
             //Quaternion normQRot = Quaternion.Euler(normRot.x, normRot.z, normRot.y);
             //rb.MoveRotation(normQRot);
             rb.MoveRotation(rot);
-            rb.AddRelativeForce(0,_finalThrottle,0);
-            
+            rb.AddRelativeForce(0, _finalThrottle, 0);
+
             //rb.AddRelativeForce(0,normFThrottle,0);
 
             //rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
-            
+
+            /*
             float angle = 20;
             if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.position) <
                 angle)
@@ -205,12 +234,13 @@ namespace TdsWork
                 //Debug.Log("Is Not Facing the goal !!");
                 //AddReward(-0.1f / MaxStep);
             }
-            
+            */
 
-            //Testing <-<-<-<
-            Vector3 targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
+
+            //Testing <-<-<-<  
+            var targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
             AddReward(Vector3.Dot(rb.velocity, targetDirection) * (0.1f / MaxStep));
-            
+
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
 
             for (var i = 0; i < rcComponents.Length; i++)
@@ -221,25 +251,20 @@ namespace TdsWork
                 foreach (var rayOutput in r3.RayOutputs)
                 {
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Goal"))
-                        if (rayOutput.HitFraction < 0.1f)
+                        if (rayOutput.HitFraction < 1f)
                         {
                             Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
-                            //AddReward(0.1f / MaxStep);
+                            AddReward(0.1f / MaxStep);
                         }
 
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Killer"))
                         if (rayOutput.HitFraction < 0.05f)
-                        {
                             Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
-                            //AddReward(-0.1f / MaxStep);
-                        }
-
+                    //AddReward(-0.1f / MaxStep);
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Ground"))
                         if (rayOutput.HitFraction < 0.05f)
-                        {
                             Debug.Log("Ground is close , CAREFULL: " + rayOutput.HitFraction);
-                            //AddReward(-0.1f / MaxStep);
-                        }
+                    //AddReward(-0.1f / MaxStep);
                 }
             }
 
@@ -255,6 +280,7 @@ namespace TdsWork
             continousActions[2] = _input.Pedals;
             continousActions[3] = _input.Throttle;
         }
+
 
         private void OnTriggerEnter(Collider other)
         {
