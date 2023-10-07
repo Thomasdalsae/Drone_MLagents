@@ -40,7 +40,7 @@ behaviors:
 
     # behavior cloning
     behavioral_cloning:
-      demo_path: F:\Unity projects\Oblig2\Drone_MLagents\Demos\DroneAgentlong_1.demo
+      demo_path: F:\Unity projects\Oblig2\Drone_MLagents\Demos\DroneAgentNewB_11.demo
       strength: 0.5
       steps: 250000
       batch_size: 512
@@ -58,7 +58,7 @@ behaviors:
         strength: 0.1
         gamma: 0.99
         encoding_size: 128
-        demo_path: F:\Unity projects\Oblig2\Drone_MLagents\Demos\DroneAgentlong_1.demo
+        demo_path: F:\Unity projects\Oblig2\Drone_MLagents\Demos\DroneAgentNewB_11.demo
         learning_rate: 3.0e-4
         use_actions: false
         use_vail: false
