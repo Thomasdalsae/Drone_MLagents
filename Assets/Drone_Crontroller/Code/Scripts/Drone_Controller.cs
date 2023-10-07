@@ -105,7 +105,8 @@ namespace TdsWork
         public override void CollectObservations(VectorSensor sensor)
         {
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
-
+            
+            /*
             for (var i = 0; i < rcComponents.Length; i++)
             {
                 var r1 = rcComponents[i];
@@ -118,7 +119,7 @@ namespace TdsWork
                     sensor.AddObservation(rayOutput.HitFraction);
                 }
             }
-
+            */
             if (_goalSpawner.HasGoalSpawned())
             {
                 sensor.AddObservation(_targetPosition);
@@ -131,7 +132,7 @@ namespace TdsWork
                 Debug.Log("DirectionToGoal: " + DirToGoal);
                 Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
             }
-
+            
             
             sensor.AddObservation(_normPitch);
             sensor.AddObservation(_normFPitch);
@@ -148,7 +149,7 @@ namespace TdsWork
             sensor.AddObservation(transform.forward);
 
             sensor.AddObservation(rb.velocity);
-            sensor.AddObservation(rb.transform.forward);
+            sensor.AddObservation(rb.transform.forward); // check if forward
         }
 
         public override void OnActionReceived(ActionBuffers actions)
@@ -186,31 +187,30 @@ namespace TdsWork
             //Quaternion normQRot = Quaternion.Euler(normRot.x, normRot.z, normRot.y);
             //rb.MoveRotation(normQRot);
             rb.MoveRotation(rot);
-           
+            rb.AddRelativeForce(0,_finalThrottle,0);
             
             //rb.AddRelativeForce(0,normFThrottle,0);
 
             //rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
-            /*
+            
             float angle = 20;
             if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.position) <
                 angle)
             {
                 //Debug.Log("Is currently facing goal");
-                AddReward(0.1f / MaxStep);
+                //AddReward(0.1f / MaxStep);
             }
             else
             {
                 //Debug.Log("Is Not Facing the goal !!");
-                AddReward(-0.1f / MaxStep);
+                //AddReward(-0.1f / MaxStep);
             }
-            */
+            
 
             //Testing <-<-<-<
-            /*
             Vector3 targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
             AddReward(Vector3.Dot(rb.velocity, targetDirection) * (0.1f / MaxStep));
-            */
+            
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
 
             for (var i = 0; i < rcComponents.Length; i++)
@@ -224,21 +224,21 @@ namespace TdsWork
                         if (rayOutput.HitFraction < 0.1f)
                         {
                             Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
-                            AddReward(0.1f / MaxStep);
+                            //AddReward(0.1f / MaxStep);
                         }
 
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Killer"))
-                        if (rayOutput.HitFraction < 0.1f)
+                        if (rayOutput.HitFraction < 0.05f)
                         {
                             Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
-                            AddReward(-0.1f / MaxStep);
+                            //AddReward(-0.1f / MaxStep);
                         }
 
                     if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Ground"))
-                        if (rayOutput.HitFraction < 0.1f)
+                        if (rayOutput.HitFraction < 0.05f)
                         {
                             Debug.Log("Ground is close , CAREFULL: " + rayOutput.HitFraction);
-                            AddReward(-0.1f / MaxStep);
+                            //AddReward(-0.1f / MaxStep);
                         }
                 }
             }
@@ -262,7 +262,7 @@ namespace TdsWork
             if (other.TryGetComponent(out Goal goal))
             {
                 Debug.Log("Collided with" + other);
-                SetReward(+1f); //reward value is only relative to other rewards
+                SetReward(1f); //reward value is only relative to other rewards
                 groundMeshRenderer.material = winMaterial;
                 EndEpisode();
             }
