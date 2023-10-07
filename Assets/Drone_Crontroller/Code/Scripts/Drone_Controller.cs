@@ -112,75 +112,37 @@ namespace TdsWork
             _targetPosition = _goalSpawner.GetLastGoalTransform();
         }
 
+
         public override void CollectObservations(VectorSensor sensor)
         {
-            var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
-
-            /*
-            for (var i = 0; i < rcComponents.Length; i++)
-            {
-                var r1 = rcComponents[i];
-                var r2 = r1.GetRayPerceptionInput();
-                var r3 = RayPerceptionSensor.Perceive(r2);
-                foreach (var rayOutput in r3.RayOutputs)
-                {
-                    //Debug.Log(rayOutput.HasHit+" "+rayOutput.HitTaggedObject+" "+rayOutput.HitTagIndex+" "+rayOutput.HitFraction);
-                    sensor.AddObservation(rayOutput.HasHit);
-                    sensor.AddObservation(rayOutput.HitFraction);
-                }
-            }
-            */
             if (_goalSpawner.HasGoalSpawned())
             {
-                //sensor.AddObservation(_targetPosition);
-
-                /*
-                var maxDistance = 25;
-
-                var normDistToGoal = DistToGoal / maxDistance;
-                */
-                //var normDistToGoal = ((DistToGoal/DistToGoal) * 2) - 1;
-                //Debug.Log("normalized dist" + normDistToGoal);
-
                 DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
                 sensor.AddObservation(DistToGoal);
-                DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized; //can change to dot later
+                DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
                 sensor.AddObservation(DirToGoal);
-
-                /*
-                var DToGoal = new Vector3((_goalSpawner.GetLastGoalTransform().x - _myLocation.x),
-                    (_goalSpawner.GetLastGoalTransform().y - _myLocation.y),
-                    (_goalSpawner.GetLastGoalTransform().z - _myLocation.z));
-                sensor.AddObservation(DToGoal.normalized);
-
-                 */
-                Debug.Log("DistanceToGoal: " + DistToGoal);
-                Debug.Log("DirectionToGoal: " + DirToGoal);
-                Debug.Log("_targetPosition" + _goalSpawner.GetLastGoalTransform());
             }
 
-
             sensor.AddObservation(_normPitch);
-            sensor.AddObservation(_normFPitch);
             sensor.AddObservation(_normYaw);
-            sensor.AddObservation(_normFYaw);
             sensor.AddObservation(_normRoll);
-            sensor.AddObservation(_normFRoll);
             sensor.AddObservation(_normThrottle);
+            sensor.AddObservation(_normFPitch);
+            sensor.AddObservation(_normFYaw);
+            sensor.AddObservation(_normFRoll);
             sensor.AddObservation(_normFThrottle);
-
 
             sensor.AddObservation(transform.localPosition.normalized);
             sensor.AddObservation(transform.localRotation);
-            //sensor.AddObservation(transform.forward);
-
             sensor.AddObservation(rb.velocity);
-            sensor.AddObservation(rb.transform.forward.normalized); // check if forward
+            sensor.AddObservation(rb.transform.forward.normalized);
         }
+
 
         public override void OnActionReceived(ActionBuffers actions)
         {
             Debug.Log("forward" + rb.transform.forward);
+
 
             _myLocation = transform.localPosition;
             _myVelo = rb.velocity;
@@ -190,32 +152,31 @@ namespace TdsWork
             _yaw += actions.ContinuousActions[2] * maxYaw;
             _throttle = actions.ContinuousActions[3] * maxThrottle;
 
-            //_pitch = (actions.ContinuousActions[0] - minPitch) / (maxPitch - minPitch) * 2 - 1;
-            //Normalization
-            _normThrottle = (_throttle - minThrottle) / (maxThrottle - minThrottle) * 2 - 1;
-            _normPitch = (_pitch - minPitch) / (maxPitch - minPitch) * 2 - 1;
-            _normRoll = (_roll - minRoll) / (maxRoll - minRoll) * 2 - 1;
-            _normYaw = (_yaw - minYaw) / (maxYaw - minYaw) * 2 - 1;
+// Normalize input values
+            _normThrottle = Mathf.InverseLerp(minThrottle, maxThrottle, _throttle) * 2 - 1;
+            _normPitch = Mathf.InverseLerp(minPitch, maxPitch, _pitch) * 2 - 1;
+            _normRoll = Mathf.InverseLerp(minRoll, maxRoll, _roll) * 2 - 1;
+            _normYaw = Mathf.InverseLerp(minYaw, maxYaw, _yaw) * 2 - 1;
 
+// Calculate final values with lerping
             _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
             _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
             _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
             _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
 
+// Normalize final values
+            _normFPitch = Mathf.InverseLerp(minPitch, maxPitch, _finalPitch) * 2 - 1;
+            _normFRoll = Mathf.InverseLerp(minRoll, maxRoll, _finalRoll) * 2 - 1;
+            _normFYaw = Mathf.InverseLerp(minYaw, maxYaw, _finalYaw) * 2 - 1;
+            _normFThrottle = Mathf.InverseLerp(minThrottle, maxThrottle, _finalThrottle) * 2 - 1;
 
-            _normFPitch = (_finalPitch - minPitch) / (maxPitch - minPitch) * 2 - 1;
-            _normFRoll = (_finalRoll - minRoll) / (maxRoll - minRoll) * 2 - 1;
-            _normFYaw = (_finalYaw - minYaw) / (maxYaw - minYaw) * 2 - 1;
-            _normFThrottle = (_finalThrottle - minThrottle) / (maxThrottle - minThrottle) * 2 - 1;
-
-
-            //var rot = Quaternion.Euler(_normFPitch, _normFYaw, -_normFRoll);
+// Calculate rotation
             var rot = Quaternion.Euler(_finalPitch, _finalYaw, -_finalRoll);
-            //var normRot = rot.eulerAngles / 180.0f - Vector3.one; // [-1,1]
-            //Quaternion normQRot = Quaternion.Euler(normRot.x, normRot.z, normRot.y);
-            //rb.MoveRotation(normQRot);
+
+// Apply rotation and force
             rb.MoveRotation(rot);
             rb.AddRelativeForce(0, _finalThrottle, 0);
+
 
             //rb.AddRelativeForce(0,normFThrottle,0);
 
@@ -238,36 +199,56 @@ namespace TdsWork
 
 
             //Testing <-<-<-<  
+            // Calculate the direction to the goal
             var targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
-            AddReward(Vector3.Dot(rb.velocity, targetDirection) * (0.1f / MaxStep));
+    
+            // Calculate the distance to the goal
+            float distanceToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
+    
+            // Calculate the reward based on alignment with goal direction
+            float alignmentReward = Vector3.Dot(rb.velocity, targetDirection) * (0.1f / MaxStep);
+    
+            // Calculate the reward penalty for moving away from the goal
+            float oppositeDirectionReward = -Vector3.Dot(rb.velocity, -targetDirection) * (0.1f / MaxStep);
+    
+            // Calculate the reward based on proximity to the goal
+            float distanceReward = Mathf.Clamp01(1f - (distanceToGoal / thresholdDistance));
+            distanceReward *= 0.1f / MaxStep; // Adjust the reward factor as needed
+    
+            // Combine alignment, opposite direction, and distance rewards
+            float totalReward = alignmentReward + oppositeDirectionReward + distanceReward;
+            AddReward(totalReward);
+            Debug.Log("totalREward" + totalReward);
+
 
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
 
-            for (var i = 0; i < rcComponents.Length; i++)
+
+            foreach (var rcComponent in rcComponents)
             {
-                var r1 = rcComponents[i];
-                var r2 = r1.GetRayPerceptionInput();
-                var r3 = RayPerceptionSensor.Perceive(r2);
-                foreach (var rayOutput in r3.RayOutputs)
-                {
-                    if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Goal"))
-                        if (rayOutput.HitFraction < 1f)
+                var rayInput = rcComponent.GetRayPerceptionInput();
+                var rayResult = RayPerceptionSensor.Perceive(rayInput);
+
+                foreach (var rayOutput in rayResult.RayOutputs)
+                    if (rayOutput.HasHit)
+                    {
+                        if (rayOutput.HitGameObject.CompareTag("Goal") && rayOutput.HitFraction < 1f)
                         {
-                            Debug.Log("Is close enough to Goal" + rayOutput.HitFraction);
+                            Debug.Log("Is close enough to Goal: " + rayOutput.HitFraction);
                             AddReward(0.1f / MaxStep);
                         }
-
-                    if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Killer"))
-                        if (rayOutput.HitFraction < 0.05f)
-                            Debug.Log("DANGER! Close to Killer" + rayOutput.HitFraction);
-                    //AddReward(-0.1f / MaxStep);
-                    if (rayOutput.HasHit && rayOutput.HitGameObject.CompareTag("Ground"))
-                        if (rayOutput.HitFraction < 0.05f)
-                            Debug.Log("Ground is close , CAREFULL: " + rayOutput.HitFraction);
-                    //AddReward(-0.1f / MaxStep);
-                }
+                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.05f)
+                        {
+                            Debug.Log("DANGER! Close to Killer: " + rayOutput.HitFraction);
+                            // AddReward(-0.1f / MaxStep);
+                        }
+                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.05f)
+                        {
+                            Debug.Log("Ground is close, CAREFUL: " + rayOutput.HitFraction);
+                            // AddReward(-0.1f / MaxStep);
+                        }
+                    }
             }
-
             // Debug.Log("Current rewards" + GetCumulativeReward());
         }
 
@@ -281,6 +262,9 @@ namespace TdsWork
             continousActions[3] = _input.Throttle;
         }
 
+        private void InferenceLogic()
+        {
+        }
 
         private void OnTriggerEnter(Collider other)
         {
