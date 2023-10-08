@@ -115,6 +115,7 @@ namespace TdsWork
 
         public override void CollectObservations(VectorSensor sensor)
         {
+            
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
             foreach (var rcComponent in rcComponents)
             {
@@ -127,7 +128,11 @@ namespace TdsWork
                         sensor.AddObservation(rayOutput.HitFraction);
                         sensor.AddObservation(rayOutput.HitTaggedObject);
                     }
+            }
+            
+            
 
+            
                 if (_goalSpawner.HasGoalSpawned())
                 {
                     DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
@@ -149,8 +154,8 @@ namespace TdsWork
                 sensor.AddObservation(transform.localRotation);
                 sensor.AddObservation(rb.velocity);
                 sensor.AddObservation(rb.transform.forward.normalized);
-                sensor.AddObservation(rb.angularVelocity);
-            }
+                sensor.AddObservation(rb.angularVelocity.normalized);
+            
         }
 
 
