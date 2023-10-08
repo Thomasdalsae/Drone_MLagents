@@ -941,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 31
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_BrainParameters.VectorActionSize.Array.size
@@ -1013,7 +1013,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5041016667782020400, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: DemonstrationName
-      value: DroneAgentMOE
+      value: DroneAgentLETS
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367146897175607774, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
+      propertyPath: TakeActionsBetweenDecisions
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6003215379407834267, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_Name
@@ -1037,7 +1041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: yawPower

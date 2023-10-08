@@ -178,47 +178,51 @@ namespace TdsWork
             rb.AddRelativeForce(0, _finalThrottle, 0);
 
 
-            //rb.AddRelativeForce(0,normFThrottle,0);
-
-            //rb.AddRelativeForce(new Vector3(0, _finalThrottle, 0));
-
-            /*
-            float angle = 20;
-            if (Vector3.Angle(rb.transform.forward, _goalSpawner.GetLastGoalTransform() - rb.position) <
-                angle)
-            {
-                //Debug.Log("Is currently facing goal");
-                //AddReward(0.1f / MaxStep);
-            }
-            else
-            {
-                //Debug.Log("Is Not Facing the goal !!");
-                //AddReward(-0.1f / MaxStep);
-            }
-            */
+           
 
 
             //Testing <-<-<-<  
+            
+
             // Calculate the direction to the goal
             var targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
-    
+
             // Calculate the distance to the goal
             float distanceToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
-    
+
             // Calculate the reward based on alignment with goal direction
-            float alignmentReward = Vector3.Dot(rb.velocity, targetDirection) * (0.1f / MaxStep);
-    
+            float alignmentReward = Vector3.Dot(rb.velocity, targetDirection) * (0.001f / MaxStep);
+
             // Calculate the reward penalty for moving away from the goal
-            float oppositeDirectionReward = -Vector3.Dot(rb.velocity, -targetDirection) * (0.1f / MaxStep);
-    
+            float oppositeDirectionReward = -Vector3.Dot(rb.velocity, -targetDirection) * (0.001f / MaxStep);
+
             // Calculate the reward based on proximity to the goal
             float distanceReward = Mathf.Clamp01(1f - (distanceToGoal / thresholdDistance));
-            distanceReward *= 0.1f / MaxStep; // Adjust the reward factor as needed
-    
-            // Combine alignment, opposite direction, and distance rewards
-            float totalReward = alignmentReward + oppositeDirectionReward + distanceReward;
+            distanceReward *= 0.001f / MaxStep; // Adjust the reward factor as needed
+
+            // Calculate the reward based on drone's velocity
+            float velocityReward = rb.velocity.magnitude * 0.001f; // Adjust the reward factor as needed
+
+            // Combine alignment, opposite direction, distance, and velocity rewards
+            float totalReward = alignmentReward + oppositeDirectionReward + distanceReward + velocityReward;
+
+            // Check if the agent is currently facing the goal within a certain angle
+            float angle = 15;
+            if (Vector3.Angle(rb.transform.forward, targetDirection) < angle)
+            {
+                // Add a reward for facing the goal
+                totalReward += 0.005f / MaxStep;
+            }
+            else
+            {
+                // Add a penalty for not facing the goal
+                totalReward -= 0.005f / MaxStep;
+            }
+
             AddReward(totalReward);
-            Debug.Log("totalREward" + totalReward);
+
+            Debug.Log("totalREward" + totalReward); 
+            
 
 
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
@@ -232,20 +236,20 @@ namespace TdsWork
                 foreach (var rayOutput in rayResult.RayOutputs)
                     if (rayOutput.HasHit)
                     {
-                        if (rayOutput.HitGameObject.CompareTag("Goal") && rayOutput.HitFraction < 1f)
+                        if (rayOutput.HitGameObject.CompareTag("Goal") && rayOutput.HitFraction < 0.5f)
                         {
                             Debug.Log("Is close enough to Goal: " + rayOutput.HitFraction);
                             AddReward(0.1f / MaxStep);
                         }
-                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.05f)
+                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.06f)
                         {
                             Debug.Log("DANGER! Close to Killer: " + rayOutput.HitFraction);
-                            // AddReward(-0.1f / MaxStep);
+                             AddReward(-0.1f / MaxStep);
                         }
-                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.05f)
+                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.06f)
                         {
                             Debug.Log("Ground is close, CAREFUL: " + rayOutput.HitFraction);
-                            // AddReward(-0.1f / MaxStep);
+                             AddReward(-0.1f / MaxStep);
                         }
                     }
             }
