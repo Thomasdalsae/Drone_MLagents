@@ -107,14 +107,13 @@ namespace TdsWork
             _goalSpawner.KillGoal();
             _goalSpawner.SpawnFood();
             // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
-            transform.localPosition = new Vector3(0, 4, -9);
+            transform.localPosition = new Vector3(0, 2, -8.5f);
             _targetPosition = _goalSpawner.GetLastGoalTransform();
         }
 
 
         public override void CollectObservations(VectorSensor sensor)
         {
-            
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
             foreach (var rcComponent in rcComponents)
             {
@@ -130,40 +129,36 @@ namespace TdsWork
             }
 
 
+            sensor.AddObservation(_goalSpawner.HasGoalSpawned());
+            DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
+            sensor.AddObservation(DistToGoal);
+            DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
+            sensor.AddObservation(DirToGoal);
 
 
+            sensor.AddObservation(_normPitch);
+            sensor.AddObservation(_normYaw);
+            sensor.AddObservation(_normRoll);
+            sensor.AddObservation(_normThrottle);
+            sensor.AddObservation(_normFPitch);
+            sensor.AddObservation(_normFYaw);
+            sensor.AddObservation(_normFRoll);
+            sensor.AddObservation(_normFThrottle);
 
-                   sensor.AddObservation(_goalSpawner.HasGoalSpawned());
-                   DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform().normalized, _myLocation.normalized) / 2;
-                    sensor.AddObservation(DistToGoal);  
-                    DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
-                    sensor.AddObservation(DirToGoal);
-                
-
-                sensor.AddObservation(_normPitch);
-                sensor.AddObservation(_normYaw);
-                sensor.AddObservation(_normRoll);
-                sensor.AddObservation(_normThrottle);
-                sensor.AddObservation(_normFPitch);
-                sensor.AddObservation(_normFYaw);
-                sensor.AddObservation(_normFRoll);
-                sensor.AddObservation(_normFThrottle);
-
-                sensor.AddObservation(transform.localPosition.normalized);
-                sensor.AddObservation(transform.localRotation);
-                sensor.AddObservation(rb.velocity);
-                sensor.AddObservation(rb.transform.forward.normalized);
-                sensor.AddObservation(rb.angularVelocity.normalized);
+            sensor.AddObservation(transform.localPosition.normalized);
+            sensor.AddObservation(transform.localRotation);
+            sensor.AddObservation(rb.velocity);
+            sensor.AddObservation(rb.transform.forward.normalized);
         }
 
 
         public override void OnActionReceived(ActionBuffers actions)
         {
             //Debug.Log("forward" + rb.transform.forward);
-
+            Debug.Log("RB angular" + rb.angularVelocity);
 
             _myLocation = transform.localPosition;
-            
+
             _myVelo = rb.velocity;
 
             _pitch = actions.ContinuousActions[0] * maxPitch;
@@ -197,51 +192,43 @@ namespace TdsWork
             rb.AddRelativeForce(0, _finalThrottle, 0);
 
 
-           
-
-
             //Testing <-<-<-<  
-            
+
 
             // Calculate the direction to the goal
             var targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
 
             // Calculate the distance to the goal
-            float distanceToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation.normalized);
+            var distanceToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation.normalized);
 
             // Calculate the reward based on alignment with goal direction
-            float alignmentReward = Vector3.Dot(rb.velocity, targetDirection) * (0.001f / MaxStep);
+            var alignmentReward = Vector3.Dot(rb.velocity, targetDirection) * (0.001f / MaxStep);
 
             // Calculate the reward penalty for moving away from the goal
-            float oppositeDirectionReward = -Vector3.Dot(rb.velocity, -targetDirection) * (0.001f / MaxStep);
+            var oppositeDirectionReward = -Vector3.Dot(rb.velocity, -targetDirection) * (0.001f / MaxStep);
 
             // Calculate the reward based on proximity to the goal
-            float distanceReward = Mathf.Clamp01(1f - (distanceToGoal / thresholdDistance));
+            var distanceReward = Mathf.Clamp01(1f - distanceToGoal / thresholdDistance);
             distanceReward *= 0.001f / MaxStep; // Adjust the reward factor as needed
 
             // Calculate the reward based on drone's velocity
-            float velocityReward = rb.velocity.magnitude * 0.001f; // Adjust the reward factor as needed
+            var velocityReward = rb.velocity.magnitude * 0.001f; // Adjust the reward factor as needed
 
             // Combine alignment, opposite direction, distance, and velocity rewards
-            float totalReward = alignmentReward + oppositeDirectionReward + distanceReward + velocityReward;
+            var totalReward = alignmentReward + oppositeDirectionReward + distanceReward + velocityReward;
 
             // Check if the agent is currently facing the goal within a certain angle
             float angle = 15;
             if (Vector3.Angle(rb.transform.forward, targetDirection) < angle)
-            {
                 // Add a reward for facing the goal
                 totalReward += 0.001f / MaxStep;
-            }
             else
-            {
                 // Add a penalty for not facing the goal
                 totalReward -= 0.001f / MaxStep;
-            }
 
             AddReward(totalReward);
 
             //Debug.Log("totalREward" + totalReward); 
-            
 
 
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
@@ -256,20 +243,14 @@ namespace TdsWork
                     if (rayOutput.HasHit)
                     {
                         if (rayOutput.HitGameObject.CompareTag("Goal") && rayOutput.HitFraction < 1.0f)
-                        {
                             //Debug.Log("Is close enough to Goal: " + rayOutput.HitFraction);
                             AddReward(0.1f / MaxStep);
-                        }
                         else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.06f)
-                        {
                             //Debug.Log("DANGER! Close to Killer: " + rayOutput.HitFraction);
-                             AddReward(-0.1f / MaxStep);
-                        }
+                            AddReward(-0.1f / MaxStep);
                         else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.06f)
-                        {
                             //Debug.Log("Ground is close, CAREFUL: " + rayOutput.HitFraction);
-                             AddReward(-0.1f / MaxStep);
-                        }
+                            AddReward(-0.1f / MaxStep);
                     }
             }
             // Debug.Log("Current rewards" + GetCumulativeReward());
@@ -346,7 +327,6 @@ namespace TdsWork
             rb.rotation = startRot;
             transform.localRotation = startRot;
             rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
 
             _pitch = 0;
             _roll = 0;
@@ -356,7 +336,17 @@ namespace TdsWork
             _finalPitch = 0;
             _finalRoll = 0;
             _finalYaw = 0;
-            _finalThrottle = 0;
+            _finalThrottle = 0f;
+
+            _normPitch = 0;
+            _normRoll = 0;
+            _normYaw = 0;
+            _normThrottle = 0;
+
+            _normFPitch = 0;
+            _normFRoll = 0;
+            _normFYaw = 0;
+            _normFThrottle = 0;
         }
 
         #endregion
