@@ -108,7 +108,7 @@ namespace TdsWork
             _goalSpawner.KillGoal();
             _goalSpawner.SpawnFood();
             // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
-            transform.localPosition = new Vector3(0, 4, -4);
+            transform.localPosition = new Vector3(0, 4, -9);
             _targetPosition = _goalSpawner.GetLastGoalTransform();
         }
 
@@ -211,12 +211,12 @@ namespace TdsWork
             if (Vector3.Angle(rb.transform.forward, targetDirection) < angle)
             {
                 // Add a reward for facing the goal
-                totalReward += 0.005f / MaxStep;
+                totalReward += 0.001f / MaxStep;
             }
             else
             {
                 // Add a penalty for not facing the goal
-                totalReward -= 0.005f / MaxStep;
+                totalReward -= 0.001f / MaxStep;
             }
 
             AddReward(totalReward);
