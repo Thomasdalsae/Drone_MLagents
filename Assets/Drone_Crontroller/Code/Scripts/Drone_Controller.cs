@@ -56,7 +56,6 @@ namespace TdsWork
         [SerializeField] private Vector3 _targetPosition;
         [SerializeField] private Transform _targetTransform;
         [SerializeField] private Vector3 _myLocation;
-        [SerializeField] private Vector3 _myRBlocation;
         [SerializeField] private Vector3 _myVelo;
 
         [Header("RayTracing")] [SerializeField]
@@ -123,23 +122,23 @@ namespace TdsWork
                 var rayResult = RayPerceptionSensor.Perceive(rayInput);
 
                 foreach (var rayOutput in rayResult.RayOutputs)
-                    if (rayOutput.HasHit)
-                    {
-                        sensor.AddObservation(rayOutput.HitFraction);
-                        sensor.AddObservation(rayOutput.HitTaggedObject);
-                    }
-            }
-            
-            
-
-            
-                if (_goalSpawner.HasGoalSpawned())
                 {
-                    DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
-                    sensor.AddObservation(DistToGoal);
+                    sensor.AddObservation(rayOutput.HasHit);
+                    sensor.AddObservation(rayOutput.HitFraction);
+                    sensor.AddObservation(rayOutput.HitTaggedObject);
+                }
+            }
+
+
+
+
+
+                   sensor.AddObservation(_goalSpawner.HasGoalSpawned());
+                   DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform().normalized, _myLocation.normalized) / 2;
+                    sensor.AddObservation(DistToGoal);  
                     DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
                     sensor.AddObservation(DirToGoal);
-                }
+                
 
                 sensor.AddObservation(_normPitch);
                 sensor.AddObservation(_normYaw);
@@ -155,7 +154,6 @@ namespace TdsWork
                 sensor.AddObservation(rb.velocity);
                 sensor.AddObservation(rb.transform.forward.normalized);
                 sensor.AddObservation(rb.angularVelocity.normalized);
-            
         }
 
 
@@ -165,6 +163,7 @@ namespace TdsWork
 
 
             _myLocation = transform.localPosition;
+            
             _myVelo = rb.velocity;
 
             _pitch = actions.ContinuousActions[0] * maxPitch;
@@ -208,7 +207,7 @@ namespace TdsWork
             var targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
 
             // Calculate the distance to the goal
-            float distanceToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
+            float distanceToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation.normalized);
 
             // Calculate the reward based on alignment with goal direction
             float alignmentReward = Vector3.Dot(rb.velocity, targetDirection) * (0.001f / MaxStep);
