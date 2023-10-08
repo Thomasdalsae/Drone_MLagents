@@ -115,33 +115,48 @@ namespace TdsWork
 
         public override void CollectObservations(VectorSensor sensor)
         {
-            if (_goalSpawner.HasGoalSpawned())
+            var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
+            foreach (var rcComponent in rcComponents)
             {
-                DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
-                sensor.AddObservation(DistToGoal);
-                DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
-                sensor.AddObservation(DirToGoal);
+                var rayInput = rcComponent.GetRayPerceptionInput();
+                var rayResult = RayPerceptionSensor.Perceive(rayInput);
+
+                foreach (var rayOutput in rayResult.RayOutputs)
+                    if (rayOutput.HasHit)
+                    {
+                        sensor.AddObservation(rayOutput.HitFraction);
+                        sensor.AddObservation(rayOutput.HitTaggedObject);
+                    }
+
+                if (_goalSpawner.HasGoalSpawned())
+                {
+                    DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
+                    sensor.AddObservation(DistToGoal);
+                    DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
+                    sensor.AddObservation(DirToGoal);
+                }
+
+                sensor.AddObservation(_normPitch);
+                sensor.AddObservation(_normYaw);
+                sensor.AddObservation(_normRoll);
+                sensor.AddObservation(_normThrottle);
+                sensor.AddObservation(_normFPitch);
+                sensor.AddObservation(_normFYaw);
+                sensor.AddObservation(_normFRoll);
+                sensor.AddObservation(_normFThrottle);
+
+                sensor.AddObservation(transform.localPosition.normalized);
+                sensor.AddObservation(transform.localRotation);
+                sensor.AddObservation(rb.velocity);
+                sensor.AddObservation(rb.transform.forward.normalized);
+                sensor.AddObservation(rb.angularVelocity);
             }
-
-            sensor.AddObservation(_normPitch);
-            sensor.AddObservation(_normYaw);
-            sensor.AddObservation(_normRoll);
-            sensor.AddObservation(_normThrottle);
-            sensor.AddObservation(_normFPitch);
-            sensor.AddObservation(_normFYaw);
-            sensor.AddObservation(_normFRoll);
-            sensor.AddObservation(_normFThrottle);
-
-            sensor.AddObservation(transform.localPosition.normalized);
-            sensor.AddObservation(transform.localRotation);
-            sensor.AddObservation(rb.velocity);
-            sensor.AddObservation(rb.transform.forward.normalized);
         }
 
 
         public override void OnActionReceived(ActionBuffers actions)
         {
-            Debug.Log("forward" + rb.transform.forward);
+            //Debug.Log("forward" + rb.transform.forward);
 
 
             _myLocation = transform.localPosition;
@@ -221,7 +236,7 @@ namespace TdsWork
 
             AddReward(totalReward);
 
-            Debug.Log("totalREward" + totalReward); 
+            //Debug.Log("totalREward" + totalReward); 
             
 
 
@@ -236,19 +251,19 @@ namespace TdsWork
                 foreach (var rayOutput in rayResult.RayOutputs)
                     if (rayOutput.HasHit)
                     {
-                        if (rayOutput.HitGameObject.CompareTag("Goal") && rayOutput.HitFraction < 0.5f)
+                        if (rayOutput.HitGameObject.CompareTag("Goal") && rayOutput.HitFraction < 1.0f)
                         {
-                            Debug.Log("Is close enough to Goal: " + rayOutput.HitFraction);
+                            //Debug.Log("Is close enough to Goal: " + rayOutput.HitFraction);
                             AddReward(0.1f / MaxStep);
                         }
                         else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.06f)
                         {
-                            Debug.Log("DANGER! Close to Killer: " + rayOutput.HitFraction);
+                            //Debug.Log("DANGER! Close to Killer: " + rayOutput.HitFraction);
                              AddReward(-0.1f / MaxStep);
                         }
                         else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.06f)
                         {
-                            Debug.Log("Ground is close, CAREFUL: " + rayOutput.HitFraction);
+                            //Debug.Log("Ground is close, CAREFUL: " + rayOutput.HitFraction);
                              AddReward(-0.1f / MaxStep);
                         }
                     }
@@ -291,9 +306,9 @@ namespace TdsWork
             if (other.TryGetComponent(out Killer killer))
             {
                 // Debug.Log("Collided with " + other);
-                //SetReward(-1f);
-                //EndEpisode();
-                //groundMeshRenderer.material = loseMaterial;
+                SetReward(-1f);
+                EndEpisode();
+                groundMeshRenderer.material = loseMaterial;
             }
         }
 
