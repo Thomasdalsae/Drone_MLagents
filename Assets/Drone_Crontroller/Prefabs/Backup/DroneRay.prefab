@@ -432,15 +432,23 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 2000
   weightInKg: 1
-  minMaxPitch: 30
-  minMaxRoll: 30
-  yawPower: 4
+  minThrottle: -5
   maxThrottle: 5
+  minPitch: -30
+  maxPitch: 30
+  minRoll: -30
+  maxRoll: 30
+  minYaw: -3
+  maxYaw: 3
   lerpSpeed: 2
+  DirToGoal: {x: 0, y: 0, z: 0}
+  DistToGoal: 0
   goal: {fileID: 4687400044590151136, guid: 4485634a9a6c2aa4f8478e7d27e2d0dc, type: 3}
   _goalSpawner: {fileID: 5903269606092305730, guid: 088f2197acf63fa41a7a99eafddd2d8c, type: 3}
   _targetPosition: {x: 0, y: 0, z: 0}
   _targetTransform: {fileID: 0}
+  _myLocation: {x: 0, y: 0, z: 0}
+  _myVelo: {x: 0, y: 0, z: 0}
   raySensor: {fileID: 0}
   thresholdDistance: 1.5
   winMaterial: {fileID: 0}
@@ -530,7 +538,7 @@ MonoBehaviour:
   m_RayLength: 60
   m_RayLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967283
+    m_Bits: 55
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}

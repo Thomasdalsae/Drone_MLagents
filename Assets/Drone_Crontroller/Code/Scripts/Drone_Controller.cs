@@ -61,7 +61,7 @@ namespace TdsWork
         [Header("RayTracing")] [SerializeField]
         private RayPerceptionSensorComponent3D raySensor;
 
-        public float thresholdDistance = 10;
+        public float thresholdDistance = 5;
 
         [Header("Materials")] [SerializeField] private Material winMaterial;
 
@@ -191,21 +191,16 @@ namespace TdsWork
             rb.MoveRotation(rot);
             rb.AddRelativeForce(0, _finalThrottle, 0);
 
-// Calculate the direction to the goal
-            var targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
 
 // Calculate the dot product between velocity and goal direction
-            var velocityDotGoal = Vector3.Dot(rb.velocity, targetDirection);
+            var velocityDotGoal = Vector3.Dot(rb.velocity, DirToGoal);
 
 // Calculate the reward based on alignment with goal direction
-            var alignmentReward = velocityDotGoal * (0.1f / MaxStep);
-
-// Calculate the distance to the goal
-            var distanceToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
+            var alignmentReward = velocityDotGoal * (0.25f / MaxStep);
 
 // Calculate the reward based on proximity to the goal
-            var distanceReward = Mathf.Clamp01(1f - distanceToGoal / thresholdDistance);
-            distanceReward *= 0.1f / MaxStep; // Adjust the reward factor as needed
+            var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
+            distanceReward *= 0.25f / MaxStep; // Adjust the reward factor as needed
 
 // Combine alignment, distance, velocity, and direction rewards
             var totalReward = alignmentReward + distanceReward;
@@ -227,7 +222,6 @@ namespace TdsWork
 
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
 
-
             foreach (var rcComponent in rcComponents)
             {
                 var rayInput = rcComponent.GetRayPerceptionInput();
@@ -237,16 +231,26 @@ namespace TdsWork
                     if (rayOutput.HasHit)
                     {
                         if (rayOutput.HitGameObject.CompareTag("Goal") && rayOutput.HitFraction < 1.0f)
-                            //Debug.Log("Is close enough to Goal: " + rayOutput.HitFraction);
-                            AddReward(0.1f / MaxStep);
-                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.06f)
-                            //Debug.Log("DANGER! Close to Killer: " + rayOutput.HitFraction);
-                            AddReward(-0.1f / MaxStep);
-                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.06f)
-                            //Debug.Log("Ground is close, CAREFUL: " + rayOutput.HitFraction);
-                            AddReward(-0.1f / MaxStep);
-                    }
+                        {
+                            // Reward based on the distance fraction to the goal
+                            var goalReward = 0.1f * rayOutput.HitFraction / MaxStep;
+                            AddReward(goalReward);
+                        }
+                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.04f)
+                        {
+                            // Penalty based on the distance fraction to the killer object
+                            var killerPenalty = -0.1f * rayOutput.HitFraction / MaxStep;
+                            AddReward(killerPenalty);
+                        }
+                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.04f)
+                        {
+                            // Penalty based on the distance fraction to the ground
+                            var groundPenalty = -0.1f * rayOutput.HitFraction / MaxStep;
+                            AddReward(groundPenalty);
+                        }
+                    } 
             }
+
             // Debug.Log("Current rewards" + GetCumulativeReward());
         }
 
