@@ -52,7 +52,6 @@ namespace TdsWork
         [Header("Ml Targets")] [SerializeField]
         private GameObject goal;
 
-        [SerializeField] private GoalSpawner _goalSpawner;
         [SerializeField] private Vector3 _targetPosition;
         [SerializeField] private Transform _targetTransform;
         [SerializeField] private Vector3 _myLocation;
@@ -104,11 +103,9 @@ namespace TdsWork
         public override void OnEpisodeBegin()
         {
             ResetValues();
-            _goalSpawner.KillGoal();
-            _goalSpawner.SpawnFood();
             // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
             transform.localPosition = new Vector3(0, 3, 0.0f);
-            _targetPosition = _goalSpawner.GetLastGoalTransform();
+            //_targetPosition = _goalSpawner.GetLastGoalTransform();
         }
 
 
@@ -128,13 +125,13 @@ namespace TdsWork
                 }
             }
 
-
+            /*
             sensor.AddObservation(_goalSpawner.HasGoalSpawned());
             DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
             sensor.AddObservation(DistToGoal);
             DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
             sensor.AddObservation(DirToGoal);
-
+            */
 
             sensor.AddObservation(_normPitch);
             sensor.AddObservation(_normYaw);
@@ -155,7 +152,6 @@ namespace TdsWork
         public override void OnActionReceived(ActionBuffers actions)
         {
             //Debug.Log("forward" + rb.transform.forward);
-            Debug.Log("RB angular" + rb.angularVelocity);
 
             _myLocation = transform.localPosition;
 
@@ -270,7 +266,7 @@ namespace TdsWork
 
         private void OnTriggerEnter(Collider other)
         {
-            groundMeshRenderer.material = loseMaterial;
+            /*
             if (other.TryGetComponent(out Goal goal))
             {
                 Debug.Log("Collided with" + other);
@@ -278,7 +274,7 @@ namespace TdsWork
                 groundMeshRenderer.material = winMaterial;
                 EndEpisode();
             }
-
+            */
             if (other.TryGetComponent(out Ground ground))
             {
                 SetReward(-1f);
