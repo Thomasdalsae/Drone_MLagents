@@ -107,7 +107,7 @@ namespace TdsWork
             _goalSpawner.KillGoal();
             _goalSpawner.SpawnFood();
             // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
-            transform.localPosition = new Vector3(0, 2, -8.5f);
+            transform.localPosition = new Vector3(0, 3, 0.0f);
             _targetPosition = _goalSpawner.GetLastGoalTransform();
         }
 
