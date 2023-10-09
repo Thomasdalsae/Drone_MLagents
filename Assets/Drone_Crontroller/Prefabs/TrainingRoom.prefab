@@ -929,7 +929,7 @@ PrefabInstance:
       objectReference: {fileID: 5022602860645237092, guid: 697a7515204457547a52fefbac9c3292, type: 3}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_BehaviorType
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1413618516064086516, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: m_InferenceDevice
@@ -1052,6 +1052,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
+      propertyPath: raySensor
+      value: 
+      objectReference: {fileID: 4754659545039674504}
+    - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: minMaxRoll
       value: 30
       objectReference: {fileID: 0}
@@ -1084,6 +1088,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
+      propertyPath: thresholdDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7384420251343625311, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
       propertyPath: groundMeshRenderer
       value: 
       objectReference: {fileID: 8307813140061220202}
@@ -1105,3 +1113,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1507699417663603381, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
   m_PrefabInstance: {fileID: 4111848238767857880}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4754659545039674504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8713279568146889808, guid: 1fac4e352df3ac340b3f198808faa9c4, type: 3}
+  m_PrefabInstance: {fileID: 4111848238767857880}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
