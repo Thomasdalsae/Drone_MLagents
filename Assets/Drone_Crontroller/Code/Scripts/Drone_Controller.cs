@@ -61,7 +61,7 @@ namespace TdsWork
         [Header("RayTracing")] [SerializeField]
         private RayPerceptionSensorComponent3D raySensor;
 
-        public float thresholdDistance = 1.5f;
+        public float thresholdDistance = 10;
 
         [Header("Materials")] [SerializeField] private Material winMaterial;
 
@@ -191,42 +191,36 @@ namespace TdsWork
             rb.MoveRotation(rot);
             rb.AddRelativeForce(0, _finalThrottle, 0);
 
-
-            //Testing <-<-<-<  
-
-
-            // Calculate the direction to the goal
+// Calculate the direction to the goal
             var targetDirection = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
 
-            // Calculate the distance to the goal
-            var distanceToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation.normalized);
+// Calculate the dot product between velocity and goal direction
+            var velocityDotGoal = Vector3.Dot(rb.velocity, targetDirection);
 
-            // Calculate the reward based on alignment with goal direction
-            var alignmentReward = Vector3.Dot(rb.velocity, targetDirection) * (0.001f / MaxStep);
+// Calculate the reward based on alignment with goal direction
+            var alignmentReward = velocityDotGoal * (0.1f / MaxStep);
 
-            // Calculate the reward penalty for moving away from the goal
-            var oppositeDirectionReward = -Vector3.Dot(rb.velocity, -targetDirection) * (0.001f / MaxStep);
+// Calculate the distance to the goal
+            var distanceToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
 
-            // Calculate the reward based on proximity to the goal
+// Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - distanceToGoal / thresholdDistance);
-            distanceReward *= 0.001f / MaxStep; // Adjust the reward factor as needed
+            distanceReward *= 0.1f / MaxStep; // Adjust the reward factor as needed
 
-            // Calculate the reward based on drone's velocity
-            var velocityReward = rb.velocity.magnitude * 0.001f; // Adjust the reward factor as needed
+// Combine alignment, distance, velocity, and direction rewards
+            var totalReward = alignmentReward + distanceReward;
 
-            // Combine alignment, opposite direction, distance, and velocity rewards
-            var totalReward = alignmentReward + oppositeDirectionReward + distanceReward + velocityReward;
-
-            // Check if the agent is currently facing the goal within a certain angle
+// Check if the agent is currently facing the goal within a certain angle
             float angle = 15;
-            if (Vector3.Angle(rb.transform.forward, targetDirection) < angle)
+            if (velocityDotGoal > Mathf.Cos(angle * Mathf.Deg2Rad))
                 // Add a reward for facing the goal
-                totalReward += 0.001f / MaxStep;
+                totalReward += 0.1f / MaxStep;
             else
                 // Add a penalty for not facing the goal
-                totalReward -= 0.001f / MaxStep;
+                totalReward -= 0.1f / MaxStep;
 
             AddReward(totalReward);
+
 
             //Debug.Log("totalREward" + totalReward); 
 
