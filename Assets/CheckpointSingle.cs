@@ -13,7 +13,7 @@ public class CheckpointSingle : MonoBehaviour
     {
         if (other.TryGetComponent<Drone>(out Drone drone))
         {
-            _trackCheckpoints.PlayerThroughCheckpoint(this);
+            _trackCheckpoints.DroneThroughCheckpoint(this,other.transform);
         } 
     }
 
