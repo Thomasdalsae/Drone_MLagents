@@ -153,7 +153,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -507,6 +507,10 @@ PrefabInstance:
     - target: {fileID: 8236238940375489013, guid: 5d9d3f2401101ee4aae57553cac827c3, type: 3}
       propertyPath: m_Name
       value: DroneRay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236238940375489013, guid: 5d9d3f2401101ee4aae57553cac827c3, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7869385214195125550, guid: 5d9d3f2401101ee4aae57553cac827c3, type: 3}
