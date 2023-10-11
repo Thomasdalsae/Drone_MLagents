@@ -442,15 +442,17 @@ MonoBehaviour:
   minYaw: -4
   maxYaw: 4
   lerpSpeed: 4
+  thresholdDistance: 5
+  _trackCheckpoints: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
+  spawnPosition: {fileID: 0}
+  goal: {fileID: 4687400044590151136, guid: 4485634a9a6c2aa4f8478e7d27e2d0dc, type: 3}
   DirToGoal: {x: 0, y: 0, z: 0}
   DistToGoal: 0
-  goal: {fileID: 4687400044590151136, guid: 4485634a9a6c2aa4f8478e7d27e2d0dc, type: 3}
   _targetPosition: {x: 0, y: 0, z: 0}
   _targetTransform: {fileID: 0}
   _myLocation: {x: 0, y: 0, z: 0}
   _myVelo: {x: 0, y: 0, z: 0}
   raySensor: {fileID: 6478571701394630974}
-  thresholdDistance: 5
   winMaterial: {fileID: 2100000, guid: e401b5d1f75f1b84e86df1d1a2ce8d4c, type: 2}
   loseMaterial: {fileID: 2100000, guid: 3abd5159cab26dd418f042646f3359a5, type: 2}
   startMaterial: {fileID: 0}

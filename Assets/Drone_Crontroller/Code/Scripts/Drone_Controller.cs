@@ -114,11 +114,11 @@ namespace TdsWork
         {
             
             transform.position = spawnPosition.position +
-                                 new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), Random.Range(-5f, 5f));
+                                 new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f));
             transform.forward = spawnPosition.forward;
             _trackCheckpoints.ResetCheckPoint(transform);
             ResetValues();
-           
+            
         }
 
 
