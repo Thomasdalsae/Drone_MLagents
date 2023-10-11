@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class TrackCheckpoints : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class TrackCheckpoints : MonoBehaviour
     [SerializeField] private List<Transform> DroneTransformList;
     private List<CheckpointSingle> checkpointSingleList;
     private List<int> nextCheckpointSingleIndexList;
+    
+    
+      public class DroneCheckPointEventArgs : EventArgs
+       {
+           public Transform droneTransform{ get; set; }
+       } 
+    
     private void Awake()
     {
         Transform checkpointsTransform = transform.Find("Checkpoints");
@@ -26,7 +34,7 @@ public class TrackCheckpoints : MonoBehaviour
 
         nextCheckpointSingleIndexList = new List<int>();
 
-        foreach (var carTransform  in DroneTransformList)
+        foreach (var droneTransform  in DroneTransformList)
         {
             nextCheckpointSingleIndexList.Add(0);
         }
@@ -44,22 +52,20 @@ public class TrackCheckpoints : MonoBehaviour
             correctCheckpointSingle.Show();
             
             nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)] = (nextCheckpointSingleIndex + 1) % checkpointSingleList.Count;
-            OnDroneCorrectCheckpoint?.Invoke(this, (DroneCheckPointEventArgs)EventArgs.Empty); //<--- Check later
+            //OnDroneCorrectCheckpoint?.Invoke(this, (DroneCheckPointEventArgs)EventArgs.Empty); //<--- Check later
+            OnDroneCorrectCheckpoint?.Invoke(this, DroneCheckPointEventArgs.Empty as DroneCheckPointEventArgs); //<--- Check later
         }
         else
         {
             //Wrong CheckPoint
             Debug.Log("Wrong");
-            OnDroneWrongCheckpoint?.Invoke(this, (DroneCheckPointEventArgs)EventArgs.Empty); // <----Check Later
+            OnDroneWrongCheckpoint?.Invoke(this, DroneCheckPointEventArgs.Empty as DroneCheckPointEventArgs); // <----Check Later
 
             CheckpointSingle correctCheckpointSingle = checkpointSingleList[nextCheckpointSingleIndex];
             correctCheckpointSingle.Show();
         }
     }
-     public class DroneCheckPointEventArgs : EventArgs
-        {
-            public Transform DroneTransform { get; set; }
-        }
+   
 
      public void ResetCheckPoint(Transform droneTransform)
      {

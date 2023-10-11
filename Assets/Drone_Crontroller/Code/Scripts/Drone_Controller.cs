@@ -92,7 +92,7 @@ namespace TdsWork
 
         private void TrackCheckpoints_OnDroneWrongCheckpoint(object sender,TrackCheckpoints.DroneCheckPointEventArgs e)
         {
-            if (e.DroneTransform == transform)
+            if (e.droneTransform == transform)
             {
                 AddReward(-1f);
             }
@@ -100,7 +100,7 @@ namespace TdsWork
 
         private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
         {
-            if (e.DroneTransform == transform)
+            if (e.droneTransform == transform)
             {
                 AddReward(1f);
             }
@@ -116,7 +116,7 @@ namespace TdsWork
             transform.position = spawnPosition.position +
                                  new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f));
             transform.forward = spawnPosition.forward;
-            _trackCheckpoints.ResetCheckPoint(transform);
+            //_trackCheckpoints.ResetCheckPoint(transform);
             ResetValues();
             
         }
@@ -124,11 +124,11 @@ namespace TdsWork
 
         public override void CollectObservations(VectorSensor sensor)
         {
-            
+            /*
             Vector3 checkpointForward = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.forward;
             float directionDot = Vector3.Dot(transform.forward, checkpointForward);
             sensor.AddObservation(directionDot);
-            
+            */
             
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
             foreach (var rcComponent in rcComponents)
