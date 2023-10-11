@@ -529,7 +529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensorName: AgentX
   m_DetectableTags:
-  - Goal
+  - Checkpoints
   - Ground
   - Killer
   m_RaysPerDirection: 5
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensorName: AgentDown
   m_DetectableTags:
-  - Goal
+  - Checkpoints
   - Ground
   - Killer
   m_RaysPerDirection: 0
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensorName: AgentUp
   m_DetectableTags:
-  - Goal
+  - Checkpoints
   - Ground
   - Killer
   m_RaysPerDirection: 0
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensorName: AgentXTilt
   m_DetectableTags:
-  - Goal
+  - Checkpoints
   - Ground
   - Killer
   m_RaysPerDirection: 2

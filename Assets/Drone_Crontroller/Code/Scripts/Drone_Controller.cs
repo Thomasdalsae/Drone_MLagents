@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace TdsWork
 {
@@ -22,13 +23,10 @@ namespace TdsWork
         [SerializeField] private float maxRoll = 30f;
         [SerializeField] private float minYaw = -3f;
         [SerializeField] private float maxYaw = 3f;
-
-        //[SerializeField] private float minMaxPitch = 30f;
-        //[SerializeField] private float minMaxRoll = 30f;
-        //[SerializeField] private float maxThrottle = 5f;
-        //[SerializeField] private float yawPower = 4f;
-
         [SerializeField] private float lerpSpeed = 2f;
+        
+        public float thresholdDistance = 5;
+
         private float _pitch;
         private float _finalPitch;
         private float _normPitch;
@@ -46,12 +44,16 @@ namespace TdsWork
         private float _normThrottle;
         private float _normFThrottle;
 
-        [SerializeField] private Vector3 DirToGoal;
-        [SerializeField] private float DistToGoal;
-
+        [Header("Track/Checkpoints")]
+        [SerializeField] private TrackCheckpoints _trackCheckpoints;
+        [SerializeField] private Transform spawnPosition;
+        
+        
         [Header("Ml Targets")] [SerializeField]
         private GameObject goal;
 
+        [SerializeField] private Vector3 DirToGoal;
+        [SerializeField] private float DistToGoal;
         [SerializeField] private Vector3 _targetPosition;
         [SerializeField] private Transform _targetTransform;
         [SerializeField] private Vector3 _myLocation;
@@ -60,7 +62,6 @@ namespace TdsWork
         [Header("RayTracing")] [SerializeField]
         private RayPerceptionSensorComponent3D raySensor;
 
-        public float thresholdDistance = 5;
 
         [Header("Materials")] [SerializeField] private Material winMaterial;
 
@@ -83,17 +84,26 @@ namespace TdsWork
 
             raySensor = GetComponent<RayPerceptionSensorComponent3D>();
 
+            _trackCheckpoints.OnDroneCorrectCheckpoint += TrackCheckpoints_OnDroneCorrectCheckpoint;
+            _trackCheckpoints.OnDroneWrongCheckpoint += TrackCheckpoints_OnDroneWrongCheckpoint;
+
             //transform.localPosition = new Vector3(-0.9f,4.15f,4.32f);
         }
 
-        private void Update()
+        private void TrackCheckpoints_OnDroneWrongCheckpoint(object sender,TrackCheckpoints.DroneCheckPointEventArgs e)
         {
-            /* // Checking forward vector
-                LineRenderer lineRenderer = GetComponent<LineRenderer>();
-                 lineRenderer.SetVertexCount(2);
-                 lineRenderer.SetPosition(0, transform.position);
-                 lineRenderer.SetPosition(1, rb.transform.forward * 20 + transform.position);
-                 */
+            if (e.DroneTransform == transform)
+            {
+                AddReward(-1f);
+            }
+        }
+
+        private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
+        {
+            if (e.DroneTransform == transform)
+            {
+                AddReward(1f);
+            }
         }
 
         #endregion
@@ -102,15 +112,24 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
+            
+            transform.position = spawnPosition.position +
+                                 new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), Random.Range(-5f, 5f));
+            transform.forward = spawnPosition.forward;
+            _trackCheckpoints.ResetCheckPoint(transform);
             ResetValues();
-            // transform.localPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0.2f, 7f), Random.Range(-4f, 4f));
-            transform.localPosition = new Vector3(0, 3, 0.0f);
-            //_targetPosition = _goalSpawner.GetLastGoalTransform();
+           
         }
 
 
         public override void CollectObservations(VectorSensor sensor)
         {
+            
+            Vector3 checkpointForward = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.forward;
+            float directionDot = Vector3.Dot(transform.forward, checkpointForward);
+            sensor.AddObservation(directionDot);
+            
+            
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
             foreach (var rcComponent in rcComponents)
             {
@@ -123,7 +142,7 @@ namespace TdsWork
                     sensor.AddObservation(rayOutput.HitFraction);
                     sensor.AddObservation(rayOutput.HitTaggedObject);
                 }
-            }
+            } 
 
             /*
             sensor.AddObservation(_goalSpawner.HasGoalSpawned());

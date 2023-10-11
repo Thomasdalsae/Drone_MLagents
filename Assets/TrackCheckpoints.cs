@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class TrackCheckpoints : MonoBehaviour
 {
-    public event EventHandler OnPlayerCorrectCheckpoint;
-    public event EventHandler OnPlayerWrongCheckpoint;
+    public event EventHandler<DroneCheckPointEventArgs> OnDroneCorrectCheckpoint;
+    public event EventHandler<DroneCheckPointEventArgs> OnDroneWrongCheckpoint;
 
     [SerializeField] private List<Transform> DroneTransformList;
     private List<CheckpointSingle> checkpointSingleList;
@@ -40,16 +40,35 @@ public class TrackCheckpoints : MonoBehaviour
         {
             //Correct Checkpoint
             Debug.Log("Correct");
-            
+            CheckpointSingle correctCheckpointSingle = checkpointSingleList[nextCheckpointSingleIndex];
+            correctCheckpointSingle.Show();
             
             nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)] = (nextCheckpointSingleIndex + 1) % checkpointSingleList.Count;
-            OnPlayerCorrectCheckpoint?.Invoke(this, EventArgs.Empty);
+            OnDroneCorrectCheckpoint?.Invoke(this, (DroneCheckPointEventArgs)EventArgs.Empty); //<--- Check later
         }
         else
         {
             //Wrong CheckPoint
             Debug.Log("Wrong");
-            OnPlayerWrongCheckpoint?.Invoke(this, EventArgs.Empty);
+            OnDroneWrongCheckpoint?.Invoke(this, (DroneCheckPointEventArgs)EventArgs.Empty); // <----Check Later
+
+            CheckpointSingle correctCheckpointSingle = checkpointSingleList[nextCheckpointSingleIndex];
+            correctCheckpointSingle.Show();
         }
+    }
+     public class DroneCheckPointEventArgs : EventArgs
+        {
+            public Transform DroneTransform { get; set; }
+        }
+
+     public void ResetCheckPoint(Transform droneTransform)
+     {
+         nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)] = 0; // <<< check later
+     }
+
+    public CheckpointSingle GetNextCheckpointPosition(Transform droneTransform)
+    {
+        int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)];
+        return checkpointSingleList[nextCheckpointSingleIndex];
     }
 }
