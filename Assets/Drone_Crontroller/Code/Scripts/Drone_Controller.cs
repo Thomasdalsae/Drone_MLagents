@@ -49,8 +49,8 @@ namespace TdsWork
         [SerializeField] private Transform spawnPosition;
         
         
-        [Header("Ml Targets")] [SerializeField]
-        private GameObject goal;
+        [Header("Ml Targets")] 
+       // private GameObject goal;
 
         [SerializeField] private Vector3 DirToGoal;
         [SerializeField] private float DistToGoal;
@@ -100,8 +100,11 @@ namespace TdsWork
 
         private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
         {
-            if (e.droneTransform == transform)
+               
+             
+            if (e.droneTransform.transform == transform)
             {
+                Debug.Log("Adding a rewards from track check point");
                 AddReward(1f);
             }
         }
@@ -116,7 +119,8 @@ namespace TdsWork
             transform.position = spawnPosition.position +
                                  new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f));
             transform.forward = spawnPosition.forward;
-            //_trackCheckpoints.ResetCheckPoint(transform);
+            _trackCheckpoints.ResetCheckPoint(transform);
+            
             ResetValues();
             
         }

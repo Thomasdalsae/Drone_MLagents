@@ -25,7 +25,10 @@ public class CheckpointSingle : MonoBehaviour
     {
         if (other.TryGetComponent<Drone>(out Drone drone))
         {
-            _trackCheckpoints.DroneThroughCheckpoint(this,other.transform);
+
+            
+            Debug.Log("Ontriggerenter: " + this,drone.transform);
+            _trackCheckpoints.DroneThroughCheckpoint(this,drone.transform);
         } 
     }
 

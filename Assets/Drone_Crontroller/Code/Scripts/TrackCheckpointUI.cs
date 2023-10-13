@@ -13,12 +13,12 @@ public class TrackCheckpointUI : MonoBehaviour
         Hide();
     }
 
-    private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender, EventArgs e)
+    private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
     {
         Hide();
     }
 
-    private void TrackCheckpoints_OnDroneWrongCheckpoint(object Sender, EventArgs e)
+    private void TrackCheckpoints_OnDroneWrongCheckpoint(object Sender, TrackCheckpoints.DroneCheckPointEventArgs e)
     {
         Show();
     }
@@ -33,4 +33,7 @@ public class TrackCheckpointUI : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+  
+    
 }
