@@ -24,6 +24,8 @@ public class TrackCheckpoints : MonoBehaviour
     {
         Transform checkpointsTransform = transform.Find("Checkpoints");
 
+        _trackCheckpointUI = GetComponent<TrackCheckpointUI>();
+
         checkpointSingleList = new List<CheckpointSingle>();
         foreach (Transform checkpointSingleTransform in checkpointsTransform)
         {
@@ -89,12 +91,15 @@ public void DroneThroughCheckpoint(CheckpointSingle checkpointSingle, Transform 
      public void ResetCheckPoint(Transform droneTransform)
      {
 
-         foreach (var checkpoint in DroneTransformList)
+         foreach (var checkpoint in checkpointSingleList)
          {
-            Debug.Log("I got this many checkpoints:" +  checkpoint);
+             Debug.Log("Checkpoint : " + checkpoint);
+             
+             checkpoint.Hide();
          }
          
          nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)] = 0; // <<< check later
+         
          
      }
 
