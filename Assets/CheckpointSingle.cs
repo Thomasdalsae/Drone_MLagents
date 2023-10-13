@@ -25,9 +25,6 @@ public class CheckpointSingle : MonoBehaviour
     {
         if (other.TryGetComponent<Drone>(out Drone drone))
         {
-
-            
-            Debug.Log("Ontriggerenter: " + this,drone.transform);
             _trackCheckpoints.DroneThroughCheckpoint(this,drone.transform);
         } 
     }
@@ -43,7 +40,7 @@ public class CheckpointSingle : MonoBehaviour
         _meshRenderer.enabled = true;
     }
 
-    private void Hide()
+    public void Hide()
     {
         _meshRenderer.enabled = false;
     }
