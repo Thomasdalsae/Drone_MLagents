@@ -233,7 +233,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1000
+  MaxStep: 5000
   weightInKg: 1
   minThrottle: -5
   maxThrottle: 5
@@ -282,7 +282,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 3
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
