@@ -93,8 +93,6 @@ public void DroneThroughCheckpoint(CheckpointSingle checkpointSingle, Transform 
 
          foreach (var checkpoint in checkpointSingleList)
          {
-             Debug.Log("Checkpoint : " + checkpoint);
-             
              checkpoint.Hide();
          }
          
@@ -108,4 +106,14 @@ public void DroneThroughCheckpoint(CheckpointSingle checkpointSingle, Transform 
         int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)];
         return checkpointSingleList[nextCheckpointSingleIndex];
     }
+
+    public Vector3 GetNextCheckpointlocation(Transform droneTransform)
+    {
+        int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)];
+         Vector3 CurrentCheckpointLocation = checkpointSingleList[nextCheckpointSingleIndex].transform.position;
+
+         return CurrentCheckpointLocation;
+    }
+    
+    
 }

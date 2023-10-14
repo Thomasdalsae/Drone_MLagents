@@ -228,8 +228,8 @@ Transform:
   m_GameObject: {fileID: 759680686}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 64.2}
-  m_LocalScale: {x: 25.396517, y: 25.396517, z: 25.396517}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -320,7 +320,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.0016319134, w: 0.9999987}
-  m_LocalPosition: {x: -21.55, y: 3.37, z: -7.34}
+  m_LocalPosition: {x: -21.554, y: 4.528, z: -10.806}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -339,20 +339,24 @@ PrefabInstance:
       value: Drone
       objectReference: {fileID: 0}
     - target: {fileID: 3064437962809733177, guid: 80808ed464b650b4284c64dfb40902ea, type: 3}
+      propertyPath: spawnPosition
+      value: 
+      objectReference: {fileID: 220797446}
+    - target: {fileID: 3064437962809733177, guid: 80808ed464b650b4284c64dfb40902ea, type: 3}
       propertyPath: _trackCheckpoints
       value: 
       objectReference: {fileID: 1524285295}
     - target: {fileID: 3405360577641989701, guid: 80808ed464b650b4284c64dfb40902ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.97165
+      value: -22.08
       objectReference: {fileID: 0}
     - target: {fileID: 3405360577641989701, guid: 80808ed464b650b4284c64dfb40902ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.04
+      value: 4.486
       objectReference: {fileID: 0}
     - target: {fileID: 3405360577641989701, guid: 80808ed464b650b4284c64dfb40902ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.3606915
+      value: -7.468
       objectReference: {fileID: 0}
     - target: {fileID: 3405360577641989701, guid: 80808ed464b650b4284c64dfb40902ea, type: 3}
       propertyPath: m_LocalRotation.w

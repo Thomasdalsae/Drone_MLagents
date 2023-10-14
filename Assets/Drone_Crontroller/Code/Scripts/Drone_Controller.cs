@@ -116,8 +116,8 @@ namespace TdsWork
         public override void OnEpisodeBegin()
         {
             
-            transform.position = spawnPosition.position +
-                                 new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f));
+            transform.position = spawnPosition.position =
+                                 new Vector3(Random.Range(-20f,-22f), Random.Range(2f, 4f), Random.Range(-6f, -8f));
             transform.forward = spawnPosition.forward;
             _trackCheckpoints.ResetCheckPoint(transform);
             
@@ -128,34 +128,20 @@ namespace TdsWork
 
         public override void CollectObservations(VectorSensor sensor)
         {
-            /*
+            //works
             Vector3 checkpointForward = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.forward;
             float directionDot = Vector3.Dot(transform.forward, checkpointForward);
+            //Debug.Log("Direction to checkpoint" + directionDot);
             sensor.AddObservation(directionDot);
-            */
             
-            var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
-            foreach (var rcComponent in rcComponents)
-            {
-                var rayInput = rcComponent.GetRayPerceptionInput();
-                var rayResult = RayPerceptionSensor.Perceive(rayInput);
-
-                foreach (var rayOutput in rayResult.RayOutputs)
-                {
-                    sensor.AddObservation(rayOutput.HasHit);
-                    sensor.AddObservation(rayOutput.HitFraction);
-                    sensor.AddObservation(rayOutput.HitTaggedObject);
-                }
-            } 
-
-            /*
-            sensor.AddObservation(_goalSpawner.HasGoalSpawned());
-            DistToGoal = Vector3.Distance(_goalSpawner.GetLastGoalTransform(), _myLocation);
-            sensor.AddObservation(DistToGoal);
-            DirToGoal = (_goalSpawner.GetLastGoalTransform() - _myLocation).normalized;
-            sensor.AddObservation(DirToGoal);
-            */
-
+            
+                        DistToGoal = Vector3.Distance( _trackCheckpoints.GetNextCheckpointlocation(transform),_myLocation);
+                        Debug.Log("dist to goal" + DistToGoal);
+                        sensor.AddObservation(DistToGoal);
+                        DirToGoal = (_trackCheckpoints.GetNextCheckpointlocation(transform) - _myLocation).normalized;
+                        Debug.Log("dir to goal" + DirToGoal);
+                        sensor.AddObservation(DirToGoal);
+            
             sensor.AddObservation(_normPitch);
             sensor.AddObservation(_normYaw);
             sensor.AddObservation(_normRoll);
