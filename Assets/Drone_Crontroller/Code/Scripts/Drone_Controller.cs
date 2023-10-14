@@ -98,7 +98,7 @@ namespace TdsWork
         {
             
             transform.position = spawnPosition.position =
-                                 new Vector3(Random.Range(-20f,-22f), Random.Range(2f, 4f), Random.Range(-6f, -8f));
+                                 new Vector3(Random.Range(-37f,-39f), Random.Range(1.5f, 6f), Random.Range(-27f, -24f));
             transform.forward = spawnPosition.forward;
             _trackCheckpoints.ResetCheckPoint(transform);
             
