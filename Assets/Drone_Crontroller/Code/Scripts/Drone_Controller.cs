@@ -90,26 +90,7 @@ namespace TdsWork
             //transform.localPosition = new Vector3(-0.9f,4.15f,4.32f);
         }
 
-        private void TrackCheckpoints_OnDroneWrongCheckpoint(object sender,TrackCheckpoints.DroneCheckPointEventArgs e)
-        {
-            if (e.droneTransform == transform)
-            {
-                AddReward(-1f);
-            }
-        }
-
-        private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
-        {
-               
-             
-            if (e.droneTransform.transform == transform)
-            {
-                Debug.Log("Adding a rewards from track check point");
-                AddReward(1f);
-            }
-        }
-
-        #endregion
+               #endregion
 
         #region ML
 
@@ -134,12 +115,12 @@ namespace TdsWork
             //Debug.Log("Direction to checkpoint" + directionDot);
             sensor.AddObservation(directionDot);
             
-            
+                            //works 
                         DistToGoal = Vector3.Distance( _trackCheckpoints.GetNextCheckpointlocation(transform),_myLocation);
-                        Debug.Log("dist to goal" + DistToGoal);
+                        //Debug.Log("dist to goal" + DistToGoal);
                         sensor.AddObservation(DistToGoal);
                         DirToGoal = (_trackCheckpoints.GetNextCheckpointlocation(transform) - _myLocation).normalized;
-                        Debug.Log("dir to goal" + DirToGoal);
+                       // Debug.Log("dir to goal" + DirToGoal);
                         sensor.AddObservation(DirToGoal);
             
             sensor.AddObservation(_normPitch);
@@ -258,6 +239,27 @@ namespace TdsWork
 
             // Debug.Log("Current rewards" + GetCumulativeReward());
         }
+ private void TrackCheckpoints_OnDroneWrongCheckpoint(object sender,TrackCheckpoints.DroneCheckPointEventArgs e)
+        {
+            if (e.droneTransform == transform)
+            {
+                AddReward(-1f);
+                groundMeshRenderer.material = loseMaterial;
+            }
+        }
+
+        private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
+        {
+               
+             
+            if (e.droneTransform.transform == transform)
+            {
+                Debug.Log("Adding a rewards from track check point");
+                AddReward(1f);
+                groundMeshRenderer.material = winMaterial;
+            }
+        }
+
 
         public override void Heuristic(in ActionBuffers actionsOut)
         {
