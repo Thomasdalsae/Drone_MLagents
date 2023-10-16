@@ -233,7 +233,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 6000
+  MaxStep: 7500
   weightInKg: 1
   minThrottle: -5
   maxThrottle: 5
@@ -423,8 +423,8 @@ MonoBehaviour:
   - Ground
   - Killer
   m_RaysPerDirection: 2
-  m_MaxRayDegrees: 16
-  m_SphereCastRadius: 0.4
+  m_MaxRayDegrees: 27
+  m_SphereCastRadius: 1.17
   m_RayLength: 25
   m_RayLayerMask:
     serializedVersion: 2
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 3.1
+  m_StartVerticalOffset: 1.8
   m_EndVerticalOffset: 10
 --- !u!65 &5990964166526316845
 BoxCollider:
