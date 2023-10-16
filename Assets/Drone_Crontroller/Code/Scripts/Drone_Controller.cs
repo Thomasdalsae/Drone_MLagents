@@ -124,12 +124,15 @@ namespace TdsWork
                         sensor.AddObservation(DirToGoal);
             
             sensor.AddObservation(_normPitch);
-            sensor.AddObservation(_normYaw);
-            sensor.AddObservation(_normRoll);
-            sensor.AddObservation(_normThrottle);
             sensor.AddObservation(_normFPitch);
+            
+            sensor.AddObservation(_normYaw);
             sensor.AddObservation(_normFYaw);
+            
+            sensor.AddObservation(_normRoll);
             sensor.AddObservation(_normFRoll);
+            
+            sensor.AddObservation(_normThrottle);
             sensor.AddObservation(_normFThrottle);
 
             sensor.AddObservation(transform.localPosition.normalized);
@@ -182,7 +185,7 @@ namespace TdsWork
             var velocityDotGoal = Vector3.Dot(rb.velocity, DirToGoal);
 
 // Calculate the reward based on alignment with goal direction
-            var alignmentReward = velocityDotGoal * (0.25f / MaxStep);
+            var alignmentReward = velocityDotGoal * (0.20f / MaxStep);
 
 // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
@@ -195,10 +198,10 @@ namespace TdsWork
             float angle = 15;
             if (velocityDotGoal > Mathf.Cos(angle * Mathf.Deg2Rad))
                 // Add a reward for facing the goal
-                totalReward += 0.1f / MaxStep;
+                totalReward += 0.50f / MaxStep;
             else
                 // Add a penalty for not facing the goal
-                totalReward -= 0.1f / MaxStep;
+                totalReward -= 0.50f / MaxStep;
 
             AddReward(totalReward);
 
@@ -216,19 +219,19 @@ namespace TdsWork
                 foreach (var rayOutput in rayResult.RayOutputs)
                     if (rayOutput.HasHit)
                     {
-                        if (rayOutput.HitGameObject.CompareTag("Goal") && rayOutput.HitFraction < 1.0f)
+                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 1.0f)
                         {
                             // Reward based on the distance fraction to the goal
-                            var goalReward = 0.1f * rayOutput.HitFraction / MaxStep;
-                            AddReward(goalReward);
+                            var checkpointReward = 0.1f * rayOutput.HitFraction / MaxStep;
+                            AddReward(checkpointReward);
                         }
-                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.04f)
+                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.03f)
                         {
                             // Penalty based on the distance fraction to the killer object
                             var killerPenalty = -0.1f * rayOutput.HitFraction / MaxStep;
                             AddReward(killerPenalty);
                         }
-                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.04f)
+                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.03f)
                         {
                             // Penalty based on the distance fraction to the ground
                             var groundPenalty = -0.1f * rayOutput.HitFraction / MaxStep;

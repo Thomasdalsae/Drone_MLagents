@@ -140,7 +140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168082675043465198}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.644527, y: 1.89, z: -7.5326777}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -233,16 +233,16 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 4500
+  MaxStep: 8000
   weightInKg: 1
   minThrottle: -5
   maxThrottle: 5
-  minPitch: -30
-  maxPitch: 30
-  minRoll: -30
-  maxRoll: 30
-  minYaw: -4
-  maxYaw: 4
+  minPitch: -35
+  maxPitch: 35
+  minRoll: -35
+  maxRoll: 35
+  minYaw: -5
+  maxYaw: 5
   lerpSpeed: 4
   thresholdDistance: 5
   _trackCheckpoints: {fileID: 0}
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: DroneAgentNow
+  DemonstrationName: DroneAgentTrackF
   DemonstrationDirectory: Demos
 --- !u!114 &9112585370824232044
 MonoBehaviour:
