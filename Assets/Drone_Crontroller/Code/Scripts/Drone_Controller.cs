@@ -190,24 +190,29 @@ namespace TdsWork
 // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
             distanceReward *= 0.25f / MaxStep; // Adjust the reward factor as needed
+            
+            
 
 // Combine alignment, distance, velocity, and direction rewards
             var totalReward = alignmentReward + distanceReward;
-
-// Check if the agent is currently facing the goal within a certain angle
-            float angle = 15;
-            if (velocityDotGoal > Mathf.Cos(angle * Mathf.Deg2Rad))
-                // Add a reward for facing the goal
-                totalReward += 0.50f / MaxStep;
-            else
-                // Add a penalty for not facing the goal
-                totalReward -= 0.50f / MaxStep;
+            
+             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
+                                float dotProduct = Vector3.Dot(transform.forward, DirToGoal);
+                                if (dotProduct > 0.95f)
+                                {
+                                    totalReward +=(0.50f / MaxStep);
+                                }
+                                else
+                                {
+                                    totalReward -= (0.50f / MaxStep);
+                                }
+ 
 
             AddReward(totalReward);
 
 
             //Debug.Log("totalREward" + totalReward); 
-
+ 
 
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
 
@@ -222,19 +227,19 @@ namespace TdsWork
                         if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 1.0f)
                         {
                             // Reward based on the distance fraction to the goal
-                            var checkpointReward = 0.1f * rayOutput.HitFraction / MaxStep;
+                            var checkpointReward = 0.5f * rayOutput.HitFraction / MaxStep;
                             AddReward(checkpointReward);
                         }
-                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.03f)
+                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.04f)
                         {
                             // Penalty based on the distance fraction to the killer object
-                            var killerPenalty = -0.1f * rayOutput.HitFraction / MaxStep;
+                            var killerPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
                             AddReward(killerPenalty);
                         }
-                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.03f)
+                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.04f)
                         {
                             // Penalty based on the distance fraction to the ground
-                            var groundPenalty = -0.1f * rayOutput.HitFraction / MaxStep;
+                            var groundPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
                             AddReward(groundPenalty);
                         }
                     } 

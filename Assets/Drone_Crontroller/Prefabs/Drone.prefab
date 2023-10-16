@@ -233,17 +233,17 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 8000
+  MaxStep: 6000
   weightInKg: 1
   minThrottle: -5
   maxThrottle: 5
-  minPitch: -35
-  maxPitch: 35
-  minRoll: -35
-  maxRoll: 35
+  minPitch: -30
+  maxPitch: 30
+  minRoll: -30
+  maxRoll: 30
   minYaw: -5
   maxYaw: 5
-  lerpSpeed: 4
+  lerpSpeed: 5
   thresholdDistance: 5
   _trackCheckpoints: {fileID: 0}
   spawnPosition: {fileID: 7786623189763834554}
@@ -336,8 +336,8 @@ MonoBehaviour:
   - Ground
   - Killer
   m_RaysPerDirection: 5
-  m_MaxRayDegrees: 180
-  m_SphereCastRadius: 0.3
+  m_MaxRayDegrees: 113
+  m_SphereCastRadius: 0.4
   m_RayLength: 25
   m_RayLayerMask:
     serializedVersion: 2
@@ -395,7 +395,7 @@ MonoBehaviour:
   - Killer
   m_RaysPerDirection: 0
   m_MaxRayDegrees: 180
-  m_SphereCastRadius: 0.03
+  m_SphereCastRadius: 0.04
   m_RayLength: 1
   m_RayLayerMask:
     serializedVersion: 2
@@ -423,8 +423,8 @@ MonoBehaviour:
   - Ground
   - Killer
   m_RaysPerDirection: 2
-  m_MaxRayDegrees: 32
-  m_SphereCastRadius: 0.3
+  m_MaxRayDegrees: 16
+  m_SphereCastRadius: 0.4
   m_RayLength: 25
   m_RayLayerMask:
     serializedVersion: 2
@@ -432,8 +432,8 @@ MonoBehaviour:
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 0
-  m_EndVerticalOffset: 8.5
+  m_StartVerticalOffset: 3.1
+  m_EndVerticalOffset: 10
 --- !u!65 &5990964166526316845
 BoxCollider:
   m_ObjectHideFlags: 0
