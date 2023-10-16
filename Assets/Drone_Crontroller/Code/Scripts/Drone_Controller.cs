@@ -200,11 +200,11 @@ namespace TdsWork
                                 float dotProduct = Vector3.Dot(transform.forward, DirToGoal);
                                 if (dotProduct > 0.95f)
                                 {
-                                    totalReward +=(0.50f / MaxStep);
+                                    totalReward +=(3.5f / MaxStep);
                                 }
                                 else
                                 {
-                                    totalReward -= (2.0f / MaxStep);
+                                    totalReward -= (3.5f / MaxStep);
                                 }
  
 
@@ -251,7 +251,7 @@ namespace TdsWork
         {
             if (e.droneTransform == transform)
             {
-                AddReward(-0.5f);
+                AddReward(-0.2f);
                 groundMeshRenderer.material = loseMaterial;
             }
         }
@@ -263,7 +263,7 @@ namespace TdsWork
             if (e.droneTransform.transform == transform)
             {
                 Debug.Log("Adding a rewards from track check point");
-                AddReward(0.5f);
+                AddReward(0.2f);
                 groundMeshRenderer.material = winMaterial;
             }
         }
