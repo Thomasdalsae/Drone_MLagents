@@ -198,13 +198,13 @@ namespace TdsWork
             
              // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
                                 float dotProduct = Vector3.Dot(transform.forward, DirToGoal);
-                                if (dotProduct > 0.95f)
+                                if (dotProduct > 0.90f)
                                 {
-                                    totalReward +=(3.5f / MaxStep);
+                                    totalReward +=(5.5f / MaxStep);
                                 }
                                 else
                                 {
-                                    totalReward -= (3.5f / MaxStep);
+                                    totalReward -= (5.5f / MaxStep);
                                 }
  
 
@@ -224,7 +224,7 @@ namespace TdsWork
                 foreach (var rayOutput in rayResult.RayOutputs)
                     if (rayOutput.HasHit)
                     {
-                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 1.0f)
+                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.10f)
                         {
                             // Reward based on the distance fraction to the goal
                             var checkpointReward = 0.5f * rayOutput.HitFraction / MaxStep;
@@ -251,7 +251,7 @@ namespace TdsWork
         {
             if (e.droneTransform == transform)
             {
-                AddReward(-0.2f);
+                AddReward(-0.1f);
                 groundMeshRenderer.material = loseMaterial;
             }
         }
@@ -263,7 +263,7 @@ namespace TdsWork
             if (e.droneTransform.transform == transform)
             {
                 Debug.Log("Adding a rewards from track check point");
-                AddReward(0.2f);
+                AddReward(0.1f);
                 groundMeshRenderer.material = winMaterial;
             }
         }

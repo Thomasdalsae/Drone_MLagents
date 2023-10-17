@@ -233,14 +233,14 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 7500
+  MaxStep: 1500
   weightInKg: 1
-  minThrottle: -5
-  maxThrottle: 5
-  minPitch: -30
-  maxPitch: 30
-  minRoll: -30
-  maxRoll: 30
+  minThrottle: -6
+  maxThrottle: 6
+  minPitch: -35
+  maxPitch: 35
+  minRoll: -35
+  maxRoll: 35
   minYaw: -5
   maxYaw: 5
   lerpSpeed: 5
@@ -280,9 +280,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 697a7515204457547a52fefbac9c3292, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 3
-  m_BehaviorType: 2
+  m_BehaviorType: 0
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: DroneAgentTrackF
+  DemonstrationName: DroneAgentTrackN
   DemonstrationDirectory: Demos
 --- !u!114 &9112585370824232044
 MonoBehaviour:
