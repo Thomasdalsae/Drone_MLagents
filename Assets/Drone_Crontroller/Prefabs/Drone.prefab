@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 7857060934636287721}
   - component: {fileID: 7954364126286426251}
   - component: {fileID: 4888688592569062835}
+  - component: {fileID: 5343670331840737777}
   - component: {fileID: 5990964166526316845}
   - component: {fileID: 8997330497796250255}
   - component: {fileID: 380606012323928827}
@@ -141,7 +142,7 @@ Transform:
   m_GameObject: {fileID: 1168082675043465198}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.644527, y: 1.89, z: -7.5326777}
+  m_LocalPosition: {x: -21.644527, y: 3.685, z: -7.5641003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -233,7 +234,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1500
+  MaxStep: 2000
   weightInKg: 1
   minThrottle: -6
   maxThrottle: 6
@@ -280,7 +281,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 697a7515204457547a52fefbac9c3292, type: 3}
   m_InferenceDevice: 3
   m_BehaviorType: 0
   m_BehaviorName: DroneAgent
@@ -336,8 +337,8 @@ MonoBehaviour:
   - Ground
   - Killer
   m_RaysPerDirection: 5
-  m_MaxRayDegrees: 113
-  m_SphereCastRadius: 0.4
+  m_MaxRayDegrees: 39
+  m_SphereCastRadius: 1
   m_RayLength: 25
   m_RayLayerMask:
     serializedVersion: 2
@@ -366,7 +367,7 @@ MonoBehaviour:
   - Killer
   m_RaysPerDirection: 0
   m_MaxRayDegrees: 180
-  m_SphereCastRadius: 0.03
+  m_SphereCastRadius: 0.1
   m_RayLength: 1
   m_RayLayerMask:
     serializedVersion: 2
@@ -395,7 +396,7 @@ MonoBehaviour:
   - Killer
   m_RaysPerDirection: 0
   m_MaxRayDegrees: 180
-  m_SphereCastRadius: 0.04
+  m_SphereCastRadius: 0.1
   m_RayLength: 1
   m_RayLayerMask:
     serializedVersion: 2
@@ -417,23 +418,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SensorName: AgentXTilt
+  m_SensorName: AgentUpTilt
   m_DetectableTags:
   - Checkpoints
   - Ground
   - Killer
   m_RaysPerDirection: 2
-  m_MaxRayDegrees: 27
-  m_SphereCastRadius: 1.17
-  m_RayLength: 25
+  m_MaxRayDegrees: 30
+  m_SphereCastRadius: 1
+  m_RayLength: 19
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 1.8
+  m_StartVerticalOffset: 0
   m_EndVerticalOffset: 10
+--- !u!114 &5343670331840737777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168082675043465198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: AgentDownTilt
+  m_DetectableTags:
+  - Checkpoints
+  - Ground
+  - Killer
+  m_RaysPerDirection: 2
+  m_MaxRayDegrees: 30
+  m_SphereCastRadius: 1
+  m_RayLength: 14
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967283
+  m_ObservationStacks: 1
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: -10
 --- !u!65 &5990964166526316845
 BoxCollider:
   m_ObjectHideFlags: 0

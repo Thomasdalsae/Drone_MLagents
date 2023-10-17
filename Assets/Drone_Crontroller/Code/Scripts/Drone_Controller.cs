@@ -251,7 +251,7 @@ namespace TdsWork
         {
             if (e.droneTransform == transform)
             {
-                AddReward(-0.1f);
+                AddReward(-0.5f);
                 groundMeshRenderer.material = loseMaterial;
             }
         }
@@ -263,7 +263,7 @@ namespace TdsWork
             if (e.droneTransform.transform == transform)
             {
                 Debug.Log("Adding a rewards from track check point");
-                AddReward(0.1f);
+                AddReward(0.5f);
                 groundMeshRenderer.material = winMaterial;
             }
         }

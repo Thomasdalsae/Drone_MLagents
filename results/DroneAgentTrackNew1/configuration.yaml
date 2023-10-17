@@ -52,7 +52,7 @@ behaviors:
         use_actions: false
         use_vail: false
         demo_path: F:\Unity projects\Oblig2\Drone_MLagents\Demos\DroneAgentTrackN_4.demo
-    init_path: null
+    init_path: results\DroneAgentTrackNew\DroneAgent\checkpoint.pt
     keep_checkpoints: 5
     checkpoint_interval: 100000
     max_steps: 5000000
@@ -87,8 +87,8 @@ engine_settings:
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: DroneAgentTrackNew
-  initialize_from: null
+  run_id: DroneAgentTrackNew1
+  initialize_from: DroneAgentTrackNew
   load_model: false
   resume: false
   force: false
