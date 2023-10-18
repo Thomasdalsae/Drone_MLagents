@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TdsWork;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CheckpointSingle : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class CheckpointSingle : MonoBehaviour
 
     private void Start()
     {
+        transform.localPosition = transform.localPosition +  new Vector3(Random.Range(-2f, 2f), Random.Range(-4f, 4f), 0);
        Hide(); 
     }
 
