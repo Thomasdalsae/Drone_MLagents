@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4450494083362209117}
   - component: {fileID: 2064201568635367183}
   - component: {fileID: 3961078272594896609}
+  - component: {fileID: 6524045280205171742}
   m_Layer: 0
   m_Name: M_Wall
   m_TagString: Killer
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2836407414601284200}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3734cddb51278546868f049d7777583, type: 3}
   m_Name: 
@@ -132,3 +133,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63be11a5be244de45ae8efe655566146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6524045280205171742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836407414601284200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff68ef4816b12d478abca37787ba08b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 2
+  Limit: 0
+  startLocation: {x: 0, y: 0, z: 0}
