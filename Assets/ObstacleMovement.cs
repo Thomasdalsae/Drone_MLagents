@@ -17,12 +17,12 @@ public class ObstacleMovement : MonoBehaviour
 
     private void Start()
     {
-        transform.localScale = new Vector3(Random.Range(0.2f, 1.5f), Random.Range(3f, 20f), Random.Range(0.5f, 1f));
-        rotationSpeed = (Random.Range(20f, 50f));
+        transform.localScale = new Vector3(Random.Range(0.2f, 1.3f), Random.Range(3f, 20f), Random.Range(0.5f, 0.9f));
+        rotationSpeed = (Random.Range(10f, 30f));
     }   
 
     private void Update()
     {
-        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+        transform.Rotate(-Vector3.forward * rotationSpeed * Time.deltaTime);
     }
 }
