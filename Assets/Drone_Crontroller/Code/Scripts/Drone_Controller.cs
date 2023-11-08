@@ -24,7 +24,7 @@ namespace TdsWork
         [SerializeField] private float minYaw = -3f;
         [SerializeField] private float maxYaw = 3f;
         [SerializeField] private float lerpSpeed = 2f;
-        
+
         public float thresholdDistance = 5;
 
         private float _pitch;
@@ -44,15 +44,17 @@ namespace TdsWork
         private float _normThrottle;
         private float _normFThrottle;
 
-        [Header("Track/Checkpoints")]
-        [SerializeField] private TrackCheckpoints _trackCheckpoints;
-        [SerializeField] private Transform spawnPosition;
-        
-        
-        [Header("Ml Targets")] 
-       // private GameObject goal;
+        [Header("Track/Checkpoints")] [SerializeField]
+        private TrackCheckpoints _trackCheckpoints;
 
-        [SerializeField] private Vector3 DirToGoal;
+        [SerializeField] private Transform spawnPosition;
+
+
+        [Header("Ml Targets")]
+        // private GameObject goal;
+        [SerializeField]
+        private Vector3 DirToGoal;
+
         [SerializeField] private float DistToGoal;
         [SerializeField] private Vector3 _targetPosition;
         [SerializeField] private Transform _targetTransform;
@@ -90,20 +92,18 @@ namespace TdsWork
             //transform.localPosition = new Vector3(-0.9f,4.15f,4.32f);
         }
 
-               #endregion
+        #endregion
 
         #region ML
 
         public override void OnEpisodeBegin()
         {
-            
             transform.position = spawnPosition.position =
-                                 new Vector3(Random.Range(-37f,-39f), Random.Range(1.5f, 6f), Random.Range(-27f, -24f));
+                new Vector3(Random.Range(-37f, -39f), Random.Range(1.5f, 6f), Random.Range(-27f, -24f));
             transform.forward = spawnPosition.forward;
             _trackCheckpoints.ResetCheckPoint(transform);
-            
+
             ResetValues();
-            
         }
 
 
@@ -114,24 +114,24 @@ namespace TdsWork
             float directionDot = Vector3.Dot(transform.forward, checkpointForward);
             //Debug.Log("Direction to checkpoint" + directionDot);
             sensor.AddObservation(directionDot);
-            
-                            //works 
-                        DistToGoal = Vector3.Distance( _trackCheckpoints.GetNextCheckpointlocation(transform),_myLocation);
-                        //Debug.Log("dist to goal" + DistToGoal);
-                        sensor.AddObservation(DistToGoal);
-                        DirToGoal = (_trackCheckpoints.GetNextCheckpointlocation(transform) - _myLocation).normalized;
-                       // Debug.Log("dir to goal" + DirToGoal);
-                        sensor.AddObservation(DirToGoal);
-            
+
+            //works 
+            DistToGoal = Vector3.Distance(_trackCheckpoints.GetNextCheckpointlocation(transform), _myLocation);
+            //Debug.Log("dist to goal" + DistToGoal);
+            sensor.AddObservation(DistToGoal);
+            DirToGoal = (_trackCheckpoints.GetNextCheckpointlocation(transform) - _myLocation).normalized;
+            // Debug.Log("dir to goal" + DirToGoal);
+            sensor.AddObservation(DirToGoal);
+
             sensor.AddObservation(_normPitch);
             sensor.AddObservation(_normFPitch);
-            
+
             sensor.AddObservation(_normYaw);
             sensor.AddObservation(_normFYaw);
-            
+
             sensor.AddObservation(_normRoll);
             sensor.AddObservation(_normFRoll);
-            
+
             sensor.AddObservation(_normThrottle);
             sensor.AddObservation(_normFThrottle);
 
@@ -189,30 +189,29 @@ namespace TdsWork
 
 // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
-            distanceReward *= 0.25f / MaxStep; // Adjust the reward factor as needed
-            
-            
+            distanceReward *= 0.2f / MaxStep; // Adjust the reward factor as needed
+
 
 // Combine alignment, distance, velocity, and direction rewards
             var totalReward = alignmentReward + distanceReward;
-            
-             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
-                                float dotProduct = Vector3.Dot(transform.forward, DirToGoal);
-                                if (dotProduct > 0.90f)
-                                {
-                                    totalReward +=(5.5f / MaxStep);
-                                }
-                                else
-                                {
-                                    totalReward -= (5.5f / MaxStep);
-                                }
- 
+
+            // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
+            float dotProduct = Vector3.Dot(transform.forward, DirToGoal);
+            if (dotProduct > 0.92f)
+            {
+                totalReward += (1f / MaxStep);
+            }
+            else
+            {
+                totalReward -= (1f / MaxStep);
+            }
+
 
             AddReward(totalReward);
 
 
             //Debug.Log("totalREward" + totalReward); 
- 
+
 
             var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
 
@@ -242,28 +241,28 @@ namespace TdsWork
                             var groundPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
                             AddReward(groundPenalty);
                         }
-                    } 
+                    }
             }
 
             // Debug.Log("Current rewards" + GetCumulativeReward());
         }
- private void TrackCheckpoints_OnDroneWrongCheckpoint(object sender,TrackCheckpoints.DroneCheckPointEventArgs e)
+
+        private void TrackCheckpoints_OnDroneWrongCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
         {
             if (e.droneTransform == transform)
             {
-                AddReward(-0.5f);
+                AddReward(-1f);
                 groundMeshRenderer.material = loseMaterial;
             }
         }
 
-        private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
+        private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender,
+            TrackCheckpoints.DroneCheckPointEventArgs e)
         {
-               
-             
             if (e.droneTransform.transform == transform)
             {
                 Debug.Log("Adding a rewards from track check point");
-                AddReward(0.5f);
+                AddReward(1.0f);
                 groundMeshRenderer.material = winMaterial;
             }
         }
