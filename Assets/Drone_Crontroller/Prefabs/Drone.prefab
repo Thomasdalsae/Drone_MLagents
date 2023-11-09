@@ -234,7 +234,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1500
+  MaxStep: 500
   weightInKg: 1
   minThrottle: -6
   maxThrottle: 6
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 26
+    VectorObservationSize: 31
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -283,7 +283,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: 697a7515204457547a52fefbac9c3292, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: DroneAgentTrackN
+  DemonstrationName: DroneAgentTrackNew
   DemonstrationDirectory: Demos
 --- !u!114 &9112585370824232044
 MonoBehaviour:
@@ -336,10 +336,10 @@ MonoBehaviour:
   - Checkpoints
   - Ground
   - Killer
-  m_RaysPerDirection: 5
-  m_MaxRayDegrees: 39
+  m_RaysPerDirection: 10
+  m_MaxRayDegrees: 180
   m_SphereCastRadius: 1
-  m_RayLength: 30
+  m_RayLength: 50
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
@@ -365,10 +365,10 @@ MonoBehaviour:
   - Checkpoints
   - Ground
   - Killer
-  m_RaysPerDirection: 0
-  m_MaxRayDegrees: 180
+  m_RaysPerDirection: 2
+  m_MaxRayDegrees: 145
   m_SphereCastRadius: 0.1
-  m_RayLength: 1
+  m_RayLength: 2
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
@@ -394,10 +394,10 @@ MonoBehaviour:
   - Checkpoints
   - Ground
   - Killer
-  m_RaysPerDirection: 0
-  m_MaxRayDegrees: 180
+  m_RaysPerDirection: 2
+  m_MaxRayDegrees: 145
   m_SphereCastRadius: 0.1
-  m_RayLength: 1
+  m_RayLength: 2.5
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
