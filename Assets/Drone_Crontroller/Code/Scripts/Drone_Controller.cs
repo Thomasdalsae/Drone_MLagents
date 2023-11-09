@@ -109,6 +109,7 @@ namespace TdsWork
 
         public override void CollectObservations(VectorSensor sensor)
         {
+            _targetPosition = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.localPosition;
             //works
             Vector3 checkpointForward = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.forward;
             float directionDot = Vector3.Dot(transform.forward, checkpointForward);
@@ -122,6 +123,11 @@ namespace TdsWork
             DirToGoal = (_trackCheckpoints.GetNextCheckpointlocation(transform) - _myLocation).normalized;
             // Debug.Log("dir to goal" + DirToGoal);
             sensor.AddObservation(DirToGoal);
+            sensor.AddObservation(_targetPosition);
+
+            sensor.AddObservation(Vector3.Dot(rb.velocity, DirToGoal));
+            sensor.AddObservation(Vector3.Dot(transform.forward, DirToGoal));
+
 
             sensor.AddObservation(_normPitch);
             sensor.AddObservation(_normFPitch);
@@ -185,7 +191,7 @@ namespace TdsWork
             var velocityDotGoal = Vector3.Dot(rb.velocity, DirToGoal);
 
 // Calculate the reward based on alignment with goal direction
-            var alignmentReward = velocityDotGoal * (0.25f / MaxStep);
+            var alignmentReward = velocityDotGoal * (2f / MaxStep);
 
 // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
@@ -199,11 +205,11 @@ namespace TdsWork
             float dotProduct = Vector3.Dot(transform.forward, DirToGoal);
             if (dotProduct > 0.90f)
             {
-                totalReward += (1f / MaxStep);
+                totalReward += (5f / MaxStep);
             }
             else
             {
-                totalReward -= (1f / MaxStep);
+                totalReward -= (5f / MaxStep);
             }
 
 
@@ -223,7 +229,7 @@ namespace TdsWork
                 foreach (var rayOutput in rayResult.RayOutputs)
                     if (rayOutput.HasHit)
                     {
-                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.10f)
+                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.1f)
                         {
                             // Reward based on the distance fraction to the goal
                             var checkpointReward = 0.5f * rayOutput.HitFraction / MaxStep;
@@ -303,7 +309,7 @@ namespace TdsWork
             if (other.TryGetComponent(out Killer killer))
             {
                 // Debug.Log("Collided with " + other);
-                SetReward(-0.5f);
+                SetReward(-1f);
                 EndEpisode();
                 groundMeshRenderer.material = loseMaterial;
             }

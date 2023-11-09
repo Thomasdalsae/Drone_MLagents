@@ -19,7 +19,7 @@ public class CheckpointSingle : MonoBehaviour
 
     private void Start()
     {
-        transform.localPosition = transform.localPosition +  new Vector3(Random.Range(-2f, 2f), Random.Range(-4f, 4f), 0);
+        transform.localPosition = transform.localPosition +  new Vector3(Random.Range(-2f, 2f), Random.Range(-1f, 1f), 0);
        Hide(); 
     }
 
