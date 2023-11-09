@@ -99,7 +99,7 @@ namespace TdsWork
         public override void OnEpisodeBegin()
         {
             transform.position = spawnPosition.position =
-                new Vector3(Random.Range(-37f, -39f), Random.Range(1.5f, 6f), Random.Range(-27f, -24f));
+                new Vector3(Random.Range(-37f, -39f), Random.Range(5.5f, 6f), Random.Range(-27f, -24f));
             transform.forward = spawnPosition.forward;
             _trackCheckpoints.ResetCheckPoint(transform);
 
@@ -185,7 +185,7 @@ namespace TdsWork
             var velocityDotGoal = Vector3.Dot(rb.velocity, DirToGoal);
 
 // Calculate the reward based on alignment with goal direction
-            var alignmentReward = velocityDotGoal * (0.10f / MaxStep);
+            var alignmentReward = velocityDotGoal * (0.25f / MaxStep);
 
 // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
@@ -197,7 +197,7 @@ namespace TdsWork
 
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(transform.forward, DirToGoal);
-            if (dotProduct > 0.92f)
+            if (dotProduct > 0.90f)
             {
                 totalReward += (1f / MaxStep);
             }
@@ -303,7 +303,7 @@ namespace TdsWork
             if (other.TryGetComponent(out Killer killer))
             {
                 // Debug.Log("Collided with " + other);
-                SetReward(-1f);
+                SetReward(-0.5f);
                 EndEpisode();
                 groundMeshRenderer.material = loseMaterial;
             }

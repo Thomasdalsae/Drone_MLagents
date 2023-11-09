@@ -18,7 +18,7 @@ public class ObstacleMovement : MonoBehaviour
     private void Start()
     {
         transform.localScale = new Vector3(Random.Range(0.2f, 1.3f), Random.Range(9f, 20f), Random.Range(0.5f, 0.9f));
-        rotationSpeed = (Random.Range(10f, 30f));
+        rotationSpeed = (Random.Range(10f, 20f));
     }   
 
     private void Update()
