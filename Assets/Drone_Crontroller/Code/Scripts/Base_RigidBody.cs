@@ -12,8 +12,7 @@ namespace TdsWork
         #region Variables
 
         [Header("Rigidbody Properties")] [SerializeField]private float weightInKg = 1f;
-        
-        
+
         protected Rigidbody rb;
         protected Rigidbody forward;
         protected float startDrag;

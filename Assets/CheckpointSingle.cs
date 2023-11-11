@@ -46,4 +46,10 @@ public class CheckpointSingle : MonoBehaviour
     {
         _meshRenderer.enabled = false;
     }
+    // Draw a forward vector in the scene view for visualization
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawRay(transform.position, transform.forward);
+        }
 }

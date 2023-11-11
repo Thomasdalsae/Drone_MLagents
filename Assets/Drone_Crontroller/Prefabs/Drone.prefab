@@ -234,7 +234,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1800
+  MaxStep: 3000
   weightInKg: 1
   minThrottle: -6
   maxThrottle: 6
@@ -246,6 +246,7 @@ MonoBehaviour:
   maxYaw: 5
   lerpSpeed: 5
   thresholdDistance: 5
+  vectorLength: 5
   _trackCheckpoints: {fileID: 0}
   spawnPosition: {fileID: 7786623189763834554}
   DirToGoal: {x: 0, y: 0, z: 0}
@@ -254,6 +255,7 @@ MonoBehaviour:
   _targetTransform: {fileID: 0}
   _myLocation: {x: 0, y: 0, z: 0}
   _myVelo: {x: 0, y: 0, z: 0}
+  rbStartRotation: {x: 0, y: 0, z: 0, w: 0}
   raySensor: {fileID: 9112585370824232044}
   winMaterial: {fileID: 2100000, guid: e401b5d1f75f1b84e86df1d1a2ce8d4c, type: 2}
   loseMaterial: {fileID: 2100000, guid: 3abd5159cab26dd418f042646f3359a5, type: 2}
@@ -283,7 +285,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: 697a7515204457547a52fefbac9c3292, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 2
+  m_BehaviorType: 0
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1

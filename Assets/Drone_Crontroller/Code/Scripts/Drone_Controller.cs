@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
@@ -26,6 +27,8 @@ namespace TdsWork
         [SerializeField] private float lerpSpeed = 2f;
 
         public float thresholdDistance = 5;
+        public float vectorLength = 5.0f;
+        private Vector3 constantForward = Vector3.forward;
 
         private float _pitch;
         private float _finalPitch;
@@ -60,6 +63,7 @@ namespace TdsWork
         [SerializeField] private Transform _targetTransform;
         [SerializeField] private Vector3 _myLocation;
         [SerializeField] private Vector3 _myVelo;
+        [SerializeField] private Quaternion rbStartRotation;
 
         [Header("RayTracing")] [SerializeField]
         private RayPerceptionSensorComponent3D raySensor;
@@ -89,7 +93,9 @@ namespace TdsWork
             _trackCheckpoints.OnDroneCorrectCheckpoint += TrackCheckpoints_OnDroneCorrectCheckpoint;
             _trackCheckpoints.OnDroneWrongCheckpoint += TrackCheckpoints_OnDroneWrongCheckpoint;
 
+
             //transform.localPosition = new Vector3(-0.9f,4.15f,4.32f);
+
         }
 
         #endregion
@@ -98,21 +104,26 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
+            
             transform.position = spawnPosition.position =
-                new Vector3(Random.Range(-37f, -39f), Random.Range(5.5f, 6f), Random.Range(-27f, -24f));
+               new Vector3(Random.Range(-28f, -37f), Random.Range(5f, 13f), Random.Range(-30f, -45f));
             transform.forward = spawnPosition.forward;
             _trackCheckpoints.ResetCheckPoint(transform);
 
             ResetValues();
         }
 
+        private void Update()
+        {
+            VisualizeForward();
+        }
 
         public override void CollectObservations(VectorSensor sensor)
         {
             _targetPosition = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.localPosition;
             //works
             Vector3 checkpointForward = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.forward;
-            float directionDot = Vector3.Dot(transform.forward, checkpointForward);
+            float directionDot = Vector3.Dot(constantForward, checkpointForward);
             //Debug.Log("Direction to checkpoint" + directionDot);
             sensor.AddObservation(directionDot);
 
@@ -126,7 +137,7 @@ namespace TdsWork
             sensor.AddObservation(_targetPosition);
 
             sensor.AddObservation(Vector3.Dot(rb.velocity, DirToGoal));
-            sensor.AddObservation(Vector3.Dot(transform.forward, DirToGoal));
+            sensor.AddObservation(Vector3.Dot(constantForward, DirToGoal));
 
 
             sensor.AddObservation(_normPitch);
@@ -145,6 +156,7 @@ namespace TdsWork
             sensor.AddObservation(transform.localRotation);
             sensor.AddObservation(rb.velocity);
             sensor.AddObservation(rb.transform.forward.normalized);
+            
         }
 
 
@@ -160,6 +172,14 @@ namespace TdsWork
             _roll = actions.ContinuousActions[1] * maxRoll;
             _yaw += actions.ContinuousActions[2] * maxYaw;
             _throttle = actions.ContinuousActions[3] * maxThrottle;
+            
+            
+            
+            // Calculate rotation without affecting yaw
+            var rotationWithoutYaw = Quaternion.Euler(0, _finalYaw, -_finalRoll);
+            
+                // Calculate constant forward vector in world space
+                 constantForward = rotationWithoutYaw * Vector3.forward;
 
 // Normalize input values
             _normThrottle = Mathf.InverseLerp(minThrottle, maxThrottle, _throttle) * 2 - 1;
@@ -191,25 +211,25 @@ namespace TdsWork
             var velocityDotGoal = Vector3.Dot(rb.velocity, DirToGoal);
 
 // Calculate the reward based on alignment with goal direction
-            var alignmentReward = velocityDotGoal * (1f / MaxStep);
+            var alignmentReward = velocityDotGoal * (0.10f / MaxStep);
 
 // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
-            distanceReward *= 0.2f / MaxStep; // Adjust the reward factor as needed
+            distanceReward *= 0.1f / MaxStep; // Adjust the reward factor as needed
 
 
 // Combine alignment, distance, velocity, and direction rewards
             var totalReward = alignmentReward + distanceReward;
-
+            
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
-            float dotProduct = Vector3.Dot(transform.forward, DirToGoal);
-            if (dotProduct > 0.90f)
+            float dotProduct = Vector3.Dot(constantForward, DirToGoal);
+            if (dotProduct > 0.94f)
             {
-                totalReward += (10f / MaxStep);
+                totalReward += (1.0f / MaxStep);
             }
             else
             {
-                totalReward -= (10f / MaxStep);
+                totalReward -= (3.0f / MaxStep);
             }
 
 
@@ -225,16 +245,18 @@ namespace TdsWork
             {
                 var rayInput = rcComponent.GetRayPerceptionInput();
                 var rayResult = RayPerceptionSensor.Perceive(rayInput);
-
+                
                 foreach (var rayOutput in rayResult.RayOutputs)
                     if (rayOutput.HasHit)
                     {
+                        
                         if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.1f)
                         {
                             // Reward based on the distance fraction to the goal
-                            var checkpointReward = 0.5f * rayOutput.HitFraction / MaxStep;
+                            var checkpointReward = 0.2f * rayOutput.HitFraction / MaxStep;
                             AddReward(checkpointReward);
                         }
+                        
                         else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.04f)
                         {
                             // Penalty based on the distance fraction to the killer object
@@ -338,7 +360,10 @@ namespace TdsWork
         }
         */
 
-
+        void VisualizeForward()
+        {
+            Debug.DrawRay(transform.position, constantForward * vectorLength, Color.blue);
+        }
         private void ResetValues()
         {
             var startRot = quaternion.identity;
@@ -369,4 +394,6 @@ namespace TdsWork
 
         #endregion
     }
+    
+      
 }
