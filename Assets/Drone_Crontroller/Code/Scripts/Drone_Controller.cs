@@ -51,8 +51,7 @@ namespace TdsWork
         private TrackCheckpoints _trackCheckpoints;
 
         [SerializeField] private Transform spawnPosition;
-        public float rotationSpeed = 5f;
-            public float radius = 2f;
+        
 
 
         [Header("Ml Targets")]
@@ -118,19 +117,6 @@ namespace TdsWork
         private void Update()
         {
             VisualizeForward();
-            
-            
-        // Calculate the new position on the circle
-        float angle = Time.time * rotationSpeed;
-        float x = Mathf.Cos(angle) * radius;
-        float z = Mathf.Sin(angle) * radius;
-
-        // Update the object's position
-        transform.position = new Vector3(x, transform.position.y, z);
-
-        // Rotate the object around the Y-axis
-        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-            
         }
 
         public override void CollectObservations(VectorSensor sensor)
