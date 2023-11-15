@@ -212,7 +212,7 @@ namespace TdsWork
             var velocityDotGoal = Vector3.Dot(rb.velocity, DirToGoal);
 
 // Calculate the reward based on alignment with goal direction
-            var alignmentReward = velocityDotGoal * (0.10f / MaxStep);
+            var alignmentReward = velocityDotGoal * (0.08f / MaxStep);
 
 // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
@@ -226,11 +226,11 @@ namespace TdsWork
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
             if (dotProduct > 0.94f)
             {
-                totalReward += (1.0f / MaxStep);
+                totalReward += (5.0f / MaxStep);
             }
             else
             {
-                totalReward -= (3.0f / MaxStep);
+                totalReward -= (10.0f / MaxStep);
             }
 
 
