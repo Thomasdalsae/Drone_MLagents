@@ -234,14 +234,14 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 4500
+  MaxStep: 1000
   weightInKg: 1
-  minThrottle: -6
-  maxThrottle: 6
-  minPitch: -35
-  maxPitch: 35
-  minRoll: -35
-  maxRoll: 35
+  minThrottle: -50
+  maxThrottle: 50
+  minPitch: -55
+  maxPitch: 55
+  minRoll: -55
+  maxRoll: 55
   minYaw: -5
   maxYaw: 5
   lerpSpeed: 5
@@ -285,7 +285,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: 697a7515204457547a52fefbac9c3292, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -340,7 +340,7 @@ MonoBehaviour:
   - Killer
   m_RaysPerDirection: 10
   m_MaxRayDegrees: 180
-  m_SphereCastRadius: 1
+  m_SphereCastRadius: 1.65
   m_RayLength: 50
   m_RayLayerMask:
     serializedVersion: 2
@@ -369,8 +369,8 @@ MonoBehaviour:
   - Killer
   m_RaysPerDirection: 2
   m_MaxRayDegrees: 145
-  m_SphereCastRadius: 0.1
-  m_RayLength: 2
+  m_SphereCastRadius: 0.2
+  m_RayLength: 10
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
@@ -398,8 +398,8 @@ MonoBehaviour:
   - Killer
   m_RaysPerDirection: 2
   m_MaxRayDegrees: 145
-  m_SphereCastRadius: 0.1
-  m_RayLength: 2.5
+  m_SphereCastRadius: 0.39
+  m_RayLength: 10
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
@@ -426,7 +426,7 @@ MonoBehaviour:
   - Ground
   - Killer
   m_RaysPerDirection: 2
-  m_MaxRayDegrees: 30
+  m_MaxRayDegrees: 53
   m_SphereCastRadius: 1
   m_RayLength: 19
   m_RayLayerMask:
@@ -435,7 +435,7 @@ MonoBehaviour:
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
-  m_StartVerticalOffset: 0
+  m_StartVerticalOffset: -0
   m_EndVerticalOffset: 10
 --- !u!114 &5343670331840737777
 MonoBehaviour:
@@ -455,9 +455,9 @@ MonoBehaviour:
   - Ground
   - Killer
   m_RaysPerDirection: 2
-  m_MaxRayDegrees: 30
+  m_MaxRayDegrees: 53
   m_SphereCastRadius: 1
-  m_RayLength: 14
+  m_RayLength: 19
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
