@@ -26,8 +26,8 @@ namespace TdsWork
         [SerializeField] private float maxYaw = 3f;
         [SerializeField] private float lerpSpeed = 2f;
 
-        public float thresholdDistance = 5;
-        public float vectorLength = 5.0f;
+        public float thresholdDistance = 18;
+        public float vectorLength = 8.0f;
         private Vector3 constantForward = Vector3.forward;
 
         private float _pitch;
@@ -49,6 +49,8 @@ namespace TdsWork
 
         [Header("Track/Checkpoints")] [SerializeField]
         private TrackCheckpoints _trackCheckpoints;
+
+        private CheckpointSingle _checkpointSingle;
 
         [SerializeField] private Transform spawnPosition;
         
@@ -107,7 +109,7 @@ namespace TdsWork
         {
             
             transform.position = spawnPosition.position =
-               new Vector3(Random.Range(-64f, -50f), Random.Range(5f, 14f), Random.Range(-25f, -40f));
+               new Vector3(Random.Range(-95f, -60f), Random.Range(25f, 35f), Random.Range(-55f, -61f));
             transform.forward = spawnPosition.forward;
             _trackCheckpoints.ResetCheckPoint(transform);
 
@@ -140,7 +142,7 @@ namespace TdsWork
             sensor.AddObservation(Vector3.Dot(rb.velocity, DirToGoal));
             sensor.AddObservation(Vector3.Dot(constantForward, DirToGoal));
 
-
+            
             sensor.AddObservation(_normPitch);
             sensor.AddObservation(_normFPitch);
 
@@ -212,7 +214,7 @@ namespace TdsWork
             var velocityDotGoal = Vector3.Dot(rb.velocity, DirToGoal);
 
 // Calculate the reward based on alignment with goal direction
-            var alignmentReward = velocityDotGoal * (0.14f / MaxStep);
+            var alignmentReward = velocityDotGoal * (0.15f / MaxStep);
 
 // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
@@ -224,13 +226,13 @@ namespace TdsWork
             
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
-            if (dotProduct > 0.94f)
+            if (dotProduct > 0.92f && velocityDotGoal > 3f)
             {
                 totalReward += (5.0f / MaxStep);
             }
             else
             {
-                totalReward -= (8.0f / MaxStep);
+                totalReward -= (5.0f / MaxStep);
             }
 
 
@@ -240,31 +242,33 @@ namespace TdsWork
             //Debug.Log("totalREward" + totalReward); 
 
 
-            var rcComponents = GetComponents<RayPerceptionSensorComponent3D>();
+            var rcComponents = GetComponentsInChildren<RayPerceptionSensorComponent3D>();
 
             foreach (var rcComponent in rcComponents)
             {
                 var rayInput = rcComponent.GetRayPerceptionInput();
                 var rayResult = RayPerceptionSensor.Perceive(rayInput);
+               // Debug.Log("Found this many sensors" + rcComponent);    
                 
                 foreach (var rayOutput in rayResult.RayOutputs)
+                
                     if (rayOutput.HasHit)
                     {
                         
-                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.1f)
+                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.07f)
                         {
                             // Reward based on the distance fraction to the goal
-                            var checkpointReward = 0.2f * rayOutput.HitFraction / MaxStep;
+                            var checkpointReward = 0.5f * rayOutput.HitFraction / MaxStep;
                             AddReward(checkpointReward);
                         }
                         
-                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.04f)
+                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.07f)
                         {
                             // Penalty based on the distance fraction to the killer object
                             var killerPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
                             AddReward(killerPenalty);
                         }
-                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.04f)
+                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.07f)
                         {
                             // Penalty based on the distance fraction to the ground
                             var groundPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
