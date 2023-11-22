@@ -110,7 +110,7 @@ public void DroneThroughCheckpoint(CheckpointSingle checkpointSingle, Transform 
     public Vector3 GetNextCheckpointlocation(Transform droneTransform)
     {
         int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)];
-         Vector3 CurrentCheckpointLocation = checkpointSingleList[nextCheckpointSingleIndex].transform.position;
+         Vector3 CurrentCheckpointLocation = checkpointSingleList[nextCheckpointSingleIndex].transform.localPosition; // <<<<<
 
          return CurrentCheckpointLocation;
     }
