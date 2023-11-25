@@ -260,20 +260,20 @@ namespace TdsWork
                     if (rayOutput.HasHit)
                     {
                         
-                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.07f)
+                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.05f)
                         {
                             // Reward based on the distance fraction to the goal
                             var checkpointReward = 0.5f * rayOutput.HitFraction / MaxStep;
                             AddReward(checkpointReward);
                         }
                         
-                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.07f)
+                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.03f)
                         {
                             // Penalty based on the distance fraction to the killer object
                             var killerPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
                             AddReward(killerPenalty);
                         }
-                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.07f)
+                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.03f)
                         {
                             // Penalty based on the distance fraction to the ground
                             var groundPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
