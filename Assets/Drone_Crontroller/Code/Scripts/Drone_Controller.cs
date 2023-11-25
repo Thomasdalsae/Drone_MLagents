@@ -231,7 +231,7 @@ namespace TdsWork
             
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
-            if (dotProduct > 0.95f && velocityDotGoal > 5.5f)
+            if (dotProduct > 0.94f && velocityDotGoal > 5.5f)
             {
                 totalReward += (4.0f / MaxStep);
             }
@@ -301,9 +301,10 @@ namespace TdsWork
             {
                 Debug.Log("Adding a rewards from track check point");
                 AddReward(1.0f);
-                EndEpisode();
                 groundMeshRenderer.material = winMaterial;
             }
+
+           
         }
 
 
