@@ -19,7 +19,7 @@ public class NewBehaviourScript : MonoBehaviour
     private void Start()
     {
         startLocation = transform.localPosition;
-        transform.localPosition = startLocation + new Vector3(0, Random.Range(-13f, 20f), Random.Range(-4f, 5f));
+        transform.localPosition = startLocation + new Vector3(0, Random.Range(-6f, 25f), Random.Range(-5f, 5f));
         transform.localScale = new Vector3(Random.Range(60f, 70f), Random.Range(8f, 15f), Random.Range(0.5f, 3f));
         
         rotationSpeed = (Random.Range(10f, 15f));
