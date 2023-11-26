@@ -42,8 +42,8 @@ behaviors:
 
     # behavior cloning
     behavioral_cloning:
-      demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentHAHA.demo
-      strength: 0.05
+      demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentwow_3.demo
+      strength: 0.5
       steps: 250000
       batch_size: 2048
       num_epoch: 3
@@ -62,10 +62,10 @@ behaviors:
 
       # GAIL
       gail:
-        strength: 0.01
+        strength: 0.3
         gamma: 0.99
         encoding_size: 128
-        demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentHAHA.demo
+        demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentwow_3.demo
         learning_rate: 1e-3
         use_actions: false
         use_vail: false

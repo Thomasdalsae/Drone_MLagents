@@ -19,7 +19,7 @@ public class NewBehaviourScript : MonoBehaviour
     private void Start()
     {
         startLocation = transform.localPosition;
-        transform.localPosition = startLocation + new Vector3(0, Random.Range(-4f, 6f), Random.Range(-3f, 3f));
+        transform.localPosition = startLocation + new Vector3(0, Random.Range(-13f, 20f), Random.Range(-4f, 5f));
         transform.localScale = new Vector3(Random.Range(60f, 70f), Random.Range(8f, 15f), Random.Range(0.5f, 3f));
         
         rotationSpeed = (Random.Range(10f, 15f));
@@ -32,7 +32,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         //transform.Rotate(-Vector3.forward * rotationSpeed * Time.deltaTime);
         // Change direction when the VerticalLimit exceeds a threshold (e.g., 5 seconds)
-        if (VerticalLimit >= 6f)
+        if (VerticalLimit >= 5f)
         {
             movingUp = !movingUp;
             VerticalLimit = 0;

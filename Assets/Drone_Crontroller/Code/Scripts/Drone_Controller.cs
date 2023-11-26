@@ -267,13 +267,13 @@ namespace TdsWork
                             AddReward(checkpointReward);
                         }
                         
-                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.03f)
+                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.01f)
                         {
                             // Penalty based on the distance fraction to the killer object
                             var killerPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
                             AddReward(killerPenalty);
                         }
-                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.03f)
+                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.01f)
                         {
                             // Penalty based on the distance fraction to the ground
                             var groundPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
