@@ -52,7 +52,7 @@ public void DroneThroughCheckpoint(CheckpointSingle checkpointSingle, Transform 
     if (checkpointSingleList.IndexOf(checkpointSingle) == nextCheckpointSingleIndex)
     {
         // Correct Checkpoint
-        Debug.Log("Correct");
+      //  Debug.Log("Correct");
         CheckpointSingle correctCheckpointSingle = checkpointSingleList[nextCheckpointSingleIndex];
         correctCheckpointSingle.Show();
 

@@ -110,7 +110,7 @@ namespace TdsWork
         {
            
             transform.localPosition = spawnPosition.localPosition =
-               new Vector3(Random.Range(-40f, 40f), Random.Range(15f, 48f), Random.Range(-47f, -35f));
+               new Vector3(Random.Range(-90f, -37f), Random.Range(15f, 30f), Random.Range(-55f, -35f));
                
            //spawnPosition.position = transform.position;
             transform.forward = spawnPosition.forward;
@@ -231,7 +231,7 @@ namespace TdsWork
             
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
-            if (dotProduct > 0.94f && velocityDotGoal > 5.5f)
+            if (dotProduct > 0.90f && velocityDotGoal > 2f)
             {
                 totalReward += (4.0f / MaxStep);
             }
@@ -259,7 +259,7 @@ namespace TdsWork
                 
                     if (rayOutput.HasHit)
                     {
-                        
+                       //Debug.Log("hit" + rayOutput.HitGameObject + "with tag" + rayOutput.HitGameObject.tag + "with fraction" + rayOutput.HitFraction); 
                         if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.05f)
                         {
                             // Reward based on the distance fraction to the goal
@@ -299,8 +299,9 @@ namespace TdsWork
         {
             if (e.droneTransform.transform == transform)
             {
-                Debug.Log("Adding a rewards from track check point");
+              //  Debug.Log("Adding a rewards from track check point");
                 AddReward(1.0f);
+                
                 groundMeshRenderer.material = winMaterial;
             }
 

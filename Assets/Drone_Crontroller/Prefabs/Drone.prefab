@@ -324,7 +324,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168082675043465198}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.454
   m_Drag: 0.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -358,7 +358,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1500
+  MaxStep: 450
   weightInKg: 1
   minThrottle: -30
   maxThrottle: 30
@@ -385,8 +385,8 @@ MonoBehaviour:
   raySensor: {fileID: 0}
   winMaterial: {fileID: 2100000, guid: e401b5d1f75f1b84e86df1d1a2ce8d4c, type: 2}
   loseMaterial: {fileID: 2100000, guid: 3abd5159cab26dd418f042646f3359a5, type: 2}
-  startMaterial: {fileID: 2100000, guid: dd6bad4314ad3a74d96ea62b0a48cf47, type: 2}
-  groundMeshRenderer: {fileID: 8201363385559626311}
+  startMaterial: {fileID: 2100000, guid: a0faf528cf89c86439fa81c22f0c1d0f, type: 2}
+  groundMeshRenderer: {fileID: 0}
 --- !u!114 &1884618876261992929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: 697a7515204457547a52fefbac9c3292, type: 3}
   m_InferenceDevice: 3
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: DroneAgentLIL
+  DemonstrationName: DroneAgentwow
   DemonstrationDirectory: Demos
 --- !u!65 &5990964166526316845
 BoxCollider:
@@ -553,7 +553,7 @@ MonoBehaviour:
   m_RaysPerDirection: 5
   m_MaxRayDegrees: 90
   m_SphereCastRadius: 4.5
-  m_RayLength: 100
+  m_RayLength: 200
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967283
@@ -1131,10 +1131,5 @@ PrefabInstance:
 --- !u!4 &8201363385557201057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: cae7bd101fff4ff4d8ecdaef191105c6, type: 3}
-  m_PrefabInstance: {fileID: 8201363385557592621}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &8201363385559626311 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300010, guid: cae7bd101fff4ff4d8ecdaef191105c6, type: 3}
   m_PrefabInstance: {fileID: 8201363385557592621}
   m_PrefabAsset: {fileID: 0}
