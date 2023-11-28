@@ -164,9 +164,7 @@ namespace TdsWork
             sensor.AddObservation(transform.localRotation);
             sensor.AddObservation(rb.velocity);
             sensor.AddObservation(rb.transform.forward.normalized);
-            
-            var velocityDotGoalOBS = Vector3.Dot(rb.velocity, DirToGoal);
-            sensor.AddObservation(velocityDotGoalOBS);
+            sensor.AddObservation(rb.rotation.normalized);
         }
 
 
@@ -232,7 +230,7 @@ namespace TdsWork
             var totalReward = alignmentReward + distanceReward;
             
             
-            Debug.Log("velocity dot goal" + velocityDotGoal);
+            //Debug.Log("velocity dot goal" + velocityDotGoal);
             
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
@@ -254,38 +252,7 @@ namespace TdsWork
 
             var rcComponents = GetComponentsInChildren<RayPerceptionSensorComponent3D>();
 
-            foreach (var rcComponent in rcComponents)
-            {
-                var rayInput = rcComponent.GetRayPerceptionInput();
-                var rayResult = RayPerceptionSensor.Perceive(rayInput);
-               // Debug.Log("Found this many sensors" + rcComponent);    
-                
-                foreach (var rayOutput in rayResult.RayOutputs)
-                
-                    if (rayOutput.HasHit)
-                    {
-                       //Debug.Log("hit" + rayOutput.HitGameObject + "with tag" + rayOutput.HitGameObject.tag + "with fraction" + rayOutput.HitFraction); 
-                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.1f)
-                        {
-                            // Reward based on the distance fraction to the goal
-                            var checkpointReward = 0.5f * rayOutput.HitFraction / MaxStep;
-                            AddReward(checkpointReward);
-                        }
-                        
-                        else if (rayOutput.HitGameObject.CompareTag("Killer") && rayOutput.HitFraction < 0.01f)
-                        {
-                            // Penalty based on the distance fraction to the killer object
-                            var killerPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
-                            AddReward(killerPenalty);
-                        }
-                        else if (rayOutput.HitGameObject.CompareTag("Ground") && rayOutput.HitFraction < 0.01f)
-                        {
-                            // Penalty based on the distance fraction to the ground
-                            var groundPenalty = -0.5f * rayOutput.HitFraction / MaxStep;
-                            AddReward(groundPenalty);
-                        }
-                    }
-            }
+            
 
             // Debug.Log("Current rewards" + GetCumulativeReward());
         }
