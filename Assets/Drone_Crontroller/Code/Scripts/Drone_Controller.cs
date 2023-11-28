@@ -165,6 +165,8 @@ namespace TdsWork
             sensor.AddObservation(rb.velocity);
             sensor.AddObservation(rb.transform.forward.normalized);
             
+            var velocityDotGoalOBS = Vector3.Dot(rb.velocity, DirToGoal);
+            sensor.AddObservation(velocityDotGoalOBS);
         }
 
 
@@ -229,15 +231,18 @@ namespace TdsWork
 // Combine alignment, distance, velocity, and direction rewards
             var totalReward = alignmentReward + distanceReward;
             
+            
+            Debug.Log("velocity dot goal" + velocityDotGoal);
+            
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
-            if (dotProduct > 0.90f && velocityDotGoal > 2f)
+            if (dotProduct > 0.93f && velocityDotGoal > 11f)
             {
-                totalReward += (4.0f / MaxStep);
+                totalReward += (8.0f / MaxStep);
             }
             else
             {
-                totalReward -= (2.0f / MaxStep);
+                totalReward -= (0.0f / MaxStep);
             }
 
 
@@ -260,7 +265,7 @@ namespace TdsWork
                     if (rayOutput.HasHit)
                     {
                        //Debug.Log("hit" + rayOutput.HitGameObject + "with tag" + rayOutput.HitGameObject.tag + "with fraction" + rayOutput.HitFraction); 
-                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.05f)
+                        if (rayOutput.HitGameObject.CompareTag("Checkpoints") && rayOutput.HitFraction < 0.1f)
                         {
                             // Reward based on the distance fraction to the goal
                             var checkpointReward = 0.5f * rayOutput.HitFraction / MaxStep;

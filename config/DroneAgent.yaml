@@ -5,13 +5,13 @@ behaviors:
     hyperparameters:
       # Hyperparameters common to PPO and SAC
       batch_size: 4096
-      buffer_size: 81920
-      learning_rate: 1e-3
+      buffer_size: 163840
+      learning_rate: 1e-5
       learning_rate_schedule: linear
 
 
       # PPO-specific hyperparameters
-      beta: 1e-2
+      beta: 1e-4
       beta_schedule: constant
       epsilon: 0.2
       epsilon_schedule: linear
@@ -24,16 +24,16 @@ behaviors:
     network_settings:
       vis_encode_type: simple
       normalize: false
-      hidden_units: 128
-      num_layers: 2
+      hidden_units: 512
+      num_layers: 3
       # memory
       memory:
-        sequence_length: 64
+        sequence_length: 128
         memory_size: 256
 
     # Trainer configurations common to all trainers
     max_steps: 5000000
-    time_horizon: 512
+    time_horizon: 32
     summary_freq: 10000
     keep_checkpoints: 5
     checkpoint_interval: 100000
@@ -42,10 +42,10 @@ behaviors:
 
     # behavior cloning
     behavioral_cloning:
-      demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentwow_5.demo
+      demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentJAU_0.demo
       strength: 0.5
-      steps: 250000
-      batch_size: 2048
+      steps: 500000
+      batch_size: 4096
       num_epoch: 3
       samples_per_update: 0
 
@@ -55,17 +55,17 @@ behaviors:
         strength: 1.0
         gamma: 0.99
       curiosity:
-        strength: 0.05
+        strength: 0.01
         gamma: 0.99
         encoding_size: 256
-        learning_rate: 1e-3
+        learning_rate: 1e-5
 
       # GAIL
       gail:
         strength: 0.5
         gamma: 0.99
         encoding_size: 128
-        demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentwow_5.demo
-        learning_rate: 1e-3
+        demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentJAU_0.demo
+        learning_rate: 1e-5
         use_actions: false
         use_vail: false

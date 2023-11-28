@@ -31,12 +31,12 @@ public class CheckpointSingle : MonoBehaviour
     { 
         // Store the initial local position
         initialLocalPosition = transform.localPosition;
-        directionChangeTime = Random.Range(20, 25);
-        rotationSpeed = Random.Range(0.1f, 0.3f);
+        directionChangeTime = Random.Range(0, 0);
+        rotationSpeed = Random.Range(0f, 0f);
         
         // Randomly choose the initial rotation direction
-        rotationDirection = Random.Range(0, 2) * 2 - 1; // Randomly sets it to either 1 or -1
-        transform.localPosition = transform.localPosition +  new Vector3(Random.Range(-2f, 2f), Random.Range(-1f, 1f), 0);
+       // rotationDirection = Random.Range(0, 2) * 2 - 1; // Randomly sets it to either 1 or -1
+        transform.localPosition = transform.localPosition +  new Vector3(Random.Range(-0f, 0f), Random.Range(0f, 0f), 0);
        Hide(); 
     }
 
