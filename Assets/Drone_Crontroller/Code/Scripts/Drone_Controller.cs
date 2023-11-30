@@ -26,7 +26,7 @@ namespace TdsWork
         [SerializeField] private float maxYaw = 3f;
         [SerializeField] private float lerpSpeed = 2f;
 
-        public float thresholdDistance = 18;
+        public float thresholdDistance = 25;
         public float vectorLength = 8.0f;
         private Vector3 constantForward = Vector3.forward;
 
@@ -234,7 +234,7 @@ namespace TdsWork
             
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
-            if (dotProduct > 0.93f && velocityDotGoal > 11f)
+            if (dotProduct > 0.93f && velocityDotGoal > 5f)
             {
                 totalReward += (8.0f / MaxStep);
             }

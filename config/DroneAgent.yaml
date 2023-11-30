@@ -16,7 +16,7 @@ behaviors:
       epsilon: 0.2
       epsilon_schedule: linear
       lambd: 0.95
-      num_epoch: 3
+      num_epoch: 5
       shared_critic: False
 
 
@@ -43,10 +43,10 @@ behaviors:
     # behavior cloning
     behavioral_cloning:
       demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentwow.demo
-      strength: 0.5
+      strength: 0.3
       steps: 500000
       batch_size: 4096
-      num_epoch: 3
+      num_epoch: 5
       samples_per_update: 0
 
     reward_signals:
@@ -62,7 +62,7 @@ behaviors:
 
       # GAIL
       gail:
-        strength: 0.5
+        strength: 0.3
         gamma: 0.99
         encoding_size: 128
         demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentwow.demo
