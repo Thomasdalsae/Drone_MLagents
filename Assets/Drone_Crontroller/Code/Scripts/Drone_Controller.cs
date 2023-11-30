@@ -110,7 +110,7 @@ namespace TdsWork
         {
            
             transform.localPosition = spawnPosition.localPosition =
-               new Vector3(Random.Range(-90f, -37f), Random.Range(15f, 30f), Random.Range(-55f, -35f));
+               new Vector3(Random.Range(65f, 80f), Random.Range(20f, 35f), Random.Range(-70f, -60f));
                
            //spawnPosition.position = transform.position;
             transform.forward = spawnPosition.forward;
