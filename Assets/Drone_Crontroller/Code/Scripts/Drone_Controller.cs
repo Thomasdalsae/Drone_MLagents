@@ -234,9 +234,9 @@ namespace TdsWork
             
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
-            if (dotProduct > 0.93f && velocityDotGoal > 5f)
+            if (dotProduct > 0.93f && velocityDotGoal > 7f)
             {
-                totalReward += (8.0f / MaxStep);
+                totalReward += (10.0f / MaxStep);
             }
             else
             {
