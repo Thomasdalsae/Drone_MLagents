@@ -57,14 +57,12 @@ behaviors:
       curiosity:
         strength: 0.01
         gamma: 0.99
-        encoding_size: 256
         learning_rate: 1e-5
 
       # GAIL
       gail:
         strength: 0.5
         gamma: 0.99
-        encoding_size: 128
         demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentMove_0.demo
         learning_rate: 1e-5
         use_actions: false
