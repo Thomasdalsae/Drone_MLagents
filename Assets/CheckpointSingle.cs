@@ -30,13 +30,13 @@ public class CheckpointSingle : MonoBehaviour
     private void Start()
     { 
         // Store the initial local position
+        transform.localPosition +=  new Vector3(Random.Range(-35f, 35f), Random.Range(-10f, 10f), Random.Range(-10f, 10f));
         initialLocalPosition = transform.localPosition;
-        directionChangeTime = Random.Range(0, 0);
-        rotationSpeed = Random.Range(0f, 0f);
+        directionChangeTime = Random.Range(20, 30);
+        rotationSpeed = Random.Range(0.1f, 0.4f);
         
         // Randomly choose the initial rotation direction
-       // rotationDirection = Random.Range(0, 2) * 2 - 1; // Randomly sets it to either 1 or -1
-        transform.localPosition = transform.localPosition +  new Vector3(Random.Range(-0f, 0f), Random.Range(0f, 0f), 0);
+        rotationDirection = Random.Range(0, 2) * 2 - 1; // Randomly sets it to either 1 or -1
        Hide(); 
     }
 
@@ -92,6 +92,6 @@ public class CheckpointSingle : MonoBehaviour
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawRay(transform.position, transform.forward);
+            Gizmos.DrawRay(transform.position, transform.forward * 5f);
         }
 }

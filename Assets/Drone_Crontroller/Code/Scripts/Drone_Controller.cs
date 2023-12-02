@@ -69,6 +69,7 @@ namespace TdsWork
         [SerializeField] private Quaternion rbStartRotation;
         [SerializeField] private Vector3 checkpointForward; 
         [SerializeField] private float directionDot;
+        private Vector3 StartPosition;
         [Header("RayTracing")] [SerializeField]
         private RayPerceptionSensorComponent3D raySensor;
 
@@ -97,8 +98,7 @@ namespace TdsWork
             _trackCheckpoints.OnDroneCorrectCheckpoint += TrackCheckpoints_OnDroneCorrectCheckpoint;
             _trackCheckpoints.OnDroneWrongCheckpoint += TrackCheckpoints_OnDroneWrongCheckpoint;
 
-
-            //transform.localPosition = new Vector3(-0.9f,4.15f,4.32f);
+            StartPosition = transform.localPosition;
 
         }
 
@@ -109,14 +109,13 @@ namespace TdsWork
         public override void OnEpisodeBegin()
         {
            
-            transform.localPosition = spawnPosition.localPosition =
-               new Vector3(Random.Range(65f, 80f), Random.Range(20f, 35f), Random.Range(-70f, -60f));
-               
+            ResetValues();
+            transform.localPosition = StartPosition +  new Vector3(Random.Range(-20f, 20f), Random.Range(-15f, 15f), Random.Range(-15f, 15f));
+            spawnPosition.localPosition = transform.localPosition;
            //spawnPosition.position = transform.position;
             transform.forward = spawnPosition.forward;
             _trackCheckpoints.ResetCheckPoint(transform);
 
-            ResetValues();
         }
 
         private void Update()
@@ -124,9 +123,12 @@ namespace TdsWork
             VisualizeForward(); 
             checkpointForward = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.forward;
             _targetPosition = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.localPosition;
-            DistToGoal = Vector3.Distance(_trackCheckpoints.GetNextCheckpointPosition(transform).transform.localPosition, _myLocation);
-            DirToGoal = (_trackCheckpoints.GetNextCheckpointlocation(transform) - _myLocation).normalized;
+            DistToGoal = Vector3.Distance(_trackCheckpoints.GetNextCheckpointPosition(transform).transform.localPosition, transform.localPosition);
+            DirToGoal = (_trackCheckpoints.GetNextCheckpointlocation(transform) - transform.localPosition).normalized;
             directionDot = Vector3.Dot(constantForward, checkpointForward);
+            
+
+            //Debug.Log("dist to goal" + DistToGoal + "dir to goal" + DirToGoal);
         }
 
         public override void CollectObservations(VectorSensor sensor)
@@ -172,7 +174,6 @@ namespace TdsWork
         {
             //Debug.Log("forward" + rb.transform.forward);
 
-            _myLocation = transform.localPosition;
 
             _myVelo = rb.velocity;
 
@@ -273,7 +274,7 @@ namespace TdsWork
             {
               //  Debug.Log("Adding a rewards from track check point");
                 AddReward(1.0f);
-                
+               EndEpisode(); 
                 groundMeshRenderer.material = winMaterial;
             }
 
