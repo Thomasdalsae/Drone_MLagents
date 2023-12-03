@@ -274,7 +274,6 @@ namespace TdsWork
             {
               //  Debug.Log("Adding a rewards from track check point");
                 AddReward(1.0f);
-               EndEpisode(); 
                 groundMeshRenderer.material = winMaterial;
             }
 
