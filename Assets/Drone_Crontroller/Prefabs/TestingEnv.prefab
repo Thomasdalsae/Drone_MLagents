@@ -45,22 +45,6 @@ Transform:
   - {fileID: 957626353454576186}
   - {fileID: 7078693905690485751}
   - {fileID: 4761861920065669231}
-  - {fileID: 311764359873552948}
-  - {fileID: 2980662735945216537}
-  - {fileID: 2300622278715117012}
-  - {fileID: 7148942339189230641}
-  - {fileID: 7430033579314569260}
-  - {fileID: 2489816318395771137}
-  - {fileID: 726112915280143050}
-  - {fileID: 4538876474748484217}
-  - {fileID: 6313116746731522410}
-  - {fileID: 1877279548050293277}
-  - {fileID: 1954437548465144530}
-  - {fileID: 5113025965142001013}
-  - {fileID: 5236362244707498040}
-  - {fileID: 7917800459965892655}
-  - {fileID: 3193373596534004493}
-  - {fileID: 6659920915100834945}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &29763911162196453
@@ -231,10 +215,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -274,10 +254,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -370,84 +346,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1172886055401501188, guid: 0bbeca42c8a3df84ab3a5a7b66dc1fc5, type: 3}
   m_PrefabInstance: {fileID: 122469266005564515}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &139058638303021717
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (28)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &7917800459965892655 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 139058638303021717}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &174092195571986154
 PrefabInstance:
@@ -983,84 +881,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1172886055401501188, guid: 0bbeca42c8a3df84ab3a5a7b66dc1fc5, type: 3}
   m_PrefabInstance: {fileID: 787506022540046217}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &798101017281798806
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (19)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &7430033579314569260 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 798101017281798806}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &954251819961308924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1155,10 +975,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (13)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -1198,10 +1014,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -1450,84 +1262,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1172886055401501188, guid: 0bbeca42c8a3df84ab3a5a7b66dc1fc5, type: 3}
   m_PrefabInstance: {fileID: 1082088859839868212}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1097050540357881483
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (18)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &7148942339189230641 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 1097050540357881483}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1386478535172922347
 PrefabInstance:
@@ -1993,10 +1727,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (8)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -2036,10 +1766,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -2297,84 +2023,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5645083394932057737, guid: c2ff610322cc6fa44b945354de8f43aa, type: 3}
   m_PrefabInstance: {fileID: 2428743739535823336}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2640498335386958466
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (27)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &5236362244707498040 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 2640498335386958466}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2675724854264310646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2543,10 +2191,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -2586,10 +2230,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -2621,10 +2261,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -2664,10 +2300,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -2761,84 +2393,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1172886055401501188, guid: 0bbeca42c8a3df84ab3a5a7b66dc1fc5, type: 3}
   m_PrefabInstance: {fileID: 3069746944324913897}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3096992818490640335
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (26)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &5113025965142001013 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 3096992818490640335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3125758354985529859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2851,10 +2405,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -2894,10 +2444,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -3003,10 +2549,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (14)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -3046,10 +2588,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -3081,10 +2619,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -3124,10 +2658,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -3220,84 +2750,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1172886055401501188, guid: 0bbeca42c8a3df84ab3a5a7b66dc1fc5, type: 3}
   m_PrefabInstance: {fileID: 3419444551284113446}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3486751759575473723
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (30)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &6659920915100834945 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 3486751759575473723}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3638037711883987893
 PrefabInstance:
@@ -3603,84 +3055,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1172886055401501188, guid: 0bbeca42c8a3df84ab3a5a7b66dc1fc5, type: 3}
   m_PrefabInstance: {fileID: 4277295983437647050}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4292799826580589520
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (23)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &6313116746731522410 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 4292799826580589520}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4327606638572036054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3693,10 +3067,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -3736,10 +3106,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -3933,7 +3299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
       propertyPath: DroneTransformList.Array.size
-      value: 31
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
       propertyPath: DroneTransformList.Array.data[0]
@@ -3995,70 +3361,6 @@ PrefabInstance:
       propertyPath: DroneTransformList.Array.data[14]
       value: 
       objectReference: {fileID: 4761861920065669231}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[15]
-      value: 
-      objectReference: {fileID: 311764359873552948}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[16]
-      value: 
-      objectReference: {fileID: 2980662735945216537}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[17]
-      value: 
-      objectReference: {fileID: 2300622278715117012}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[18]
-      value: 
-      objectReference: {fileID: 7148942339189230641}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[19]
-      value: 
-      objectReference: {fileID: 7430033579314569260}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[20]
-      value: 
-      objectReference: {fileID: 2489816318395771137}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[21]
-      value: 
-      objectReference: {fileID: 726112915280143050}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[22]
-      value: 
-      objectReference: {fileID: 4538876474748484217}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[23]
-      value: 
-      objectReference: {fileID: 6313116746731522410}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[24]
-      value: 
-      objectReference: {fileID: 1877279548050293277}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[25]
-      value: 
-      objectReference: {fileID: 1954437548465144530}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[26]
-      value: 
-      objectReference: {fileID: 5113025965142001013}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[27]
-      value: 
-      objectReference: {fileID: 5236362244707498040}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[28]
-      value: 
-      objectReference: {fileID: 7917800459965892655}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[29]
-      value: 
-      objectReference: {fileID: 3193373596534004493}
-    - target: {fileID: 133780593388466540, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
-      propertyPath: DroneTransformList.Array.data[30]
-      value: 
-      objectReference: {fileID: 6659920915100834945}
     - target: {fileID: 901063970632702449, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -4489,84 +3791,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4724898311461640582, guid: 1d7076c8bd23c1f4085c8cff8ecaaeb3, type: 3}
   m_PrefabInstance: {fileID: 4597589319721626573}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4638286317501028791
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (29)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &3193373596534004493 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 4638286317501028791}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4789853082353945938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4579,10 +3803,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (9)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -4622,10 +3842,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -4718,84 +3934,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1172886055401501188, guid: 0bbeca42c8a3df84ab3a5a7b66dc1fc5, type: 3}
   m_PrefabInstance: {fileID: 4809265845638257053}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &4995288576401043619
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (16)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &2980662735945216537 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 4995288576401043619}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4995754665919960980
 PrefabInstance:
@@ -4965,10 +4103,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -5008,10 +4142,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -5498,162 +4628,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5645083394932057737, guid: c2ff610322cc6fa44b945354de8f43aa, type: 3}
   m_PrefabInstance: {fileID: 5635834971459246118}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5657152487141026747
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (20)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &2489816318395771137 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 5657152487141026747}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5977104166360971459
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (22)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &4538876474748484217 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 5977104166360971459}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5996787826506458227
 PrefabInstance:
@@ -6283,10 +5257,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -6326,10 +5296,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -6361,10 +5327,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (12)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -6404,10 +5366,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -6797,84 +5755,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1172886055401501188, guid: 0bbeca42c8a3df84ab3a5a7b66dc1fc5, type: 3}
   m_PrefabInstance: {fileID: 7298984497091177304}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &7357772728690663536
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (21)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &726112915280143050 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 7357772728690663536}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7492978315633632889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6949,84 +5829,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1172886055401501188, guid: 0bbeca42c8a3df84ab3a5a7b66dc1fc5, type: 3}
   m_PrefabInstance: {fileID: 7492978315633632889}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &7519947607629799566
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (15)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &311764359873552948 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 7519947607629799566}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7645367903597522235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7039,10 +5841,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone
       objectReference: {fileID: 0}
-    - target: {fileID: 1884618876261992929, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_BehaviorType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -7082,10 +5880,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -7807,10 +6601,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drone (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalPosition.x
       value: -227
@@ -7850,10 +6640,6 @@ PrefabInstance:
     - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
       propertyPath: _trackCheckpoints
@@ -7872,162 +6658,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
   m_PrefabInstance: {fileID: 8328390512911341648}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &8350473384216973166
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (17)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &2300622278715117012 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 8350473384216973166}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &8503582540757827751
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (24)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &1877279548050293277 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 8503582540757827751}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8567951796022726691
 PrefabInstance:
@@ -8110,84 +6740,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5645083394932057737, guid: c2ff610322cc6fa44b945354de8f43aa, type: 3}
   m_PrefabInstance: {fileID: 8567951796022726691}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &8579403543889444968
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6541657271555297699}
-    m_Modifications:
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_Name
-      value: Drone (25)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1168082675043465198, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -227
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -270.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: MaxStep
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: _trackCheckpoints
-      value: 
-      objectReference: {fileID: 4473943175549000353}
-    - target: {fileID: 8281059138809813963, guid: f1522841d6abf2548808798bedeed969, type: 3}
-      propertyPath: groundMeshRenderer
-      value: 
-      objectReference: {fileID: 4339321019816405137}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f1522841d6abf2548808798bedeed969, type: 3}
---- !u!4 &1954437548465144530 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7786623189763834554, guid: f1522841d6abf2548808798bedeed969, type: 3}
-  m_PrefabInstance: {fileID: 8579403543889444968}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8628127118838639934
 PrefabInstance:
