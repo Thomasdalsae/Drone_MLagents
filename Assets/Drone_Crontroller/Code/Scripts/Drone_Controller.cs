@@ -220,7 +220,7 @@ namespace TdsWork
             var velocityDotGoal = Vector3.Dot(rb.velocity, DirToGoal);
 
 // Calculate the reward based on alignment with goal direction
-            var alignmentReward = velocityDotGoal * (0.20f / MaxStep);
+            var alignmentReward = velocityDotGoal * (0.15f / MaxStep);
 
 // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
@@ -235,13 +235,13 @@ namespace TdsWork
             
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
-            if (dotProduct > 0.93f && velocityDotGoal > 6f)
+            if (dotProduct > 0.91f && velocityDotGoal > 2.5f)
             {
-                totalReward += (10.0f / MaxStep);
+                totalReward += (1.0f / MaxStep);
             }
             else
             {
-                totalReward -= (5.0f / MaxStep);
+                totalReward -= (1.0f / MaxStep);
             }
 
 
@@ -273,7 +273,7 @@ namespace TdsWork
             if (e.droneTransform.transform == transform)
             {
               //  Debug.Log("Adding a rewards from track check point");
-                AddReward(2.0f);
+                AddReward(1.0f);
                 groundMeshRenderer.material = winMaterial;
             }
 
