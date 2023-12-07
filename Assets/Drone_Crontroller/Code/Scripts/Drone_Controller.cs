@@ -244,7 +244,7 @@ namespace TdsWork
                 totalReward -= (1.0f / MaxStep);
             }
 
-
+            
             AddReward(totalReward);
 
 
