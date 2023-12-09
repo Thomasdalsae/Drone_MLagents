@@ -43,7 +43,7 @@ behaviors:
     # behavior cloning
     behavioral_cloning:
       demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentTrack_1.demo
-      strength: 0.05
+      strength: 0.01
       steps: 250000
       batch_size: 4096
       num_epoch: 3
@@ -61,7 +61,7 @@ behaviors:
 
       # GAIL
       gail:
-        strength: 0.05
+        strength: 0.01
         gamma: 0.99
         demo_path: F:\Unity_projects\Oblig2\Drone_MLagents\Demos\DroneAgentTrack_1.demo
         learning_rate: 1e-5

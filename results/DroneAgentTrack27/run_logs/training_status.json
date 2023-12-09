@@ -1,0 +1,65 @@
+{
+    "DroneAgent": {
+        "checkpoints": [
+            {
+                "steps": 4699995,
+                "file_path": "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-4699995.onnx",
+                "reward": 21.527343915879708,
+                "creation_time": 1702117836.4892297,
+                "auxillary_file_paths": [
+                    "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-4699995.pt"
+                ]
+            },
+            {
+                "steps": 4799991,
+                "file_path": "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-4799991.onnx",
+                "reward": 21.266393029184353,
+                "creation_time": 1702117998.961877,
+                "auxillary_file_paths": [
+                    "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-4799991.pt"
+                ]
+            },
+            {
+                "steps": 4899994,
+                "file_path": "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-4899994.onnx",
+                "reward": 19.99933943412907,
+                "creation_time": 1702118188.8818812,
+                "auxillary_file_paths": [
+                    "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-4899994.pt"
+                ]
+            },
+            {
+                "steps": 4999993,
+                "file_path": "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-4999993.onnx",
+                "reward": 18.690297907035397,
+                "creation_time": 1702118350.160368,
+                "auxillary_file_paths": [
+                    "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-4999993.pt"
+                ]
+            },
+            {
+                "steps": 5000025,
+                "file_path": "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-5000025.onnx",
+                "reward": 18.690297907035397,
+                "creation_time": 1702118350.3273852,
+                "auxillary_file_paths": [
+                    "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-5000025.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5000025,
+            "file_path": "results\\DroneAgentTrack27\\DroneAgent.onnx",
+            "reward": 18.690297907035397,
+            "creation_time": 1702118350.3273852,
+            "auxillary_file_paths": [
+                "results\\DroneAgentTrack27\\DroneAgent\\DroneAgent-5000025.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.0.1+cu117"
+    }
+}
