@@ -30,7 +30,6 @@ public class NewBehaviourScript : MonoBehaviour
     {
         VerticalLimit += Time.deltaTime;
 
-        //transform.Rotate(-Vector3.forward * rotationSpeed * Time.deltaTime);
         // Change direction when the VerticalLimit exceeds a threshold (e.g., 5 seconds)
         if (VerticalLimit >= 5f)
         {

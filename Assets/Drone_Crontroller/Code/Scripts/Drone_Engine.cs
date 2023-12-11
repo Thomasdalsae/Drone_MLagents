@@ -21,8 +21,6 @@ namespace TdsWork
 
         public void UpdateEngine(Rigidbody rb, Drone_Inputs input)
         {
-            //Debug.Log("Running Engine: " + gameObject.name);
-            
             Vector3 engineForce = Vector3.zero;
             engineForce = transform.up * ((rb.mass * Physics.gravity.magnitude) + (input.Throttle * maxPower)) / 4f; // 4f since we got 4 engines
             rb.AddForce(engineForce, ForceMode.Force);

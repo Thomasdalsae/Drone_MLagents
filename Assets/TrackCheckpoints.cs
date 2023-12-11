@@ -28,6 +28,8 @@ public class TrackCheckpoints : MonoBehaviour
 
         _trackCheckpointUI = GetComponent<TrackCheckpointUI>();
 
+        // Loop through all the checkpoints and add them to the list
+        
         checkpointSingleList = new List<CheckpointSingle>();
         foreach (Transform checkpointSingleTransform in checkpointsTransform)
         {
@@ -39,6 +41,7 @@ public class TrackCheckpoints : MonoBehaviour
 
         nextCheckpointSingleIndexList = new List<int>();
 
+        // Loop through all the drones and add them to the list
         foreach (var droneTransform  in DroneTransformList)
         {
             nextCheckpointSingleIndexList.Add(0);
@@ -57,8 +60,6 @@ public void DroneThroughCheckpoint(CheckpointSingle checkpointSingle, Transform 
         Debug.Log("Correct");
         CheckpointSingle correctCheckpointSingle = checkpointSingleList[nextCheckpointSingleIndex];
         correctCheckpointSingle.Show();
-
-        // Update the next checkpoint index if i want the drone to fly more than one round on the track
         
         // add the next checkpoint index to the list til the drone reaches the last checkpoint
         nextCheckpointSingleIndex++;
@@ -119,7 +120,7 @@ public void DroneThroughCheckpoint(CheckpointSingle checkpointSingle, Transform 
              checkpoint.Hide();
          }
          
-         nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)] = 0; // <<< check later
+         nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)] = 0; 
          
          
      }
@@ -133,7 +134,7 @@ public void DroneThroughCheckpoint(CheckpointSingle checkpointSingle, Transform 
     public Vector3 GetNextCheckpointlocation(Transform droneTransform)
     {
         int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)];
-         Vector3 CurrentCheckpointLocation = checkpointSingleList[nextCheckpointSingleIndex].transform.localPosition; // <<<<<
+         Vector3 CurrentCheckpointLocation = checkpointSingleList[nextCheckpointSingleIndex].transform.localPosition; 
 
          return CurrentCheckpointLocation;
     }

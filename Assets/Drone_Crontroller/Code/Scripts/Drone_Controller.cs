@@ -53,11 +53,9 @@ namespace TdsWork
         private CheckpointSingle _checkpointSingle;
 
         [SerializeField] private Transform spawnPosition;
-        
 
 
         [Header("Ml Targets")]
-        // private GameObject goal;
         [SerializeField]
         private Vector3 DirToGoal;
 
@@ -67,9 +65,10 @@ namespace TdsWork
         [SerializeField] private Vector3 _myLocation;
         [SerializeField] private Vector3 _myVelo;
         [SerializeField] private Quaternion rbStartRotation;
-        [SerializeField] private Vector3 checkpointForward; 
+        [SerializeField] private Vector3 checkpointForward;
         [SerializeField] private float directionDot;
         private Vector3 StartPosition;
+
         [Header("RayTracing")] [SerializeField]
         private RayPerceptionSensorComponent3D raySensor;
 
@@ -94,13 +93,14 @@ namespace TdsWork
             _engines = GetComponentsInChildren<IEngine>().ToList();
 
             raySensor = GetComponent<RayPerceptionSensorComponent3D>();
-
+            
+            
+            // subscribe to the events
             _trackCheckpoints.OnDroneCorrectCheckpoint += TrackCheckpoints_OnDroneCorrectCheckpoint;
-            _trackCheckpoints.OnDroneLastCheckpoint += TrackCheckpoints_onDroneThroughCheckpoint;
+            _trackCheckpoints.OnDroneLastCheckpoint += TrackCheckpoints_onDroneLastCheckpoint;
             _trackCheckpoints.OnDroneWrongCheckpoint += TrackCheckpoints_OnDroneWrongCheckpoint;
 
             StartPosition = transform.localPosition;
-
         }
 
         #endregion
@@ -109,48 +109,36 @@ namespace TdsWork
 
         public override void OnEpisodeBegin()
         {
-           
-            ResetValues();
-            transform.localPosition = StartPosition +  new Vector3(Random.Range(-20f, 20f), Random.Range(-15f, 15f), Random.Range(-15f, 15f));
+            ResetValues(); // reset the values
+            // randomize the position of the drone
+            transform.localPosition = StartPosition + new Vector3(Random.Range(-20f, 20f), Random.Range(-15f, 15f), Random.Range(-15f, 15f));
             spawnPosition.localPosition = transform.localPosition;
-           //spawnPosition.position = transform.position;
+            //spawnPosition.position = transform.position;
             transform.forward = spawnPosition.forward;
+            // resets the checkpoints so that the drone can go through them again
             _trackCheckpoints.ResetCheckPoint(transform);
-
         }
 
         private void Update()
         {
-            VisualizeForward(); 
-            checkpointForward = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.forward;
-            _targetPosition = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.localPosition;
-            DistToGoal = Vector3.Distance(_trackCheckpoints.GetNextCheckpointPosition(transform).transform.localPosition, transform.localPosition);
-            DirToGoal = (_trackCheckpoints.GetNextCheckpointlocation(transform) - transform.localPosition).normalized;
-            directionDot = Vector3.Dot(constantForward, checkpointForward);
-            
-
-            //Debug.Log("dist to goal" + DistToGoal + "dir to goal" + DirToGoal);
+            VisualizeForward(); // visualize the forward vector
+            checkpointForward = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.forward; // get the forward vector of the next checkpoint
+            _targetPosition = _trackCheckpoints.GetNextCheckpointPosition(transform).transform.localPosition; // get the position of the next checkpoint
+            DistToGoal = Vector3.Distance(_trackCheckpoints.GetNextCheckpointPosition(transform).transform.localPosition, transform.localPosition); // get the distance to the next checkpoint
+            DirToGoal = (_trackCheckpoints.GetNextCheckpointlocation(transform) - transform.localPosition).normalized; // get the direction to the next checkpoint
+            directionDot = Vector3.Dot(constantForward, checkpointForward); // get the dot product between the forward vector of the drone and the forward vector of the next checkpoint
         }
 
         public override void CollectObservations(VectorSensor sensor)
         {
-            //works
-            //Debug.Log("Direction to checkpoint" + directionDot);
+         // adding the calculations from the update method to the observations 
             sensor.AddObservation(directionDot);
-
-            //works 
-          
-            //Debug.Log("dist to goal" + DistToGoal);
             sensor.AddObservation(DistToGoal);
-           
-            // Debug.Log("dir to goal" + DirToGoal);
             sensor.AddObservation(DirToGoal);
             sensor.AddObservation(_targetPosition);
-
             sensor.AddObservation(Vector3.Dot(rb.velocity, DirToGoal));
             sensor.AddObservation(Vector3.Dot(constantForward, DirToGoal));
 
-            
             sensor.AddObservation(_normPitch);
             sensor.AddObservation(_normFPitch);
 
@@ -163,6 +151,7 @@ namespace TdsWork
             sensor.AddObservation(_normThrottle);
             sensor.AddObservation(_normFThrottle);
 
+            // adding some of the rigidbody values to the observations
             sensor.AddObservation(transform.localPosition.normalized);
             sensor.AddObservation(transform.localRotation);
             sensor.AddObservation(rb.velocity);
@@ -173,67 +162,59 @@ namespace TdsWork
 
         public override void OnActionReceived(ActionBuffers actions)
         {
-            //Debug.Log("forward" + rb.transform.forward);
-
-
+            // input values from the drone inputs
             _myVelo = rb.velocity;
-
             _pitch = actions.ContinuousActions[0] * maxPitch;
             _roll = actions.ContinuousActions[1] * maxRoll;
             _yaw += actions.ContinuousActions[2] * maxYaw;
             _throttle = actions.ContinuousActions[3] * maxThrottle;
-            
-            
-            
+
+
             // Calculate rotation without affecting yaw
             var rotationWithoutYaw = Quaternion.Euler(0, _finalYaw, -_finalRoll);
-            
-                // Calculate constant forward vector in world space
-                 constantForward = rotationWithoutYaw * Vector3.forward;
 
-// Normalize input values
+            // Calculate constant forward vector in world space
+            constantForward = rotationWithoutYaw * Vector3.forward;
+
+            // Normalize input values
             _normThrottle = Mathf.InverseLerp(minThrottle, maxThrottle, _throttle) * 2 - 1;
             _normPitch = Mathf.InverseLerp(minPitch, maxPitch, _pitch) * 2 - 1;
             _normRoll = Mathf.InverseLerp(minRoll, maxRoll, _roll) * 2 - 1;
             _normYaw = Mathf.InverseLerp(minYaw, maxYaw, _yaw) * 2 - 1;
 
-// Calculate final values with lerping
+            // Calculate final values with lerping
             _finalThrottle = Mathf.Lerp(_finalThrottle, _throttle, Time.deltaTime * lerpSpeed);
             _finalPitch = Mathf.Lerp(_finalPitch, _pitch, Time.deltaTime * lerpSpeed);
             _finalRoll = Mathf.Lerp(_finalRoll, _roll, Time.deltaTime * lerpSpeed);
             _finalYaw = Mathf.Lerp(_finalYaw, _yaw, Time.deltaTime * lerpSpeed);
 
-// Normalize final values
+            // Normalize final values
             _normFPitch = Mathf.InverseLerp(minPitch, maxPitch, _finalPitch) * 2 - 1;
             _normFRoll = Mathf.InverseLerp(minRoll, maxRoll, _finalRoll) * 2 - 1;
             _normFYaw = Mathf.InverseLerp(minYaw, maxYaw, _finalYaw) * 2 - 1;
             _normFThrottle = Mathf.InverseLerp(minThrottle, maxThrottle, _finalThrottle) * 2 - 1;
 
-// Calculate rotation
+            // Calculate rotation
             var rot = Quaternion.Euler(_finalPitch, _finalYaw, -_finalRoll);
 
-// Apply rotation and force
+            // Apply rotation and force
             rb.MoveRotation(rot);
             rb.AddRelativeForce(0, _finalThrottle, 0);
 
 
-// Calculate the dot product between velocity and goal direction
+            // Calculate the dot product between velocity and goal direction
             var velocityDotGoal = Vector3.Dot(rb.velocity, DirToGoal);
 
-// Calculate the reward based on alignment with goal direction
+            // Calculate the reward based on alignment with goal direction
             var alignmentReward = velocityDotGoal * (0.15f / MaxStep);
 
-// Calculate the reward based on proximity to the goal
+            // Calculate the reward based on proximity to the goal
             var distanceReward = Mathf.Clamp01(1f - DistToGoal / thresholdDistance);
             distanceReward *= 0.1f / MaxStep; // Adjust the reward factor as needed
 
-
-// Combine alignment, distance, velocity, and direction rewards
+            // Combine alignment, distance, velocity, and direction rewards
             var totalReward = alignmentReward + distanceReward;
-            
-            
-            //Debug.Log("velocity dot goal" + velocityDotGoal);
-            
+
             // Calculate the dot product between the agent's forward direction and the direction to the checkpoint
             float dotProduct = Vector3.Dot(constantForward, DirToGoal);
             if (dotProduct > 0.91f && velocityDotGoal > 1.5f)
@@ -245,20 +226,12 @@ namespace TdsWork
                 totalReward -= (1.0f / MaxStep);
             }
 
-            
             AddReward(totalReward);
 
-
-            //Debug.Log("totalREward" + totalReward); 
-
-
             var rcComponents = GetComponentsInChildren<RayPerceptionSensorComponent3D>();
-
-            
-
-            // Debug.Log("Current rewards" + GetCumulativeReward());
         }
 
+        // this is called when the drone goes through the wrong checkpoint
         private void TrackCheckpoints_OnDroneWrongCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
         {
             if (e.droneTransform == transform)
@@ -267,33 +240,30 @@ namespace TdsWork
                 groundMeshRenderer.material = loseMaterial;
             }
         }
-        
-        private void TrackCheckpoints_onDroneThroughCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
+       // this is called when the drone goes through the last checkpoint 
+        private void TrackCheckpoints_onDroneLastCheckpoint(object sender,
+            TrackCheckpoints.DroneCheckPointEventArgs e)
         {
             if (e.droneTransform == transform)
             {
-                AddReward(10.0f);
+                AddReward(5.0f * (10000.0f / MaxStep));
                 EndEpisode();
                 groundMeshRenderer.material = winMaterial;
             }
         }
-
+       // this is called when the drone goes through the correct checkpoint
         private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender,
             TrackCheckpoints.DroneCheckPointEventArgs e)
         {
             if (e.droneTransform.transform == transform)
             {
-              //  Debug.Log("Adding a rewards from track check point");
+                //  Debug.Log("Adding a rewards from track check point");
                 AddReward(1.0f);
                 groundMeshRenderer.material = winMaterial;
             }
-
-           
-
-           
         }
-      
 
+        // input values from the drone inputs 
         public override void Heuristic(in ActionBuffers actionsOut)
         {
             //Debug.Log("Entering Heuristics:");
@@ -310,15 +280,7 @@ namespace TdsWork
 
         private void OnTriggerEnter(Collider other)
         {
-            /*
-            if (other.TryGetComponent(out Goal goal))
-            {
-                Debug.Log("Collided with" + other);
-                SetReward(1f); //reward value is only relative to other rewards
-                groundMeshRenderer.material = winMaterial;
-                EndEpisode();
-            }
-            */
+            // if the drone collides with the ground or the killer object, the episode ends . splitted into two functions if i want different penalties
             if (other.TryGetComponent(out Ground ground))
             {
                 SetReward(-1f);
@@ -342,7 +304,6 @@ namespace TdsWork
         protected override void HandlePhysics() //This will not run if there is no rigidbody in rb script,
         {
             HandleEngines();
-            //HandleControls();
         }
 
         protected virtual void HandleEngines()
@@ -351,17 +312,12 @@ namespace TdsWork
             foreach (var _engine in _engines) _engine.UpdateEngine(rb, _input);
         }
 
-        /*
-        protected virtual void HandleControls()
-        {
-
-        }
-        */
-
         void VisualizeForward()
         {
             Debug.DrawRay(transform.position, constantForward * vectorLength, Color.blue);
         }
+
+        // reset the values
         private void ResetValues()
         {
             var startRot = quaternion.identity;
@@ -392,6 +348,4 @@ namespace TdsWork
 
         #endregion
     }
-    
-      
 }
