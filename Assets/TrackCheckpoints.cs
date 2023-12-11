@@ -8,6 +8,8 @@ public class TrackCheckpoints : MonoBehaviour
 {
     public event EventHandler<DroneCheckPointEventArgs> OnDroneCorrectCheckpoint;
     public event EventHandler<DroneCheckPointEventArgs> OnDroneWrongCheckpoint;
+    
+    public event EventHandler<DroneCheckPointEventArgs> OnDroneLastCheckpoint;
 
     [SerializeField] private List<Transform> DroneTransformList;
     private List<CheckpointSingle> checkpointSingleList;
@@ -52,20 +54,41 @@ public void DroneThroughCheckpoint(CheckpointSingle checkpointSingle, Transform 
     if (checkpointSingleList.IndexOf(checkpointSingle) == nextCheckpointSingleIndex)
     {
         // Correct Checkpoint
-      //  Debug.Log("Correct");
+        Debug.Log("Correct");
         CheckpointSingle correctCheckpointSingle = checkpointSingleList[nextCheckpointSingleIndex];
         correctCheckpointSingle.Show();
 
-        nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)] = (nextCheckpointSingleIndex + 1) % checkpointSingleList.Count;
+        // Update the next checkpoint index if i want the drone to fly more than one round on the track
+        
+        // add the next checkpoint index to the list til the drone reaches the last checkpoint
+        nextCheckpointSingleIndex++;
+        
+        nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)] = (nextCheckpointSingleIndex);
+
+        // if the drone reaches the last checkpoint
+        if (nextCheckpointSingleIndexList[DroneTransformList.IndexOf(droneTransform)] == checkpointSingleList.Count)
+        {
+            // Last Checkpoint
+            Debug.Log("Last");
+            OnDroneLastCheckpoint?.Invoke(this, new DroneCheckPointEventArgs
+            {
+                droneTransform = droneTransform
+            });
+        }
+       
+        
 
         // Create an instance of DroneCheckPointEventArgs with the droneTransform data
         var eventArgs = new DroneCheckPointEventArgs
         {
             droneTransform = droneTransform
         };
+        
 
         // Use the custom event arguments class
         OnDroneCorrectCheckpoint?.Invoke(this, eventArgs);
+        
+        
     }
     else
     {

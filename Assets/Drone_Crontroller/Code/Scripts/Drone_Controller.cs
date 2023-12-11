@@ -96,6 +96,7 @@ namespace TdsWork
             raySensor = GetComponent<RayPerceptionSensorComponent3D>();
 
             _trackCheckpoints.OnDroneCorrectCheckpoint += TrackCheckpoints_OnDroneCorrectCheckpoint;
+            _trackCheckpoints.OnDroneLastCheckpoint += TrackCheckpoints_onDroneThroughCheckpoint;
             _trackCheckpoints.OnDroneWrongCheckpoint += TrackCheckpoints_OnDroneWrongCheckpoint;
 
             StartPosition = transform.localPosition;
@@ -266,6 +267,16 @@ namespace TdsWork
                 groundMeshRenderer.material = loseMaterial;
             }
         }
+        
+        private void TrackCheckpoints_onDroneThroughCheckpoint(object sender, TrackCheckpoints.DroneCheckPointEventArgs e)
+        {
+            if (e.droneTransform == transform)
+            {
+                AddReward(10.0f);
+                EndEpisode();
+                groundMeshRenderer.material = winMaterial;
+            }
+        }
 
         private void TrackCheckpoints_OnDroneCorrectCheckpoint(object sender,
             TrackCheckpoints.DroneCheckPointEventArgs e)
@@ -278,8 +289,10 @@ namespace TdsWork
             }
 
            
-        }
 
+           
+        }
+      
 
         public override void Heuristic(in ActionBuffers actionsOut)
         {
