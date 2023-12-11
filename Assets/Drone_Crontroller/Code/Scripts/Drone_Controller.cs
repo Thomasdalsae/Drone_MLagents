@@ -15,19 +15,19 @@ namespace TdsWork
         #region Variables
 
         [Header("Control Properties")] [SerializeField]
-        private float minThrottle = -5f;
+        private float minThrottle = -30f;
 
-        [SerializeField] private float maxThrottle = 3f;
-        [SerializeField] private float minPitch = -30f;
-        [SerializeField] private float maxPitch = 30f;
-        [SerializeField] private float minRoll = -30f;
-        [SerializeField] private float maxRoll = 30f;
-        [SerializeField] private float minYaw = -3f;
-        [SerializeField] private float maxYaw = 3f;
-        [SerializeField] private float lerpSpeed = 2f;
+        [SerializeField] private float maxThrottle = 30f;
+        [SerializeField] private float minPitch = -55f;
+        [SerializeField] private float maxPitch = 55f;
+        [SerializeField] private float minRoll = -55f;
+        [SerializeField] private float maxRoll = 55f;
+        [SerializeField] private float minYaw = -5f;
+        [SerializeField] private float maxYaw = 5f;
+        [SerializeField] private float lerpSpeed = 6f;
 
-        public float thresholdDistance = 25;
-        public float vectorLength = 8.0f;
+        public float thresholdDistance = 5;
+        public float vectorLength = 5.0f;
         private Vector3 constantForward = Vector3.forward;
 
         private float _pitch;
